@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+
+import './App.css';import TextFields from './components/NewUser';
+import { useState } from 'react';
+import Display from './components/Display';
+import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import Profile from './components/profile';
+import SignIn from './signin';
+//import MiniDrawer from './drawer';
+import NewUser from './components/NewUser';
+import SignUp from './signup';
+import BasicTable from './Table';
+
+
+export default function App() {
+  const [formData, setFormData] = useState({});
+  const [formValues, setFormValues] = useState({});
+  const handleSave = (data) => {
+    setFormData(data);
+  }
+  const onSave = (updatedFormValues) => {
+    setFormValues(updatedFormValues);
+    console.log(updatedFormValues)
+  };
+  const onClick = (formData) => {
+    // Handle saving the form data here
+    console.log(formData);
+  };
+
+
+
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+
+     <SignIn/>
+  
+  
   );
 }
-
-export default App;
