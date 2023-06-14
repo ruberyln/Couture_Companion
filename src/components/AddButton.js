@@ -17,6 +17,7 @@ export default function AddButtons() {
       }}
     >
       <Button 
+      href= "http://localhost:3000/NewUser"
         variant="outlined" 
         startIcon={<AddCircleIcon />} 
         sx={{ 

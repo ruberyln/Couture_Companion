@@ -6,13 +6,15 @@ import Display from './components/Display';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import Profile from './components/profile';
 import SignIn from './signin';
-//import MiniDrawer from './drawer';
+import MiniDrawer from './drawer';
 import NewUser from './components/NewUser';
 import SignUp from './signup';
-import BasicTable from './Table';
+import BasicTable from './table';
 
 
-export default function App() {
+export default function App(props) {
+  const [userData, setUserData] = useState({});
+
   const [formData, setFormData] = useState({});
   const [formValues, setFormValues] = useState({});
   const handleSave = (data) => {
@@ -29,12 +31,14 @@ export default function App() {
 
 
 
-  
   return (
-
-
-     <SignIn/>
-  
-  
+  <Router>
+      <Routes>
+      <Route  path='signup' element={<SignUp/>} />
+      <Route path='profile' element={<Profile/>}/>
+      <Route path='NewUser' element={<NewUser setFormData={setFormData}  />}/>
+      <Route path='drawer' element={<MiniDrawer formData={formData}/>}/>
+      </Routes>
+      </Router>
   );
 }

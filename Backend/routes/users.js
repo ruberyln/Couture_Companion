@@ -26,4 +26,16 @@ router.route('/login').post((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/save-client').post((req, res) => {
+  const data = req.body;
+  
+  const newClient = new Client(data);
+
+  newClient.save()
+    .then(() => res.json('Client added!'))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+
+
 module.exports = router;

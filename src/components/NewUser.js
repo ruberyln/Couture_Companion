@@ -5,22 +5,34 @@ import TextField from '@mui/material/TextField';
 import { Typography } from '@mui/material'; 
 import  { Button } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
-import Display from './Display';
-//import {  useNavigate } from 'react-router-dom';
+//import Display from './Display';
+import axios from 'axios';
+import {  useNavigate } from 'react-router-dom';
 
-export default function NewUser() {
+export default function NewUser(props) {
     const [fieldLabels, setFieldLabels] = React.useState([]);
     const [newFieldLabel, setNewFieldLabel] = useState('');
     const [images, setImages] = useState([]);
-    const [formValues, setFormValues] = useState({});
-   // const history = useNavigate();
+   const [formValues, setFormValues] = useState({});
+   const [user, setUser] = useState(null);
+   const [newUser, setNewUser] = useState({
+    name: '',
+    PhoneNumber: '',
+    DueDelivery:'',
+   })
+  const navigate = useNavigate();
 
     const handleUploadClick = (e) => {
         const files = Array.from(e.target.files);
         const urlArray = files.map(file => URL.createObjectURL(file));
         setImages(urlArray);
     };
-
+    const handleSave = () => {
+        setUser(newUser);  // Assuming `newUser` is the new user data
+    
+        navigate("/drawer");
+      };
+    
     const addNewField = () => {
         if (newFieldLabel) {
             setFieldLabels([...fieldLabels, newFieldLabel]);
@@ -35,12 +47,15 @@ export default function NewUser() {
         const formValues = Object.fromEntries(data);
         setFormValues(formValues); // Update the form values state
         onSave(formValues); // Call onSave with form data
-        //history.push('/display'); // Replace '/display' with the actual path of your Display component
-    };
+        props.setFormData(formValues); // Update the form values state in ParentComponent
+        onSave(formValues); // Call onSave with form data
+        navigate("/drawer"); // Navigate to the drawer route
+      };
 
     const onSave = (formData) => {
-        // Handle the form data in the parent component as needed
-        console.log(formData);
+        axios.post('http://localhost:5005/users/save-client', formData)
+            .then(res => console.log(res.data))
+            .catch(err => console.log('Error: ' + err));
     };
 
   return (
@@ -143,7 +158,9 @@ export default function NewUser() {
         </Box>
       ))}
 
-  <Button type="submit" variant="contained" color="primary">
+  <Button 
+ onClick={handleSave}
+  type="submit" variant="contained" color="primary">
     Save
   </Button>
 

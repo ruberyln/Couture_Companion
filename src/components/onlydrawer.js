@@ -6,10 +6,11 @@ import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
+import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronRight';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -17,26 +18,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import BasicTable from './table';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import InputBase from '@mui/material/InputBase';
-import SearchIcon from '@mui/icons-material/Search';
-import { indigo } from '@mui/material/colors';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import AddButtons from './components/AddButton';
-
-
-
-
 
 const drawerWidth = 240;
 
@@ -105,7 +86,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export default function MiniDrawer({formData}) {
+export default function OnlyDrawer() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -134,32 +115,11 @@ export default function MiniDrawer({formData}) {
         >
           <MenuIcon />
         </IconButton>
-        <Box sx={{ display: 'flex', alignItems: 'center', ml: 2 }}>
-          <IconButton>
-            <SearchIcon />
-          </IconButton>
-          <InputBase
-            placeholder="Search…"
-          />
-        </Box>
-        <Box sx={{ flexGrow: 1}} />  
-
-        <Button 
-        href= "http://localhost:3000/NewUser"
-        startIcon={<AddCircleIcon />} variant="outlined" sx= {{ bgcolor: indigo[100], color:indigo[400], borderRadius:'25px' }}>
-          Add New Client
-        </Button>
-
-        <IconButton sx = {{color:indigo[300], ml: 2 }}>
-          <NotificationsIcon />
-        </IconButton>
-
-       
-        
-        <Avatar sx={{ ml: 2 }}>A</Avatar>
-      </Toolbar>
-    </AppBar>
-     
+          <Typography  sx={{ fontFamily: "'EB Garamond', serif" }} variant="h6" noWrap component="div">
+          Profile 
+          </Typography>
+        </Toolbar>
+      </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
@@ -219,34 +179,8 @@ export default function MiniDrawer({formData}) {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650,   backgroundColor: indigo[50] }} aria-label="simple table">
-   
       
-   
-
-        <TableHead>
-          <TableRow>
-            <TableCell sx={{ fontFamily: "'EB Garamond', serif" }}>Name</TableCell>
-            <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Phone Number</TableCell>
-            <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Due Delivery</TableCell>
-            <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Payment</TableCell>
-            <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>No of Orders</TableCell>
-            <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Order Status</TableCell>
-         </TableRow>
-        </TableHead>
-   
-        <TableBody>
-        <TableCell>{formData?.firstName}</TableCell>
-            <TableCell align="right">{formData?.phoneNumber}</TableCell>
-            <TableCell align="right">{formData?.deliveryDate}</TableCell>
-            <TableCell align="right">{formData?.amountPaid}</TableCell>
-            <TableCell align="right">{formData?.noofOrders}</TableCell>
-            <TableCell align="right">{formData?.orderStatus}</TableCell> {/*  add the same fontFamily property to the cells in the table body */}
-        </TableBody>
-      </Table>
-      <AddButtons/>
-    </TableContainer>
+      
       </Box>
     </Box>
   );

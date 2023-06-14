@@ -13,12 +13,15 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import image1 from './myImage/image1.png'
-
-
+import { useNavigate } from 'react-router-dom';
+import MiniDrawer from './drawer';
 
 const defaultTheme = createTheme();
 
 export default function SignUp() {
+
+    const navigate = useNavigate(); 
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.target);
@@ -38,6 +41,11 @@ export default function SignUp() {
     
         const result = await response.json();
         console.log(result); // 'User added!' if the request was successful
+
+        if (response.ok) { // If the request was successful
+            localStorage.setItem('userId', result.id); // Save the user's ID for later
+            navigate('/drawer'); // Navigate to the profile page
+          }
       };
 
   return (
