@@ -13,13 +13,16 @@ import BasicTable from './table';
 
 
 export default function App(props) {
-  const [userData, setUserData] = useState({});
+  const [usersData, setUsersData] = useState({});
 
   const [formData, setFormData] = useState({});
   const [formValues, setFormValues] = useState({});
   const handleSave = (data) => {
     setFormData(data);
   }
+  // const handleNewUser = (newUser) => {
+  //   setUsersData(prevUsers => [...prevUsers, newUser]);
+  // }
   const onSave = (updatedFormValues) => {
     setFormValues(updatedFormValues);
     console.log(updatedFormValues)
@@ -38,6 +41,7 @@ export default function App(props) {
       <Route path='profile' element={<Profile/>}/>
       <Route path='NewUser' element={<NewUser setFormData={setFormData}  />}/>
       <Route path='drawer' element={<MiniDrawer formData={formData}/>}/>
+      <Route path='Display' element={<Display/>}/>
       </Routes>
       </Router>
   );

@@ -50,6 +50,15 @@ export default function Display({ onSave, formValues }) {
   
     setIsEditable(!isEditable);
   };
+//   useEffect(() => {
+//   axios.get(`http://localhost:5005/clients/get-client/${props.userId}`)
+//     .then(res => {
+//       // res.data contains your user data
+//       setFormValues(res.data);
+//     })
+//     .catch(err => console.log('Error: ' + err));
+// }, [props.userId]);
+
 
   return (
     <Box

@@ -3,11 +3,25 @@ import { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Typography } from '@mui/material'; 
-import  { Button } from '@mui/material';
+import  { Button , TableBody, TableCell  } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
+import DrawOutlinedIcon from '@mui/icons-material/DrawOutlined';
 //import Display from './Display';
+import PatternOutlinedIcon from '@mui/icons-material/PatternOutlined';
+import TextureOutlinedIcon from '@mui/icons-material/TextureOutlined';
 import axios from 'axios';
 import {  useNavigate } from 'react-router-dom';
+import ContentCutOutlinedIcon from '@mui/icons-material/ContentCutOutlined';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import PriceCheckOutlinedIcon from '@mui/icons-material/PriceCheckOutlined';
+import CheckroomOutlinedIcon from '@mui/icons-material/CheckroomOutlined';
+import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
+import PendingActionsOutlinedIcon from '@mui/icons-material/PendingActionsOutlined';
+import BalanceOutlinedIcon from '@mui/icons-material/BalanceOutlined';
+
 
 export default function NewUser(props) {
     const [fieldLabels, setFieldLabels] = React.useState([]);
@@ -22,6 +36,8 @@ export default function NewUser(props) {
    })
   const navigate = useNavigate();
 
+
+  
     const handleUploadClick = (e) => {
         const files = Array.from(e.target.files);
         const urlArray = files.map(file => URL.createObjectURL(file));
@@ -30,7 +46,7 @@ export default function NewUser(props) {
     const handleSave = () => {
         setUser(newUser);  // Assuming `newUser` is the new user data
     
-        navigate("/drawer");
+        navigate("/Display");
       };
     
     const addNewField = () => {
@@ -39,6 +55,18 @@ export default function NewUser(props) {
             setNewFieldLabel('');
         }
     };
+    const [orderstatus, setOrderStatus] = React.useState('');
+
+    const handleChange = (event) => { // for order status 
+      setOrderStatus(event.target.value);
+    };
+  
+
+
+    const [paymentstatus, setPaymentStatus] = React.useState('');
+    const handleChanged = (event) => { // for payment status 
+        setPaymentStatus(event.target.value);
+      };
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -52,11 +80,14 @@ export default function NewUser(props) {
         navigate("/drawer"); // Navigate to the drawer route
       };
 
-    const onSave = (formData) => {
-        axios.post('http://localhost:5005/users/save-client', formData)
-            .then(res => console.log(res.data))
-            .catch(err => console.log('Error: ' + err));
-    };
+      const onSave = (formData) => {
+        axios.post('http://localhost:5005/clients/save-client', formData)
+          .then(res => {
+            console.log(res.data);
+            setUser(res.data);
+          })
+          .catch(err => console.log('Error: ' + err));
+      };
 
   return (
     <><Box
@@ -87,6 +118,32 @@ export default function NewUser(props) {
           <TextField id="amountPaid" name="amountPaid" label="Amount Paid" variant="standard" />
           <TextField id="noofOrders" name="noofOrders" label="No of Orders" variant="standard" />
 
+          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="demo-simple-select-standard-label">Payment-Status</InputLabel>
+        <Select
+          labelId="demo-simple-select-standard-label"
+          value={paymentstatus}
+          onChange={handleChanged}
+          id= "paymentStatus"
+          name = "paymentStatus"
+          label="paymentstatus"
+        >
+           <MenuItem value="">
+      <em>None</em>
+    </MenuItem>
+    <MenuItem value={"Pending"}>
+      <PendingActionsOutlinedIcon /> Pending
+    </MenuItem> 
+  
+    <MenuItem value={"PArtial-Payment"}>
+      <BalanceOutlinedIcon /> Partial-Payment
+    </MenuItem> 
+    <MenuItem value={"Fully-Paid"}>
+      <PriceCheckOutlinedIcon />Fully-Paid
+    </MenuItem> 
+    
+  </Select>
+</FormControl>
 
           <Typography>Order Details and Measurements </Typography>
           <TextField id="fabricType"  name="fabricType"label="Fabric Type " variant="standard" />
@@ -131,7 +188,43 @@ export default function NewUser(props) {
       <Button variant="contained" color="primary" onClick={addNewField}>
         Add New Field
       </Button>
+<Box>
+        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="demo-simple-select-standard-label">Order-Status</InputLabel>
+        <Select
+          labelId="demo-simple-select-standard-label"
+          id="orderStatus"
+          name = "orderStatus"
+          value={orderstatus}
+          onChange={handleChange}
+          label="orderstatus"
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
 
+
+          <MenuItem value={ "Sketch" }  >
+            <DrawOutlinedIcon /> Sketch
+          </MenuItem> 
+          <MenuItem value={"Fabric-Sourcing"}>
+            <TextureOutlinedIcon /> Fabric-Sourcing
+          </MenuItem> 
+          <MenuItem value={"Pattern-Drafting"}>
+            <PatternOutlinedIcon /> Pattern-Drafting
+          </MenuItem> 
+          <MenuItem value={"Cutting"}>
+            <ContentCutOutlinedIcon /> Cutting
+          </MenuItem> 
+          <MenuItem value={"Sewing"}>
+            <CheckroomOutlinedIcon /> Sewing
+          </MenuItem>
+          <MenuItem value={"Delivery"}>
+            <LocalShippingOutlinedIcon /> Delivery
+          </MenuItem>
+        </Select> 
+      </FormControl>
+      </Box>
 
 <Typography> 
     Upload Image 
@@ -169,3 +262,4 @@ export default function NewUser(props) {
    
   );
     }
+ 

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -31,14 +32,13 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import Paper from '@mui/material/Paper';
 import AddButtons from './components/AddButton';
-
-
-
-
-
+import axios from 'axios';
+import {  useNavigate } from 'react-router-dom';
 const drawerWidth = 240;
+
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -106,6 +106,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function MiniDrawer({formData}) {
+
+  const [form, setForm] = useState({});
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -113,9 +115,22 @@ export default function MiniDrawer({formData}) {
     setOpen(true);
   };
 
+  const navigate = useNavigate();
+  const handleClick  = () =>  {
+    navigate ("/Display");
+  }
+
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  useEffect(() => {
+    axios.get('http://localhost:5005/clients/get-client')
+      .then(res => {
+        setForm(res.data);
+      })
+      .catch(err => console.log('Error: ' + err));
+  }, []);  // Empty dependency array ensures this runs once when component mounts
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -233,16 +248,21 @@ export default function MiniDrawer({formData}) {
             <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Payment</TableCell>
             <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>No of Orders</TableCell>
             <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Order Status</TableCell>
+
+
          </TableRow>
         </TableHead>
    
         <TableBody>
         <TableCell>{formData?.firstName}</TableCell>
-            <TableCell align="right">{formData?.phoneNumber}</TableCell>
-            <TableCell align="right">{formData?.deliveryDate}</TableCell>
-            <TableCell align="right">{formData?.amountPaid}</TableCell>
-            <TableCell align="right">{formData?.noofOrders}</TableCell>
-            <TableCell align="right">{formData?.orderStatus}</TableCell> {/*  add the same fontFamily property to the cells in the table body */}
+        <TableCell align="right">{formData?.phoneNumber}</TableCell>
+        <TableCell align="right">{formData?.deliveryDate}</TableCell>
+        <TableCell align="right">{formData?.paymentStatus}</TableCell>
+        <TableCell align="right">{formData?.noofOrders}</TableCell>
+        <TableCell align="right">{formData?.orderStatus}</TableCell>
+        
+        <IconButton> <ModeEditOutlineOutlinedIcon onClick = {handleClick} /> </IconButton>
+
         </TableBody>
       </Table>
       <AddButtons/>
