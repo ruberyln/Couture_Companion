@@ -6,7 +6,7 @@ import { Typography } from '@mui/material';
 import  { Button , TableBody, TableCell  } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import DrawOutlinedIcon from '@mui/icons-material/DrawOutlined';
-//import Display from './Display';
+import Display from './Display';
 import PatternOutlinedIcon from '@mui/icons-material/PatternOutlined';
 import TextureOutlinedIcon from '@mui/icons-material/TextureOutlined';
 import axios from 'axios';
@@ -44,7 +44,7 @@ export default function NewUser(props) {
         setImages(urlArray);
     };
     const handleSave = () => {
-        setUser(newUser);  // Assuming `newUser` is the new user data
+        setNewUser(newUser);  // Assuming `newUser` is the new user data
     
         navigate("/Display");
       };
@@ -74,20 +74,24 @@ export default function NewUser(props) {
         console.log(Object.fromEntries(data)); // Here we call onSave with the form data when the form is submitted
         const formValues = Object.fromEntries(data);
         setFormValues(formValues); // Update the form values state
-        onSave(formValues); // Call onSave with form data
-        props.setFormData(formValues); // Update the form values state in ParentComponent
-        onSave(formValues); // Call onSave with form data
-        navigate("/drawer"); // Navigate to the drawer route
-      };
 
-      const onSave = (formData) => {
-        axios.post('http://localhost:5005/clients/save-client', formData)
-          .then(res => {
-            console.log(res.data);
-            setUser(res.data);
-          })
-          .catch(err => console.log('Error: ' + err));
-      };
+        axios.post('http://localhost:5005/clients/save-client', formValues)
+        .then(res => {
+          console.log(res.data);
+          setUser(res.data);
+          navigate("/Display", { state: { user: res.data }}); // Navigate to Display.js with the user data
+    })
+     
+        .catch(err => console.log('Error: ' + err));
+    };
+        // onSave(formValues); // Call onSave with form data
+        // props.setFormData(formValues); // Update the form values state in ParentComponent
+        // onSave(formValues); // Call onSave with form data
+        // navigate("/drawer"); // Navigate to the drawer route
+    
+
+    //   const onSave = (formData) => {
+       
 
   return (
     <><Box
@@ -100,7 +104,11 @@ export default function NewUser(props) {
           autoComplete="off"
       >
           <Typography> Personal Details </Typography>
-          <TextField id="firstName" name= "firstName" label="First Name" variant="standard" />
+          <TextField id="firstName" 
+          name= "firstName"
+          label="First Name" 
+          variant="standard" 
+          />
           <TextField id="lastName" name= "lastName" label="Last Name" variant="standard" />
           <TextField id="birthday" name="birthday" label="Birthday" variant="standard" />
         <TextField id="phoneNumber" name="phoneNumber" label="Phone Number" variant="standard" />
@@ -135,7 +143,7 @@ export default function NewUser(props) {
       <PendingActionsOutlinedIcon /> Pending
     </MenuItem> 
   
-    <MenuItem value={"PArtial-Payment"}>
+    <MenuItem value={"Partial-Payment"}>
       <BalanceOutlinedIcon /> Partial-Payment
     </MenuItem> 
     <MenuItem value={"Fully-Paid"}>
@@ -147,18 +155,19 @@ export default function NewUser(props) {
 
           <Typography>Order Details and Measurements </Typography>
           <TextField id="fabricType"  name="fabricType"label="Fabric Type " variant="standard" />
-         
+          <TextField id="orderSummary"  name="orderSummary"label="Order Summary" variant="standard" />
           <TextField
               id="orderSummary"
               name= "orderSummary"
               label="Order summary"
               multiline
               rows={4}
-              placeholder="Describe order in details, example: Long sleeve dress with tiny sleeves and stoned neck" />
+              placeholder="Describe order in details, example: Long sleeve dress with tiny sleeves and stoned neck" 
+              />
 
 
 
-          <TextField id="shoulder" name="shoulder" label="Shoulder" variant="outlined" />
+          <TextField id="shoulder" name=" shoulder " label="Shoulder" variant="outlined" />
           <TextField id="bust" name="bust" label="Bust" variant="outlined" />
           <TextField id="waist" name="waist" label="Waist" variant="outlined" />
           <TextField id="underBust" name="underBust" label="Underbust" variant="outlined" />
@@ -252,11 +261,11 @@ export default function NewUser(props) {
       ))}
 
   <Button 
- onClick={handleSave}
+ onSave={handleSave}
   type="submit" variant="contained" color="primary">
     Save
   </Button>
-
+  
 </Box>
 </>
    

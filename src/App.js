@@ -41,7 +41,7 @@ export default function App(props) {
       <Route path='profile' element={<Profile/>}/>
       <Route path='NewUser' element={<NewUser setFormData={setFormData}  />}/>
       <Route path='drawer' element={<MiniDrawer formData={formData}/>}/>
-      <Route path='Display' element={<Display/>}/>
+      <Route path='Display' element={<Display onSave={handleSave}/>}/>
       </Routes>
       </Router>
   );

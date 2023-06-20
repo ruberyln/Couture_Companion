@@ -36,7 +36,7 @@ import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutl
 import Paper from '@mui/material/Paper';
 import AddButtons from './components/AddButton';
 import axios from 'axios';
-import {  useNavigate } from 'react-router-dom';
+import {  useLocation, useNavigate } from 'react-router-dom';
 const drawerWidth = 240;
 
 
@@ -105,7 +105,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export default function MiniDrawer({formData}) {
+export default function MiniDrawer({}) {
+  const location = useLocation();
+  const { formData } = location.state || {}; // Extract the formData from location state
 
   const [form, setForm] = useState({});
   const theme = useTheme();

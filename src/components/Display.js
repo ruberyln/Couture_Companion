@@ -5,12 +5,24 @@ import TextField from '@mui/material/TextField';
 import { Typography } from '@mui/material'; 
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { useLocation, useNavigate } from 'react-router-dom';
+ // Import the context
 
-export default function Display({ onSave, formValues }) {
+ import axios from 'axios';
+
+
+export default function Display({ onSave }) {
   const [fieldLabels, setFieldLabels] = React.useState([]);
   const [newFieldLabel, setNewFieldLabel] = useState('');
   const [images, setImages] = useState([]);
   const [isEditable, setIsEditable] = useState(false);
+  const location = useLocation();
+  const user = location.state?.user;
+  const [users, setUsers] = useState(null);
+  const [formValues, setFormValues] = useState(user || {}); // Initialize formValues with user data if available
+  const navigate = useNavigate();
+  
+
 
   const handleUploadClick = (e) => {
     const files = Array.from(e.target.files);
@@ -18,12 +30,30 @@ export default function Display({ onSave, formValues }) {
     setImages(urlArray);
   };
 
+  const handleOnSave = (event) => {
+    console.log(formValues);
+  axios.post('http://localhost:5005/clients/save-client', formValues)
+    .then(res => {
+      console.log(res.data);
+      setUsers(res.data);
+      navigate("/drawer", { state: { users: res.data }});
+    })
+    .catch(err => {
+      console.error(err);
+      // You could set some state here to show an error message to the user
+    });
+}
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    onSave({ ...formValues, [name]: value });
+    setFormValues({ ...formValues, [name]: value }); // Update formValues
   };
 
+  const handleSave = () => {
+    setUsers(users);  // Assuming `newUser` is the new user data
 
+    navigate("/drawer");
+  };
   const addNewField = () => {
     if (newFieldLabel) {
       setFieldLabels([...fieldLabels, newFieldLabel]);
@@ -40,7 +70,17 @@ export default function Display({ onSave, formValues }) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    onSave(data);
+    console.log(formValues);
+  axios.post('http://localhost:5005/clients/save-client', formValues)
+    .then(res => {
+      console.log(res.data);
+      setUsers(res.data);
+      navigate("/drawer", { state: { users: res.data }});
+    })
+    .catch(err => {
+      console.error(err);
+      // You could set some state here to show an error message to the user
+    });
   };
 
   const toggleEdit = () => {
@@ -50,20 +90,13 @@ export default function Display({ onSave, formValues }) {
   
     setIsEditable(!isEditable);
   };
-//   useEffect(() => {
-//   axios.get(`http://localhost:5005/clients/get-client/${props.userId}`)
-//     .then(res => {
-//       // res.data contains your user data
-//       setFormValues(res.data);
-//     })
-//     .catch(err => console.log('Error: ' + err));
-// }, [props.userId]);
+
 
 
   return (
     <Box
       component="form"
-      onSubmit={handleSubmit}
+      onSubmit={handleSave}
       sx={{
         '& > :not(style)': { m: 1, width: '25ch' },
       }}
@@ -87,6 +120,7 @@ export default function Display({ onSave, formValues }) {
         variant="standard"
         disabled={!isEditable}
         value={formValues?.lastName||''}
+        onChange={handleInputChange}
       />
       <TextField
         id="birthday"
@@ -95,6 +129,7 @@ export default function Display({ onSave, formValues }) {
         variant="standard"
         disabled={!isEditable}
         value={formValues?.birthday||''}
+        onChange={handleInputChange}
       />
       <TextField
         id="phoneNumber"
@@ -103,6 +138,7 @@ export default function Display({ onSave, formValues }) {
         variant="standard"
         disabled={!isEditable}
         value={formValues?.phoneNumber||''}
+        onChange={handleInputChange}
       />
       <TextField
         id="email"
@@ -111,6 +147,7 @@ export default function Display({ onSave, formValues }) {
         variant="standard"
         disabled={!isEditable}
         value={formValues?.email||''}
+        onChange={handleInputChange}
       />
 
       <Typography>Location</Typography>
@@ -121,6 +158,7 @@ export default function Display({ onSave, formValues }) {
         variant="standard"
         disabled={!isEditable}
         value={formValues?.streetAddress||''}
+        onChange={handleInputChange}
       />
       <TextField
         id="postalCode"
@@ -129,6 +167,7 @@ export default function Display({ onSave, formValues }) {
         variant="standard"
         disabled={!isEditable}
         value={formValues?.postalCode||''}
+        onChange={handleInputChange}
       />
       <TextField
         id="city"
@@ -137,6 +176,7 @@ export default function Display({ onSave, formValues }) {
         variant="standard"
         disabled={!isEditable}
         value={formValues?.city||''}
+        onChange={handleInputChange}
       />
       <TextField
         id="state"
@@ -145,6 +185,7 @@ export default function Display({ onSave, formValues }) {
         variant="standard"
         disabled={!isEditable}
         value={formValues?.state||''}
+        onChange={handleInputChange}
       />
 
       <Typography>Price & Duration</Typography>
@@ -155,6 +196,7 @@ export default function Display({ onSave, formValues }) {
         variant="standard"
         disabled={!isEditable}
         value={formValues?.price||''}
+        onChange={handleInputChange}
       />
       <TextField
         id="deliveryDate"
@@ -163,6 +205,7 @@ export default function Display({ onSave, formValues }) {
         variant="standard"
         disabled={!isEditable}
         value={formValues?.deliveryDate||''}
+        onChange={handleInputChange}
       />
       <TextField
         id="amountPaid"
@@ -171,6 +214,7 @@ export default function Display({ onSave, formValues }) {
         variant="standard"
         disabled={!isEditable}
         value={formValues?.amountPaid||''}
+        onChange={handleInputChange}
       />
       <TextField
         id="noofOrders"
@@ -189,8 +233,9 @@ export default function Display({ onSave, formValues }) {
         variant="standard"
         disabled={!isEditable}
         value={formValues?.fabricType||''}
+        onChange={handleInputChange}
       />
-
+     
       <TextField
         id="orderSummary"
         name="orderSummary"
@@ -199,17 +244,20 @@ export default function Display({ onSave, formValues }) {
         rows={4}
         placeholder="Describe order in details, example: Long sleeve dress with tiny sleeves and stoned neck"
         disabled={!isEditable}
-        value={formValues?.firstorderSummary||''}
+        value={formValues?.orderSummary||''}
+        onChange={handleInputChange}
       />
 
       <TextField
-        id="shoulder"
-        name="shoulder"
-        label="Shoulder"
-        variant="outlined"
-        disabled={!isEditable}
-        value={formValues?.shoulder||''}
+          id="shoulder"
+          name="shoulder"
+          label="Shoulder"
+          variant="outlined"
+          disabled={!isEditable}
+          value={formValues?.shoulder||''}
+          onChange={handleInputChange}
       />
+
       <TextField
         id="bust"
         name="bust"
@@ -217,6 +265,7 @@ export default function Display({ onSave, formValues }) {
         variant="outlined"
         disabled={!isEditable}
         value={formValues?.bust||''}
+        onChange={handleInputChange}
       />
       <TextField
         id="waist"
@@ -225,6 +274,7 @@ export default function Display({ onSave, formValues }) {
         variant="outlined"
         disabled={!isEditable}
         value={formValues?.waist||''}
+        onChange={handleInputChange}
       />
       <TextField
         id="underBust"
@@ -232,6 +282,8 @@ export default function Display({ onSave, formValues }) {
         label="Underbust"
         variant="outlined"
         disabled={!isEditable}
+        value={formValues?.underBust||''}
+        onChange={handleInputChange}
       />
       <TextField
         id="shoulderBust"
@@ -240,6 +292,7 @@ export default function Display({ onSave, formValues }) {
         variant="outlined"
         disabled={!isEditable}
         value={formValues?.shoulderBust||''}
+        onChange={handleInputChange}
       />
       <TextField
         id="shoulderWaist"
@@ -248,6 +301,7 @@ export default function Display({ onSave, formValues }) {
         variant="outlined"
         disabled={!isEditable}
         value={formValues?.shoulderWaist||''}
+        onChange={handleInputChange}
       />
       <TextField
         id="hips"
@@ -256,6 +310,7 @@ export default function Display({ onSave, formValues }) {
         variant="outlined"
         disabled={!isEditable}
         value={formValues?.hips||''}
+        onChange={handleInputChange}
       />
       <TextField
         id="fullLength"
@@ -264,14 +319,16 @@ export default function Display({ onSave, formValues }) {
         variant="outlined"
         disabled={!isEditable}
         value={formValues?.fullLength||''}
+        onChange={handleInputChange}
       />
       <TextField
-        id="shortdresslength"
+        id="shortdressLength"
         name="shortdresslength"
         label="Short Dress Length"
         variant="outlined"
         disabled={!isEditable}
         value={formValues?.shortdressLength||''}
+        onChange={handleInputChange}
       />
       <TextField
         id="skirtLength"
@@ -280,6 +337,7 @@ export default function Display({ onSave, formValues }) {
         variant="outlined"
         disabled={!isEditable}
         value={formValues?.skirtLength||''}
+        onChange={handleInputChange}
       />
       <TextField
         id="wrist"
@@ -288,6 +346,7 @@ export default function Display({ onSave, formValues }) {
         variant="outlined"
         disabled={!isEditable}
         value={formValues?.wrist||''}
+        onChange={handleInputChange}
       />
       <TextField
         id="biceps"
@@ -296,6 +355,7 @@ export default function Display({ onSave, formValues }) {
         variant="outlined"
         disabled={!isEditable}
         value={formValues?.biceps||''}
+        onChange={handleInputChange}
       />
       <TextField
         id="elbow"
@@ -304,6 +364,7 @@ export default function Display({ onSave, formValues }) {
         variant="outlined"
         disabled={!isEditable}
         value={formValues?.elbow||''}
+        onChange={handleInputChange}
       />
 
       <Typography>Additional Measurements</Typography>
@@ -316,6 +377,7 @@ export default function Display({ onSave, formValues }) {
           variant="outlined"
           disabled={!isEditable}
           value={formValues?.add||''}
+          onChange={handleInputChange}
         />
       ))}
 
@@ -327,7 +389,7 @@ export default function Display({ onSave, formValues }) {
         value={newFieldLabel}
         onChange={(e) => setNewFieldLabel(e.target.value)}
         disabled={!isEditable}
-      
+        
        
       />
 
@@ -363,7 +425,9 @@ export default function Display({ onSave, formValues }) {
         ))}
 
       <Button variant="contained" color="primary" onClick={toggleEdit}>
-        {isEditable ? 'Save' : 'Edit'}
+        {isEditable ? 'Save' : 'Edit'}</Button>
+        <Button variant="contained" color="primary" onSave={handleSave} >
+Save
       </Button>
     </Box>
   );
