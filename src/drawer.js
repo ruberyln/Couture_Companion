@@ -6,6 +6,7 @@ import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
@@ -118,21 +119,31 @@ export default function MiniDrawer({}) {
   };
 
   const navigate = useNavigate();
-  const handleClick  = () =>  {
-    navigate ("/Display");
-  }
+  // const handleClick  = () =>  {
+  //   navigate ("/Display");
+  // }
+  const handleEditClick = () => {
+    navigate("/Display", { state: { formData } }); // Navigate back to Display page with the formData for editing
+  };
 
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  const [savedData, setSavedData] = useState(formData);
 
   useEffect(() => {
-    axios.get('http://localhost:5005/clients/get-client')
-      .then(res => {
-        setForm(res.data);
-      })
-      .catch(err => console.log('Error: ' + err));
-  }, []);  // Empty dependency array ensures this runs once when component mounts
+    if (formData) {
+      // If formData exists, send a POST request to save it in the backend
+      axios
+        .post('http://localhost:5005/clients/save-client', formData)
+        .then((res) => {
+          console.log(res.data);
+          setSavedData(res.data); // Update the savedData state with the response from the backend
+        })
+        .catch((err) => console.error(err));
+    }
+  }, [formData]);
+
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -201,7 +212,7 @@ export default function MiniDrawer({}) {
                     justifyContent: 'center',
                   }}
                 >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {index % 2 === 0 ? <HomeOutlinedIcon /> : <MailIcon />}
                 </ListItemIcon>
                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
@@ -257,13 +268,13 @@ export default function MiniDrawer({}) {
    
         <TableBody>
         <TableCell>{formData?.firstName}</TableCell>
-        <TableCell align="right">{formData?.phoneNumber}</TableCell>
+        <TableCell align="right">{formData?.phoneNumber}  </TableCell>
         <TableCell align="right">{formData?.deliveryDate}</TableCell>
         <TableCell align="right">{formData?.paymentStatus}</TableCell>
         <TableCell align="right">{formData?.noofOrders}</TableCell>
         <TableCell align="right">{formData?.orderStatus}</TableCell>
         
-        <IconButton> <ModeEditOutlineOutlinedIcon onClick = {handleClick} /> </IconButton>
+        <IconButton> <ModeEditOutlineOutlinedIcon onClick = {handleEditClick} /> </IconButton>
 
         </TableBody>
       </Table>

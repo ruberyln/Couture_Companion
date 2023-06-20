@@ -155,7 +155,7 @@ export default function NewUser(props) {
 
           <Typography>Order Details and Measurements </Typography>
           <TextField id="fabricType"  name="fabricType"label="Fabric Type " variant="standard" />
-          <TextField id="orderSummary"  name="orderSummary"label="Order Summary" variant="standard" />
+          <TextField id="orderSummary"  name="orderSummary"label="" variant="standard" />
           <TextField
               id="orderSummary"
               name= "orderSummary"

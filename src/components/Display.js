@@ -1,102 +1,91 @@
-import * as React from 'react';
-import { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Typography } from '@mui/material'; 
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { useLocation, useNavigate } from 'react-router-dom';
- // Import the context
-
- import axios from 'axios';
-
+import axios from 'axios';
 
 export default function Display({ onSave }) {
-  const [fieldLabels, setFieldLabels] = React.useState([]);
+  const [fieldLabels, setFieldLabels] = useState([]);
   const [newFieldLabel, setNewFieldLabel] = useState('');
   const [images, setImages] = useState([]);
   const [isEditable, setIsEditable] = useState(false);
   const location = useLocation();
   const user = location.state?.user;
-  const [users, setUsers] = useState(null);
-  const [formValues, setFormValues] = useState(user || {}); // Initialize formValues with user data if available
+  const [users, setUsers] = useState('');
+  const [formValues, setFormValues] = useState(user || {});
+
+  const {formDatas} = location.state || {};
+  const[formVal, setFormVal] = useState (formDatas);
   const navigate = useNavigate();
+  const [error, setError] = useState(null); 
+  const [newUser, setNewUser] = useState({
+    name: '',
+    PhoneNumber: '',
+    DueDelivery:'',
+   })
+   
   
-
-
+   
   const handleUploadClick = (e) => {
     const files = Array.from(e.target.files);
     const urlArray = files.map(file => URL.createObjectURL(file));
     setImages(urlArray);
   };
 
-  const handleOnSave = (event) => {
-    console.log(formValues);
-  axios.post('http://localhost:5005/clients/save-client', formValues)
-    .then(res => {
-      console.log(res.data);
-      setUsers(res.data);
-      navigate("/drawer", { state: { users: res.data }});
-    })
-    .catch(err => {
-      console.error(err);
-      // You could set some state here to show an error message to the user
-    });
-}
-
-  const handleInputChange = (event) => {
+  const handleInputChange = useCallback((event) => {
     const { name, value } = event.target;
-    setFormValues({ ...formValues, [name]: value }); // Update formValues
-  };
+    setFormValues(prevFormValues => ({ ...prevFormValues, [name]: value }));
+  }, []); 
 
+//   const handleSubmit = useCallback((event) => {
+//   event.preventDefault();
+//   axios.post('http://localhost:5005/clients/save-client', formValues)
+//     .then(res => {
+//       onSave(res.data); // Pass the form data to onSave callback
+//       navigate("/drawer", { state: { user: res.data } });
+//     })
+//     .catch(err => {
+//       console.error(err);
+//       setError('There was an error saving the form.');
+//     });
+// }, [formValues, navigate, onSave]);
+
+const handleSubmit = (event) => {
+  event.preventDefault();
+  onSave(formValues); // Pass the form data to onSave callback
+  navigate('/drawer', { state: { formData: formValues } }); // Pass the form data to the drawer component via location state
+};
+
+
+
+  const addNewField = () => {
+    if (newFieldLabel) {
+      setFieldLabels(prevFieldLabels => ([...prevFieldLabels, newFieldLabel]));
+      setNewFieldLabel('');
+      setFormValues(prevFormValues => ({...prevFormValues, [newFieldLabel]: ''}));
+    }
+  };
   const handleSave = () => {
-    setUsers(users);  // Assuming `newUser` is the new user data
+    setNewUser(newUser);  // Assuming `newUser` is the new user data
 
     navigate("/drawer");
   };
-  const addNewField = () => {
-    if (newFieldLabel) {
-      setFieldLabels([...fieldLabels, newFieldLabel]);
-      setNewFieldLabel('');
-    }
-  };
-//   const handleInputChange = (event) => {
-//     const { name, value } = event.target;
-//     onSave({ ...formValues, [name]: value });
-//   };
 
-
-  const handleSubmit = (event) => {
+  const toggleEdit = (event) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
-    console.log(formValues);
-  axios.post('http://localhost:5005/clients/save-client', formValues)
-    .then(res => {
-      console.log(res.data);
-      setUsers(res.data);
-      navigate("/drawer", { state: { users: res.data }});
-    })
-    .catch(err => {
-      console.error(err);
-      // You could set some state here to show an error message to the user
-    });
-  };
-
-  const toggleEdit = () => {
     if (isEditable) {
-      onSave(formValues);
+     
     }
-  
     setIsEditable(!isEditable);
   };
-
-
 
   return (
     <Box
       component="form"
-      onSubmit={handleSave}
+      onSubmit={handleSubmit}
       sx={{
         '& > :not(style)': { m: 1, width: '25ch' },
       }}
@@ -110,8 +99,8 @@ export default function Display({ onSave }) {
         label="First Name"
         variant="standard"
         disabled={!isEditable}
-        value={formValues?.firstName||''}
-         onChange={handleInputChange}
+        value={formValues?.firstName || ''}
+        onChange={handleInputChange}
       />
       <TextField
         id="lastName"
@@ -119,7 +108,8 @@ export default function Display({ onSave }) {
         label="Last Name"
         variant="standard"
         disabled={!isEditable}
-        value={formValues?.lastName||''}
+        value={formValues?.lastName || ''}
+
         onChange={handleInputChange}
       />
       <TextField
@@ -376,8 +366,8 @@ export default function Display({ onSave }) {
           label={label}
           variant="outlined"
           disabled={!isEditable}
-          value={formValues?.add||''}
-          onChange={handleInputChange}
+          value={formValues?.[label]||''} 
+        onChange={handleInputChange} 
         />
       ))}
 
@@ -426,9 +416,14 @@ export default function Display({ onSave }) {
 
       <Button variant="contained" color="primary" onClick={toggleEdit}>
         {isEditable ? 'Save' : 'Edit'}</Button>
-        <Button variant="contained" color="primary" onSave={handleSave} >
+       {/* <Button variant="contained" color="primary" onClick={} >
 Save
-      </Button>
+      </Button>  */}
+        <Button 
+ onClick={handleSave}
+  type="submit" variant="contained" color="primary">
+    Save
+  </Button>
     </Box>
   );
 }

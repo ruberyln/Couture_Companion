@@ -9,11 +9,11 @@ import SignIn from './signin';
 import MiniDrawer from './drawer';
 import NewUser from './components/NewUser';
 import SignUp from './signup';
-import BasicTable from './table';
+
 
 
 export default function App(props) {
-  const [usersData, setUsersData] = useState({});
+  const [userData, setUserData] = useState({});
 
   const [formData, setFormData] = useState({});
   const [formValues, setFormValues] = useState({});
@@ -40,8 +40,8 @@ export default function App(props) {
       <Route  path='signup' element={<SignUp/>} />
       <Route path='profile' element={<Profile/>}/>
       <Route path='NewUser' element={<NewUser setFormData={setFormData}  />}/>
-      <Route path='drawer' element={<MiniDrawer formData={formData}/>}/>
-      <Route path='Display' element={<Display onSave={handleSave}/>}/>
+      <Route path='drawer' element={<MiniDrawer formData={userData}/>}/>
+      <Route path='Display' element={<Display onSave={setUserData}/>}/>
       </Routes>
       </Router>
   );
