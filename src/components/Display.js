@@ -25,7 +25,17 @@ export default function Display() {
   const [formValues, setFormValues] = useState({});
   const [user, setUser] = useState({id: '' });
 
-
+  useEffect(() => {
+    console.log('location.state:', location.state);
+    
+    if (location.state) {
+      const { formData } = location.state;
+      console.log('formData:', formData);
+      // Assuming formData contains user information
+      setFormValues(formData);
+      setUser(formData);
+    }
+  }, [location.state]);
 
 useEffect(() => {
   console.log('location.state:', location.state);
@@ -88,7 +98,7 @@ useEffect(() => {
   name="firstName"
   label="First Name"
   variant="standard"
-  value={formValues.firstName || ''}
+  value={formValues?.firstName || ''}
   onChange={(e) => setFormValues({ ...formValues, firstName: e.target.value })}
 />
 

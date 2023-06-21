@@ -12,7 +12,7 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import image1 from './myImage/image1.png'
+import image3 from './myImage/image3.png'
 import { useNavigate } from 'react-router-dom';
 
 
@@ -39,6 +39,7 @@ export default function SignIn() {
           }),
         });
     
+        
         const result = await response.json();
         console.log(result); // 'User added!' if the request was successful
        
@@ -107,7 +108,7 @@ export default function SignIn() {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link href="http://localhost:3000/signup">
                     {"Dont have an account? Sign Up"}
                   </Link>
                 </Grid>
@@ -122,7 +123,7 @@ export default function SignIn() {
           sm={4}
           md={7} 
           >
-           <img src={image1}
+           <img src={image3}
             alt="My Image" 
             style={{width: '100%', height: 'auto'}} />
 

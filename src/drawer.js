@@ -132,8 +132,8 @@ export default function MiniDrawer({}) {
   // const handleClick  = () =>  {
   //   navigate ("/Display");
   // }
-  const handleEditClick = () => {
-    navigate("/Display", { state: { formData } }); // Navigate back to Display page with the formData for editing
+  const handleEditClick = (clientData) => {
+    navigate("/Display", { state: { formValues: clientData } });
   };
   const handleClick = () => {
     navigate("/NewUser")
@@ -379,9 +379,10 @@ export default function MiniDrawer({}) {
                 <TableCell align="right">{client.noofOrders}</TableCell>
                 <TableCell align="right">{client.orderStatus}</TableCell>
                 <TableCell align="right">
-                  <IconButton onClick={() => handleEditClick(client)}>
-                    <ModeEditOutlineOutlinedIcon />
-                  </IconButton>
+                <IconButton onClick={() => handleEditClick(client)}>
+  <ModeEditOutlineOutlinedIcon />
+</IconButton>
+
                 </TableCell>
               </TableRow>
               
