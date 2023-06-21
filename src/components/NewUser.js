@@ -3,10 +3,10 @@ import { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Typography } from '@mui/material'; 
-import  { Button , TableBody, TableCell  } from '@mui/material';
+import  { Button  } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import DrawOutlinedIcon from '@mui/icons-material/DrawOutlined';
-import Display from './Display';
+import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import PatternOutlinedIcon from '@mui/icons-material/PatternOutlined';
 import TextureOutlinedIcon from '@mui/icons-material/TextureOutlined';
 import axios from 'axios';
@@ -262,7 +262,7 @@ export default function NewUser(props) {
 
   <Button 
  onSave={handleSave}
-  type="submit" variant="contained" color="primary">
+  type="submit" variant="contained" color="primary" endIcon={<SaveAltIcon />}>
     Save
   </Button>
   

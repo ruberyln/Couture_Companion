@@ -19,6 +19,9 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
+import PowerSettingsNewOutlinedIcon from '@mui/icons-material/PowerSettingsNewOutlined';
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import BasicTable from './table';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -32,12 +35,19 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
+import Display from './components/Display';
+import Notifications from './components/notifications';
 import TableRow from '@mui/material/TableRow';
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import Paper from '@mui/material/Paper';
+import LogoutPage from './components/logout';
 import AddButtons from './components/AddButton';
+import Link from '@mui/material/Link';
 import axios from 'axios';
+
+
 import {  useLocation, useNavigate } from 'react-router-dom';
+import { Typography } from '@mui/material';
 const drawerWidth = 240;
 
 
@@ -160,10 +170,16 @@ export default function MiniDrawer({}) {
             ...(open && { display: 'none' }),
           }}
         >
+         
           <MenuIcon />
         </IconButton>
+        <Typography sx={{ fontFamily: "'EB Garamond', serif" }} >Ruberyln Tech</Typography>
         <Box sx={{ display: 'flex', alignItems: 'center', ml: 2 }}>
+
           <IconButton>
+
+        
+
             <SearchIcon />
           </IconButton>
           <InputBase
@@ -184,67 +200,137 @@ export default function MiniDrawer({}) {
 
        
         
-        <Avatar sx={{ ml: 2 }}>A</Avatar>
+        <Avatar sx={{ ml: 2 }}>A</Avatar> 
+
+        <Typography sx={{ fontFamily: "'EB Garamond', serif" }}> Hello there! </Typography>
       </Toolbar>
     </AppBar>
      
-      <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-        <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
+    <Drawer variant="permanent" open={open}>
+      <DrawerHeader>
+        <IconButton onClick={handleDrawerClose}>
+          {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+        </IconButton>
+      </DrawerHeader>
+      <Divider />
+      <List>
+        {['Home'].map((text) => (
+          <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+            <ListItemButton
+              sx={{
+                minHeight: 80,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}
+              cursor="pointer" onClick={() =>{
+                navigate("/")
+                window.scrollTo({
+                  top: 0,
+                  behavior: "smooth",
+                })
+              }
+              }
+            >
+              <ListItemIcon
                 sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
+                  minWidth: 0,
+                  mr: open ? 3 : 'auto',
+                  justifyContent: 'center',
                 }}
+                component={Link}
+                href={"/drawer "}
               >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {index % 2 === 0 ? <HomeOutlinedIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
+            <HomeOutlinedIcon /> 
+
+              </ListItemIcon>
+              <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+
+      <List>
+        {['Notifications'].map((text,) => (
+          <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+            <ListItemButton
+              sx={{
+                minHeight: 80,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}
+              component={Link}
+              href={"/notifications "}
+            >
+              <ListItemIcon
                 sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
+                  minWidth: 0,
+                  mr: open ? 3 : 'auto',
+                  justifyContent: 'center',
+                }}>
+                <NotificationsNoneOutlinedIcon  />
+
+              </ListItemIcon>
+              <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+
+      <List>
+        {['Profile'].map((text,) => (
+          <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+            <ListItemButton
+              sx={{
+                minHeight: 80,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}
+              component={Link}
+              href={"/profile"}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : 'auto',
+                  justifyContent: 'center',
+                }}>
+              <Person2OutlinedIcon />
+
+              </ListItemIcon>
+              <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+     
+      <List>
+        {['Logout'].map((text,) => (
+          <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+            <ListItemButton
+              sx={{
+                minHeight: 200,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}
+              component={Link}
+             
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : 'auto',
+                  justifyContent: 'center',
+                }}>
+                <LogoutPage />
+
+              </ListItemIcon>
+              <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
       </Drawer>
+
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         <TableContainer component={Paper}>

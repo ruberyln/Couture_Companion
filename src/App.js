@@ -9,6 +9,8 @@ import SignIn from './signin';
 import MiniDrawer from './drawer';
 import NewUser from './components/NewUser';
 import SignUp from './signup';
+import Notifications from './components/notifications';
+import LogoutPage from './components/logout';
 
 
 
@@ -39,6 +41,9 @@ export default function App(props) {
       <Routes>
       <Route  path='signup' element={<SignUp/>} />
       <Route path='profile' element={<Profile/>}/>
+      <Route path='signin' element={<SignIn/>}/>
+      <Route path='logout' element={<LogoutPage/>}/>
+      <Route path='notifications' element={<Notifications/>}/>
       <Route path='NewUser' element={<NewUser setFormData={setFormData}  />}/>
       <Route path='drawer' element={<MiniDrawer formData={userData}/>}/>
       <Route path='Display' element={<Display onSave={setUserData}/>}/>

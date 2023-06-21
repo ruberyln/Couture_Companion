@@ -3,9 +3,23 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Typography } from '@mui/material'; 
 import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import SaveAltIcon from '@mui/icons-material/SaveAlt';
+import PatternOutlinedIcon from '@mui/icons-material/PatternOutlined';
+import TextureOutlinedIcon from '@mui/icons-material/TextureOutlined';
+import ContentCutOutlinedIcon from '@mui/icons-material/ContentCutOutlined';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import PriceCheckOutlinedIcon from '@mui/icons-material/PriceCheckOutlined';
+import CheckroomOutlinedIcon from '@mui/icons-material/CheckroomOutlined';
+import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
+import PendingActionsOutlinedIcon from '@mui/icons-material/PendingActionsOutlined';
+import BalanceOutlinedIcon from '@mui/icons-material/BalanceOutlined';
 
 export default function Display({ onSave }) {
   const [fieldLabels, setFieldLabels] = useState([]);
@@ -59,6 +73,10 @@ const handleSubmit = (event) => {
   navigate('/drawer', { state: { formData: formValues } }); // Pass the form data to the drawer component via location state
 };
 
+const [paymentstatus, setPaymentStatus] = React.useState('');
+const handleChanged = (event) => { // for payment status 
+    setPaymentStatus(event.target.value);
+  };
 
 
   const addNewField = () => {
@@ -214,6 +232,35 @@ const handleSubmit = (event) => {
         disabled={!isEditable}
         value={formValues?.noofOrders||''}
       />
+
+      <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="demo-simple-select-standard-label">Payment-Status</InputLabel>
+        <Select
+          labelId="demo-simple-select-standard-label"
+          // value={paymentstatus}
+          onChange={handleChanged}
+          id= "paymentStatus"
+          disabled={!isEditable}
+          name = "paymentStatus"
+          label="paymentstatus"
+          value={formValues?.paymentstatus||''}
+        >
+           <MenuItem value="">
+      <em>None</em>
+    </MenuItem>
+    <MenuItem value={"Pending"}>
+      <PendingActionsOutlinedIcon /> Pending
+    </MenuItem> 
+  
+    <MenuItem value={"Partial-Payment"}>
+      <BalanceOutlinedIcon /> Partial-Payment
+    </MenuItem> 
+    <MenuItem value={"Fully-Paid"}>
+      <PriceCheckOutlinedIcon />Fully-Paid
+    </MenuItem> 
+    
+  </Select>
+</FormControl>
 
       <Typography>Order Details and Measurements</Typography>
       <TextField
@@ -416,14 +463,20 @@ const handleSubmit = (event) => {
 
       <Button variant="contained" color="primary" onClick={toggleEdit}>
         {isEditable ? 'Save' : 'Edit'}</Button>
-       {/* <Button variant="contained" color="primary" onClick={} >
-Save
-      </Button>  */}
-        <Button 
- onClick={handleSave}
-  type="submit" variant="contained" color="primary">
+  
+     < Button
+      onClick={handleSave}
+      variant="contained"  
+      type="submit" 
+      endIcon={<SaveAltIcon />}>
+
+
     Save
   </Button>
+
+  <Button variant="outlined" startIcon={<DeleteIcon />}>
+        Delete
+      </Button>
     </Box>
   );
 }
