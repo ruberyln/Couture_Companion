@@ -12,7 +12,7 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import image1 from './myImage/image3.png'
+import image1 from './myImage/image1.png'
 import { useNavigate } from 'react-router-dom';
 
 
@@ -108,7 +108,7 @@ export default function SignIn() {
                 </Grid>
                 <Grid item>
                   <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
+                    {"Dont have an account? Sign Up"}
                   </Link>
                 </Grid>
               </Grid>

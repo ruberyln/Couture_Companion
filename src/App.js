@@ -11,6 +11,7 @@ import NewUser from './components/NewUser';
 import SignUp from './signup';
 import Notifications from './components/notifications';
 import LogoutPage from './components/logout';
+// import Landing from './components/landing';
 
 
 
@@ -40,6 +41,7 @@ export default function App(props) {
   <Router>
       <Routes>
       <Route  path='signup' element={<SignUp/>} />
+      {/* <Route  path='landing' element={<Landing/>} /> */}
       <Route path='profile' element={<Profile/>}/>
       <Route path='signin' element={<SignIn/>}/>
       <Route path='logout' element={<LogoutPage/>}/>

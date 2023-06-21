@@ -135,25 +135,39 @@ export default function MiniDrawer({}) {
   const handleEditClick = () => {
     navigate("/Display", { state: { formData } }); // Navigate back to Display page with the formData for editing
   };
+  const handleClick = () => {
+    navigate("/NewUser")
+
+  }
 
   const handleDrawerClose = () => {
     setOpen(false);
   };
   const [savedData, setSavedData] = useState(formData);
+  const [clients, setClients] = useState([]);
+
+  // useEffect(() => {
+  //   if (formData) {
+  //     // If formData exists, send a POST request to save it in the backend
+  //     axios
+  //       .post('http://localhost:5005/clients/save-client', formData)
+  //       .then((res) => {
+  //         console.log(res.data);
+  //         setSavedData(res.data); // Update the savedData state with the response from the backend
+  //         setClients(prevClients => [...prevClients, res.data]); 
+  //       })
+  //       .catch((err) => console.error(err));
+        
+  //   }
+  // }, [formData]);
 
   useEffect(() => {
-    if (formData) {
-      // If formData exists, send a POST request to save it in the backend
-      axios
-        .post('http://localhost:5005/clients/save-client', formData)
-        .then((res) => {
-          console.log(res.data);
-          setSavedData(res.data); // Update the savedData state with the response from the backend
-        })
-        .catch((err) => console.error(err));
-    }
-  }, [formData]);
-
+    axios.get('http://localhost:5005/clients/get-client')
+      .then(res => {
+        setClients(res.data);
+      })
+      .catch(err => console.log('Error: ' + err));
+  }, []);
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -189,7 +203,7 @@ export default function MiniDrawer({}) {
         <Box sx={{ flexGrow: 1}} />  
 
         <Button 
-        href= "http://localhost:3000/NewUser"
+       onClick={handleClick}
         startIcon={<AddCircleIcon />} variant="outlined" sx= {{ bgcolor: indigo[100], color:indigo[400], borderRadius:'25px' }}>
           Add New Client
         </Button>
@@ -352,16 +366,26 @@ export default function MiniDrawer({}) {
          </TableRow>
         </TableHead>
    
-        <TableBody>
-        <TableCell>{formData?.firstName}</TableCell>
-        <TableCell align="right">{formData?.phoneNumber}  </TableCell>
-        <TableCell align="right">{formData?.deliveryDate}</TableCell>
-        <TableCell align="right">{formData?.paymentStatus}</TableCell>
-        <TableCell align="right">{formData?.noofOrders}</TableCell>
-        <TableCell align="right">{formData?.orderStatus}</TableCell>
-        
-        <IconButton> <ModeEditOutlineOutlinedIcon onClick = {handleEditClick} /> </IconButton>
 
+
+
+        <TableBody>
+        {clients.map((client) => (
+                <TableRow key={client._id}> 
+                <TableCell>{client.firstName}</TableCell>
+                <TableCell align="right">{client.phoneNumber}</TableCell>
+                <TableCell align="right">{client.deliveryDate}</TableCell>
+                <TableCell align="right">{client.paymentStatus}</TableCell>
+                <TableCell align="right">{client.noofOrders}</TableCell>
+                <TableCell align="right">{client.orderStatus}</TableCell>
+                <TableCell align="right">
+                  <IconButton onClick={() => handleEditClick(client)}>
+                    <ModeEditOutlineOutlinedIcon />
+                  </IconButton>
+                </TableCell>
+              </TableRow>
+              
+  ))}
         </TableBody>
       </Table>
       <AddButtons/>

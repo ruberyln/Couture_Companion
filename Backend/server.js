@@ -33,6 +33,18 @@ app.post('/users/save-client', (req, res) => {
         console.log('Endpoint /users/save-client hit');
 });
 
+app.delete('/clients/delete-client/:id', (req, res) => {
+    const clientId = req.params.id;
+    Client.findByIdAndDelete(clientId)
+      .then(() => res.json('Client deleted!'))
+      .catch((err) => res.status(400).json('Error: ' + err));
+  });
+  
+app.get('/clients/get-client', (req, res) => {
+    Client.find()
+      .then((clients) => res.json(clients))
+      .catch((err) => res.status(400).json('Error: ' + err));
+  });
 app.listen(5005, () => {
     console.log("Server is running on Port: 5005");
 });
