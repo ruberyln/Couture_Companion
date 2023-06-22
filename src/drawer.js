@@ -29,12 +29,13 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
-import { indigo } from '@mui/material/colors';
+import { indigo , pink } from '@mui/material/colors';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
+import image4 from './myImage/image4.JPG'
 import Display from './components/Display';
 import Notifications from './components/notifications';
 import TableRow from '@mui/material/TableRow';
@@ -186,7 +187,11 @@ export default function MiniDrawer({}) {
         >
          
           <MenuIcon />
+        
         </IconButton>
+        <img src={image4}
+            alt="My Image" 
+            style={{width: '2%', height: '2%'}} />
         <Typography sx={{ fontFamily: "'EB Garamond', serif" }} >Ruberyln Tech</Typography>
         <Box sx={{ display: 'flex', alignItems: 'center', ml: 2 }}>
 
@@ -380,7 +385,9 @@ export default function MiniDrawer({}) {
                 <TableCell align="right">{client.orderStatus}</TableCell>
                 <TableCell align="right">
                 <IconButton onClick={() => handleEditClick(client)}>
+                  <Avatar sx={{ bgcolor: pink[500] }}>
   <ModeEditOutlineOutlinedIcon />
+  </Avatar>
 </IconButton>
 
                 </TableCell>

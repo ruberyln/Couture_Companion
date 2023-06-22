@@ -10,6 +10,7 @@ import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import PatternOutlinedIcon from '@mui/icons-material/PatternOutlined';
 import TextureOutlinedIcon from '@mui/icons-material/TextureOutlined';
 import axios from 'axios';
+import AvatarUpload from './avatarupload';
 import { useNavigate } from 'react-router-dom';
 import ContentCutOutlinedIcon from '@mui/icons-material/ContentCutOutlined';
 import InputLabel from '@mui/material/InputLabel';
@@ -23,7 +24,7 @@ import PendingActionsOutlinedIcon from '@mui/icons-material/PendingActionsOutlin
 import BalanceOutlinedIcon from '@mui/icons-material/BalanceOutlined';
 import Avatar from '@mui/material/Avatar';
 
-export default function NewUser() {
+export default function NewUser({onAvatarChange}) {
   const [fieldLabels, setFieldLabels] = React.useState([]);
   const [newFieldLabel, setNewFieldLabel] = useState('');
   const [images, setImages] = useState([]);
@@ -37,7 +38,7 @@ export default function NewUser() {
   };
 
   const handleSave = () => {
-    navigate('/Display', { state: { images, formValues } });
+    navigate('/Display', { state: { user: avatar, images, formValues } });
   };
 
   const addNewField = () => {
@@ -47,7 +48,7 @@ export default function NewUser() {
       setFormValues((prevFormValues) => ({ ...prevFormValues, [newFieldLabel]: '' }));
     }
   };
-
+  const [avatar, setAvatar] = useState("/static/images/avatar/1.jpg");
   const [orderstatus, setOrderStatus] = React.useState('');
 
   const handleChange = (event) => {
@@ -76,7 +77,7 @@ export default function NewUser() {
 
   return (
     <>
-      <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" sx={{ width: 56, height: 56 }} />
+      <AvatarUpload src={avatar} onChange={onAvatarChange} />
       <Box
         component="form"
         onSubmit={handleSubmit}
@@ -90,7 +91,15 @@ export default function NewUser() {
 
         <TextField id="firstName" name="firstName" label="First Name" variant="standard" />
         <TextField id="lastName" name="lastName" label="Last Name" variant="standard" />
-        <TextField id="birthday" name="birthday" label="Birthday" variant="standard" />
+        <TextField 
+        id="birthday" 
+        name="birthday" 
+        label="Birthday" 
+        type = "date"
+        variant="standard"
+        InputLabelProps={{
+            shrink: true,
+         }} />
         <TextField id="phoneNumber" name="phoneNumber" label="Phone Number" variant="standard" />
         <TextField id="email" name="email" label="Email" variant="standard" />
 
@@ -102,12 +111,22 @@ export default function NewUser() {
 
         <Typography>Price & Duration</Typography>
         <TextField id="price" name="price" label="Price" variant="standard" />
-        <TextField id="deliveryDate" name="deliveryDate" label="Delivery Date" variant="standard" />
+        <TextField
+  id="deliveryDate"
+  name="deliveryDate"
+  label="Delivery Date"
+  type="date"
+  variant="standard"
+  InputLabelProps={{
+    shrink: true,
+  }}
+/>
+
         <TextField id="amountPaid" name="amountPaid" label="Amount Paid" variant="standard" />
         <TextField id="noofOrders" name="noofOrders" label="No of Orders" variant="standard" />
 
         <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-          <InputLabel id="demo-simple-select-standard-label">Payment-Status</InputLabel>
+          <InputLabel id="paymentStatus">Payment-Status</InputLabel>
           <Select
             labelId="demo-simple-select-standard-label"
             value={paymentstatus}

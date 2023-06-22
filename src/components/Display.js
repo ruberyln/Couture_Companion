@@ -7,6 +7,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import InputLabel from '@mui/material/InputLabel';
+import AvatarUpload from './avatarupload';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import PatternOutlinedIcon from '@mui/icons-material/PatternOutlined';
 import TextureOutlinedIcon from '@mui/icons-material/TextureOutlined';
@@ -18,7 +23,7 @@ import PendingActionsOutlinedIcon from '@mui/icons-material/PendingActionsOutlin
 import BalanceOutlinedIcon from '@mui/icons-material/BalanceOutlined';
 import PriceCheckOutlinedIcon from '@mui/icons-material/PriceCheckOutlined';
 
-export default function Display() {
+export default function Display( {avatar}) {
   const navigate = useNavigate();
   const location = useLocation();
   const [images, setImages] = useState([]);
@@ -83,6 +88,7 @@ useEffect(() => {
 
   return (
     <>
+    <AvatarUpload/>
       <Box
         component="form"
         sx={{
@@ -203,14 +209,17 @@ useEffect(() => {
           onChange={(e) => setFormValues({ ...formValues, noofOrders: e.target.value })}
         />
 
-        <TextField
-          id="paymentStatus"
+      <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+          <InputLabel id="paymentStatus">Payment-Status</InputLabel>
+          <Select
+                 id="paymentStatus"
           name="paymentStatus"
           label="Payment Status"
           variant="standard"
           value={formValues.paymentStatus || ''}
           onChange={(e) => setFormValues({ ...formValues, paymentStatus: e.target.value })}
         />
+        </FormControl>
 
         <Typography>Order Details and Measurements</Typography>
         <TextField
