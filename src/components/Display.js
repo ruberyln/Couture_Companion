@@ -8,6 +8,9 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import InputLabel from '@mui/material/InputLabel';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 import AvatarUpload from './avatarupload';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -22,6 +25,7 @@ import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined
 import PendingActionsOutlinedIcon from '@mui/icons-material/PendingActionsOutlined';
 import BalanceOutlinedIcon from '@mui/icons-material/BalanceOutlined';
 import PriceCheckOutlinedIcon from '@mui/icons-material/PriceCheckOutlined';
+import OnlyDrawer from './onlydrawer';
 
 export default function Display( {avatar}) {
   const navigate = useNavigate();
@@ -89,10 +93,13 @@ useEffect(() => {
   return (
     <>
     <AvatarUpload/>
+    <OnlyDrawer/>
       <Box
         component="form"
         sx={{
           '& > :not(style)': { m: 1, width: '25ch' },
+          marginLeft: '150px',
+          marginTop: '20px'
         }}
         noValidate
         autoComplete="off"
@@ -209,6 +216,33 @@ useEffect(() => {
           onChange={(e) => setFormValues({ ...formValues, noofOrders: e.target.value })}
         />
 
+<FormGroup 
+>
+      <FormControlLabel 
+      control={<Checkbox  />} 
+      label="Paid" 
+      id = "paid" 
+      name = "paid"
+      value={formValues.paid || ''}
+      onChange={(e) => setFormValues({ ...formValues, paid: e.target.value })}
+       />
+      <FormControlLabel control={<Checkbox  />} 
+      label="Partial-Payment"
+       id = "partial" 
+       name = "partial" 
+       value={formValues.partial || ''}
+       onChange={(e) => setFormValues({ ...formValues, partial: e.target.value })}/>
+
+      <FormControlLabel control={<Checkbox  />} 
+      label="Pending" 
+      id = "pending" 
+      name = "pending"
+      value={formValues.pending || ''}
+      onChange={(e) => setFormValues({ ...formValues, pending: e.target.value })}
+       />
+      
+      </FormGroup>
+{/* 
       <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
           <InputLabel id="paymentStatus">Payment-Status</InputLabel>
           <Select
@@ -219,7 +253,7 @@ useEffect(() => {
           value={formValues.paymentStatus || ''}
           onChange={(e) => setFormValues({ ...formValues, paymentStatus: e.target.value })}
         />
-        </FormControl>
+        </FormControl> */}
 
         <Typography>Order Details and Measurements</Typography>
         <TextField

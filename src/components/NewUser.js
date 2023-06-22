@@ -23,6 +23,10 @@ import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined
 import PendingActionsOutlinedIcon from '@mui/icons-material/PendingActionsOutlined';
 import BalanceOutlinedIcon from '@mui/icons-material/BalanceOutlined';
 import Avatar from '@mui/material/Avatar';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import OnlyDrawer from './onlydrawer';
 
 export default function NewUser({onAvatarChange}) {
   const [fieldLabels, setFieldLabels] = React.useState([]);
@@ -77,16 +81,25 @@ export default function NewUser({onAvatarChange}) {
 
   return (
     <>
-      <AvatarUpload src={avatar} onChange={onAvatarChange} />
+   
+   <AvatarUpload src={avatar} onChange={onAvatarChange} 
+      sx=  {{marginLeft: '150px',
+            marginTop: '150px'
+      }} />
+      <OnlyDrawer/>
+     
       <Box
         component="form"
         onSubmit={handleSubmit}
-        sx={{
-          '& > :not(style)': { m: 1, width: '25ch' },
+        sx={{ 
+          '& > :not(style)': { m: 1, width: '25ch', },
+          marginLeft: '150px',
+          marginTop: '20px'
         }}
         noValidate
         autoComplete="off"
       >
+       
         <Typography>Personal Details</Typography>
 
         <TextField id="firstName" name="firstName" label="First Name" variant="standard" />
@@ -124,8 +137,9 @@ export default function NewUser({onAvatarChange}) {
 
         <TextField id="amountPaid" name="amountPaid" label="Amount Paid" variant="standard" />
         <TextField id="noofOrders" name="noofOrders" label="No of Orders" variant="standard" />
+       
 
-        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+        {/* <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
           <InputLabel id="paymentStatus">Payment-Status</InputLabel>
           <Select
             labelId="demo-simple-select-standard-label"
@@ -148,7 +162,18 @@ export default function NewUser({onAvatarChange}) {
               <PriceCheckOutlinedIcon /> Fully-Paid
             </MenuItem>
           </Select>
-        </FormControl>
+        </FormControl> */}
+        <Typography>Payment Status </Typography>
+         <FormGroup>
+      <FormControlLabel control={<Checkbox  />} label="Paid" id = "paid" name = "paid" />
+      <FormControlLabel control={<Checkbox  />} label="Partial- Payment" id = "partial" name = "partial" />
+      <FormControlLabel control={<Checkbox  />} label="Pending" id = "pending" name = "pending" />
+      </FormGroup>
+
+
+
+
+
 
         <Typography>Order Details and Measurements</Typography>
         <TextField id="fabricType" name="fabricType" label="Fabric Type" variant="standard" />
@@ -250,6 +275,7 @@ export default function NewUser({onAvatarChange}) {
         <Button onClick={handleSave} type="submit" variant="contained" color="primary" endIcon={<SaveAltIcon />}>
           Save
         </Button>
+     
       </Box>
     </>
   );

@@ -9,6 +9,7 @@ import SignIn from './signin';
 import MiniDrawer from './drawer';
 import NewUser from './components/NewUser';
 import SignUp from './signup';
+import OnlyDrawer from './components/onlydrawer';
 import Notifications from './components/notifications';
 import LogoutPage from './components/logout';
 import AvatarUpload from './components/avatarupload';
@@ -45,6 +46,7 @@ export default function App(props) {
       <Route  path='avatarUpload' element={<AvatarUpload/>} />
       {/* <Route  path='landing' element={<Landing/>} /> */}
       <Route path='profile' element={<Profile/>}/>
+      <Route path='onlydrawer' element={<OnlyDrawer/>}/>
       <Route path='signin' element={<SignIn/>}/>
       <Route path='logout' element={<LogoutPage/>}/>
       <Route path='notifications' element={<Notifications/>}/>

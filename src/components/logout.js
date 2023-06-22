@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import { IconButton } from '@mui/material';
+import  {Avatar}  from '@mui/material';
+import { indigo , pink, blue, green, red, orange } from '@mui/material/colors';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 
 function LogoutPage() {
@@ -24,7 +26,10 @@ function LogoutPage() {
     return (
         <div>
             <IconButton onClick={handleClickOpen}>
-                <PowerSettingsNewIcon/>
+            <Avatar sx={{ bgcolor: indigo[500] }}>
+            <PowerSettingsNewIcon/>
+            </Avatar>
+
             </IconButton>
             <Dialog
                 open={open}

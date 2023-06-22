@@ -33,40 +33,40 @@ const label = { inputProps: { 'aria-label': 'Color switch demo' } };
 
 export default function Profile() {
   const [user, setUser] = useState(null);
-  useEffect(() => {
-    const fetchData = async () => {
-      const userId = localStorage.getItem('userId');
-      if (!userId) {
-        console.log('No user ID found');
-        return;
-      }
-      const response = await fetch(`http://localhost:5005/users/${userId}`);
-      const userData = await response.json();
-      setUser(userData);
-    };
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const userId = localStorage.getItem('userId');
+  //     if (!userId) {
+  //       console.log('No user ID found');
+  //       return;
+  //     }
+  //     const response = await fetch(`http://localhost:5005/users/${userId}`);
+  //     const userData = await response.json();
+  //     setUser(userData);
+  //   };
+  //   fetchData();
+  // }, []);
 
-  const handleSave = async () => {
-    const userId = localStorage.getItem('userId');
-    if (!userId) {
-      console.log('No user ID found');
-      return;
-    }
-    const response = await fetch(`http://localhost:5005/users/${userId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user),
-    });
-    const result = await response.json();
-    console.log(result); // 'User updated!' if the request was successful
-  };
+  // const handleSave = async () => {
+  //   const userId = localStorage.getItem('userId');
+  //   if (!userId) {
+  //     console.log('No user ID found');
+  //     return;
+  //   }
+  //   const response = await fetch(`http://localhost:5005/users/${userId}`, {
+  //     method: 'PUT',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(user),
+  //   });
+  //   const result = await response.json();
+  //   console.log(result); // 'User updated!' if the request was successful
+  // };
 
-  if (!user) {
-    return <div>Loading...</div>; // or your loading screen
-  }
+  // if (!user) {
+  //   return <div>Loading...</div>; // or your loading screen
+  // }
 
   return (
 
@@ -96,7 +96,7 @@ export default function Profile() {
           id="firstName"
           label="First Name"
           variant="outlined"
-          value={user.firstName}
+          value={user?.firstName}
           onChange={e => setUser({...user, firstName: e.target.value})}
         />
         <TextField
@@ -104,7 +104,7 @@ export default function Profile() {
           id="lastName"
           label="Last Name"
           variant="outlined"
-          value={user.lastName}
+          value={user?.lastName}
           onChange={e => setUser({...user, lastName: e.target.value})}
         />
 
@@ -124,7 +124,7 @@ export default function Profile() {
     
      </Stack>
      </Box>
-     <Button onClick={handleSave}>Save</Button>
+     {/* <Button onClick={handleSave}>Save</Button> */}
     </Box>
    
 

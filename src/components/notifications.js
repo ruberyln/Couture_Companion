@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import OnlyDrawer from "./onlydrawer";
 import { useNavigate } from "react-router-dom";
 export default function  Notifications () {
     const handleClick = () => {
@@ -9,7 +10,7 @@ export default function  Notifications () {
     const navigate = useNavigate();
 
     return (
-      
+     
       <Box   sx={{
         my: 8,
         mx: 4,
@@ -17,7 +18,9 @@ export default function  Notifications () {
         flexDirection: 'column',
         alignItems: 'center',
       }}
-      >  <Typography > Oops you have no Notifications </Typography>
+      > 
+       <OnlyDrawer/>
+        <Typography > Oops you have no Notifications </Typography>
       <Button onClick = {handleClick} > Return to Home Page</Button>
        </Box> 
     )

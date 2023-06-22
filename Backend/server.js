@@ -25,13 +25,13 @@ app.use('/users', usersRouter);
 
 const Client = require('./models/Client'); // import the Client model
 
-app.post('/users/save-client', (req, res) => {
-    const clientData = new Client(req.body);
-    clientData.save()
-        .then(client => res.json('Client saved!'))
-        .catch(err => res.status(400).json('Error: ' + err));
-        console.log('Endpoint /users/save-client hit');
-});
+// app.post('/users/save-client', (req, res) => {
+//     const clientData = new Client(req.body);
+//     clientData.save()
+//         .then(client => res.json('Client saved!'))
+//         .catch(err => res.status(400).json('Error: ' + err));
+//         console.log('Endpoint /users/save-client hit');
+// });
 
 app.delete('/clients/delete-client/:id', (req, res) => {
     const clientId = req.params.id;
@@ -40,6 +40,19 @@ app.delete('/clients/delete-client/:id', (req, res) => {
       .catch((err) => res.status(400).json('Error: ' + err));
   });
   
+  // Your other code...
+
+// Changed '/users/save-client' to '/clients/save-client'
+app.post('/clients/save-client', (req, res) => {
+    const clientData = new Client(req.body);
+    clientData.save()
+        .then(client => res.json('Client saved!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+        console.log('Endpoint /clients/save-client hit');
+});
+
+// Your other code...
+
 app.get('/clients/get-client', (req, res) => {
     Client.find()
       .then((clients) => res.json(clients))

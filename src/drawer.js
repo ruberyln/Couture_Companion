@@ -23,13 +23,14 @@ import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
 import PowerSettingsNewOutlinedIcon from '@mui/icons-material/PowerSettingsNewOutlined';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import BasicTable from './table';
+import OnlyDrawer from './components/onlydrawer';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
-import { indigo , pink } from '@mui/material/colors';
+import { blue, green, indigo , orange, pink } from '@mui/material/colors';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -123,11 +124,9 @@ export default function MiniDrawer({}) {
 
   const [form, setForm] = useState({});
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+
+
 
   const navigate = useNavigate();
   // const handleClick  = () =>  {
@@ -141,9 +140,7 @@ export default function MiniDrawer({}) {
 
   }
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+ 
   const [savedData, setSavedData] = useState(formData);
   const [clients, setClients] = useState([]);
 
@@ -173,197 +170,26 @@ export default function MiniDrawer({}) {
   return (
     <Box sx={{ display: 'flex' }}>
     <CssBaseline />
-    <AppBar position="fixed" open={open} sx={{ bgcolor: 'white', color: 'black'}}>
-      <Toolbar>
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          onClick={handleDrawerOpen}
-          edge="start"
-          sx={{
-            marginRight: 5,
-            ...(open && { display: 'none' }),
-          }}
-        >
-         
-          <MenuIcon />
-        
-        </IconButton>
-        <img src={image4}
-            alt="My Image" 
-            style={{width: '2%', height: '2%'}} />
-        <Typography sx={{ fontFamily: "'EB Garamond', serif" }} >Ruberyln Tech</Typography>
-        <Box sx={{ display: 'flex', alignItems: 'center', ml: 2 }}>
-
-          <IconButton>
-
-        
-
-            <SearchIcon />
-          </IconButton>
-          <InputBase
-            placeholder="Search…"
-          />
-        </Box>
-        <Box sx={{ flexGrow: 1}} />  
-
-        <Button 
-       onClick={handleClick}
-        startIcon={<AddCircleIcon />} variant="outlined" sx= {{ bgcolor: indigo[100], color:indigo[400], borderRadius:'25px' }}>
-          Add New Client
-        </Button>
-
-        <IconButton sx = {{color:indigo[300], ml: 2 }}>
-          <NotificationsIcon />
-        </IconButton>
-
-       
-        
-        <Avatar sx={{ ml: 2 }}>A</Avatar> 
-
-        <Typography sx={{ fontFamily: "'EB Garamond', serif" }}> Hello there! </Typography>
-      </Toolbar>
-    </AppBar>
-     
-    <Drawer variant="permanent" open={open}>
-      <DrawerHeader>
-        <IconButton onClick={handleDrawerClose}>
-          {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-        </IconButton>
-      </DrawerHeader>
-      <Divider />
-      <List>
-        {['Home'].map((text) => (
-          <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-            <ListItemButton
-              sx={{
-                minHeight: 80,
-                justifyContent: open ? 'initial' : 'center',
-                px: 2.5,
-              }}
-              cursor="pointer" onClick={() =>{
-                navigate("/")
-                window.scrollTo({
-                  top: 0,
-                  behavior: "smooth",
-                })
-              }
-              }
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : 'auto',
-                  justifyContent: 'center',
-                }}
-                component={Link}
-                href={"/drawer "}
-              >
-            <HomeOutlinedIcon /> 
-
-              </ListItemIcon>
-              <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-
-      <List>
-        {['Notifications'].map((text,) => (
-          <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-            <ListItemButton
-              sx={{
-                minHeight: 80,
-                justifyContent: open ? 'initial' : 'center',
-                px: 2.5,
-              }}
-              component={Link}
-              href={"/notifications "}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : 'auto',
-                  justifyContent: 'center',
-                }}>
-                <NotificationsNoneOutlinedIcon  />
-
-              </ListItemIcon>
-              <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-
-      <List>
-        {['Profile'].map((text,) => (
-          <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-            <ListItemButton
-              sx={{
-                minHeight: 80,
-                justifyContent: open ? 'initial' : 'center',
-                px: 2.5,
-              }}
-              component={Link}
-              href={"/profile"}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : 'auto',
-                  justifyContent: 'center',
-                }}>
-              <Person2OutlinedIcon />
-
-              </ListItemIcon>
-              <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-     
-      <List>
-        {['Logout'].map((text,) => (
-          <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-            <ListItemButton
-              sx={{
-                minHeight: 200,
-                justifyContent: open ? 'initial' : 'center',
-                px: 2.5,
-              }}
-              component={Link}
-             
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : 'auto',
-                  justifyContent: 'center',
-                }}>
-                <LogoutPage />
-
-              </ListItemIcon>
-              <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      </Drawer>
+  
+    
+      <OnlyDrawer/>
 
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650,   backgroundColor: indigo[50] }} aria-label="simple table">
+      <Table sx={{ minWidth: 750, }} aria-label="simple table">
    
       
    
 
-        <TableHead>
-          <TableRow>
+        <TableHead >
+          <TableRow >
+          <TableCell sx={{ fontFamily: "'EB Garamond', serif" }}>S/N</TableCell>
             <TableCell sx={{ fontFamily: "'EB Garamond', serif" }}>Name</TableCell>
             <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Phone Number</TableCell>
             <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Due Delivery</TableCell>
-            <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Payment</TableCell>
+            <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Price</TableCell>
+            <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Amount Paid</TableCell>
             <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>No of Orders</TableCell>
             <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Order Status</TableCell>
 
@@ -377,11 +203,14 @@ export default function MiniDrawer({}) {
         <TableBody>
         {clients.map((client) => (
                 <TableRow key={client._id}> 
+                 <TableCell>{client.id}</TableCell>
                 <TableCell>{client.firstName}</TableCell>
                 <TableCell align="right">{client.phoneNumber}</TableCell>
                 <TableCell align="right">{client.deliveryDate}</TableCell>
-                <TableCell align="right">{client.paymentStatus}</TableCell>
-                <TableCell align="right">{client.noofOrders}</TableCell>
+                <TableCell align="right" sx={{ color: green[800] }}>{client.price}</TableCell>
+                <TableCell align="right" sx={{ color: indigo[800] }}>{client.amountPaid}</TableCell>
+              
+                <TableCell align="right" sx={{ color: orange[800] }}>{client.noofOrders}</TableCell>
                 <TableCell align="right">{client.orderStatus}</TableCell>
                 <TableCell align="right">
                 <IconButton onClick={() => handleEditClick(client)}>
