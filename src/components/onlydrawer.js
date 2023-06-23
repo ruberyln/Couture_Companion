@@ -204,7 +204,7 @@ export default function OnlyDrawer({}) {
             px: 2.5,
           }}
           cursor="pointer" onClick={() =>{
-            navigate("/")
+            navigate("/drawer")
             window.scrollTo({
               top: 0,
               behavior: "smooth",

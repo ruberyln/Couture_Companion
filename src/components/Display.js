@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Typography } from '@mui/material';
@@ -60,7 +60,7 @@ useEffect(() => {
   const handleUpdate = useCallback(() => {
     // check if user is not null or undefined and if user object is not empty and contains the id property
     if (user && Object.keys(user).length > 0 && user.id) {
-      axios.post(`http://localhost:5005/clients/update-client/${user.id}`, formValues)
+      axios.post('http://localhost:5005/clients/save-client', formValues)
         .then((res) => {
           console.log('Update response:', res.data);
           setUser(res.data);
@@ -80,18 +80,46 @@ const handleDelete = useCallback(() => {
     }
 }, [user, navigate]);
 
-const handleSave = () => {
-  navigate('/drawer', { state: { user: formValues } });
+const formRef = useRef();
+
+const handleSave = (event) => {
+  event.preventDefault();
+  const data = new FormData(formRef.current);
+  const formValues = Object.fromEntries(data.entries());
+  setFormValues(formValues);
+  axios
+    .post('http://localhost:5005/clients/save-client', formValues)
+    .then((res) => {
+      console.log(res.data);
+      navigate('/drawer', { state: { user: res.data, formValues } });
+    })
+    .catch((err) => console.log('Error: ' + err));
 };
 
 
+
+// const handleSubmit = (event) => {
+//   event.preventDefault();
+//   const data = new FormData(event.target);
+//   const formValues = Object.fromEntries(data);
+//   setFormValues(formValues);
+
+//   axios
+//     .post('http://localhost:5005/clients/save-client', formValues)
+//     .then((res) => {
+//       console.log(res.data);
+//       console.log ("user updated")
+//       navigate('/drawer', { state: { user: res.data, images, formValues } });
+//     })
+//     .catch((err) => console.log('Error: ' + err));
+// };
 
   return (
     <>
     <AvatarUpload/>
     <OnlyDrawer/>
-      <Box
-      onSubmit = {handleUpdate}
+      <Box 
+    ref={formRef} onSubmit={handleSave}
         component="form"
         sx={{
           '& > :not(style)': { m: 1, width: '25ch' },
