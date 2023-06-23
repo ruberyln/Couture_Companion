@@ -30,7 +30,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
-import { blue, green, indigo , orange, pink } from '@mui/material/colors';
+import { blue, green, indigo , orange, pink, red } from '@mui/material/colors';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -46,6 +46,7 @@ import LogoutPage from './components/logout';
 import AddButtons from './components/AddButton';
 import Link from '@mui/material/Link';
 import axios from 'axios';
+import Dash from './components/dash';
 
 
 import {  useLocation, useNavigate } from 'react-router-dom';
@@ -83,40 +84,8 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme, open }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(['width', 'margin'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
 
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-  ({ theme, open }) => ({
-    width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: 'nowrap',
-    boxSizing: 'border-box',
-    ...(open && {
-      ...openedMixin(theme),
-      '& .MuiDrawer-paper': openedMixin(theme),
-    }),
-    ...(!open && {
-      ...closedMixin(theme),
-      '& .MuiDrawer-paper': closedMixin(theme),
-    }),
-  }),
-);
+
 
 export default function MiniDrawer({}) {
   const location = useLocation();
@@ -139,6 +108,7 @@ export default function MiniDrawer({}) {
     navigate("/NewUser")
 
   }
+  let serialNumber = 1;
 
  
   const [savedData, setSavedData] = useState(formData);
@@ -158,14 +128,37 @@ export default function MiniDrawer({}) {
         
   //   }
   // }, [formData]);
+  const [totalAmountPaid, setTotalAmountPaid] = useState(0);
+  const [totalNoOfOrders, setTotalNoOfOrders] = useState(0); // Add a state variable for the total number of orders
+  const [totalClients, setTotalClients] = useState(0); // Add a state variable for the total number of clients
+
+
+  // useEffect(() => {
+  //   axios.get('http://localhost:5005/clients/get-client')
+  //     .then(res => {
+  //       setClients(res.data);
+  //     })
+  //     .catch(err => console.log('Error: ' + err));
+  // }, []);
 
   useEffect(() => {
     axios.get('http://localhost:5005/clients/get-client')
       .then(res => {
         setClients(res.data);
+
+        // Calculate the sum of amounts paid
+        const sumAmountPaid = res.data.reduce((sum, client) => sum + parseFloat(client.amountPaid), 0);
+        setTotalAmountPaid(sumAmountPaid);
+    
+      const sumNoOfOrders = res.data.reduce((sum, client) => sum + parseFloat(client.noofOrders), 0);
+        setTotalNoOfOrders(sumNoOfOrders);
+
+        const numberOfClients = res.data.length;
+        setTotalClients(numberOfClients);
       })
       .catch(err => console.log('Error: ' + err));
   }, []);
+
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -175,7 +168,9 @@ export default function MiniDrawer({}) {
       <OnlyDrawer/>
 
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Dash totalAmountPaid={totalAmountPaid} totalNoOfOrders={totalNoOfOrders} totalClients={totalClients}/>
         <DrawerHeader />
+       
         <TableContainer component={Paper}>
       <Table sx={{ minWidth: 750, }} aria-label="simple table">
    
@@ -191,7 +186,7 @@ export default function MiniDrawer({}) {
             <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Price</TableCell>
             <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Amount Paid</TableCell>
             <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>No of Orders</TableCell>
-            <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Order Status</TableCell>
+           
 
 
          </TableRow>
@@ -203,18 +198,17 @@ export default function MiniDrawer({}) {
         <TableBody>
         {clients.map((client) => (
                 <TableRow key={client._id}> 
-                 <TableCell>{client.id}</TableCell>
-                <TableCell>{client.firstName}</TableCell>
-                <TableCell align="right">{client.phoneNumber}</TableCell>
-                <TableCell align="right">{client.deliveryDate}</TableCell>
-                <TableCell align="right" sx={{ color: green[800] }}>{client.price}</TableCell>
-                <TableCell align="right" sx={{ color: indigo[800] }}>{client.amountPaid}</TableCell>
-              
-                <TableCell align="right" sx={{ color: orange[800] }}>{client.noofOrders}</TableCell>
-                <TableCell align="right">{client.orderStatus}</TableCell>
-                <TableCell align="right">
+                 <TableCell sx={{ fontFamily: "'EB Garamond', serif" }}>{serialNumber++}</TableCell>
+                <TableCell sx={{ fontFamily: "'EB Garamond', serif" }}>{client.firstName}</TableCell>
+                <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>{client.phoneNumber}</TableCell>
+                <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>{client.deliveryDate}</TableCell>
+                <TableCell align="right" sx={{ color: green[800], fontFamily: "'EB Garamond', serif"  }}>{client.price}</TableCell>
+                <TableCell align="right" sx={{ color: indigo[800], fontFamily: "'EB Garamond', serif"  }}>{client.amountPaid}</TableCell>
+                <TableCell align="right" sx={{ color: red[800], fontFamily: "'EB Garamond', serif"  }}>{client.noofOrders}</TableCell>
+                
+                <TableCell align="right" >
                 <IconButton onClick={() => handleEditClick(client)}>
-                  <Avatar sx={{ bgcolor: pink[500] }}>
+                  <Avatar sx={{ bgcolor: pink[400] }}>
   <ModeEditOutlineOutlinedIcon />
   </Avatar>
 </IconButton>

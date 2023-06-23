@@ -12,7 +12,9 @@ import SignUp from './signup';
 import OnlyDrawer from './components/onlydrawer';
 import Notifications from './components/notifications';
 import LogoutPage from './components/logout';
+import Dash from './components/dash';
 import AvatarUpload from './components/avatarupload';
+import { Dashboard } from '@mui/icons-material';
 // import Landing from './components/landing';
 
 
@@ -44,6 +46,7 @@ export default function App(props) {
       <Routes>
       <Route  path='signup' element={<SignUp/>} />
       <Route  path='avatarUpload' element={<AvatarUpload/>} />
+      <Route  path='dash' element={<Dash/>} />
       {/* <Route  path='landing' element={<Landing/>} /> */}
       <Route path='profile' element={<Profile/>}/>
       <Route path='onlydrawer' element={<OnlyDrawer/>}/>

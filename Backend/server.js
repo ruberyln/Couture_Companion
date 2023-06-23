@@ -51,6 +51,24 @@ app.post('/clients/save-client', (req, res) => {
         console.log('Endpoint /clients/save-client hit');
 });
 
+app.put('/clients/update-client/:id', (req, res) => {
+    const clientId = req.params.id;
+    const updatedClientData = req.body;
+  
+    Client.findByIdAndUpdate(clientId, updatedClientData, { new: true })
+      .then(client => {
+        if (!client) {
+          return res.status(404).json('Client not found');
+        }
+        res.json('Client updated!');
+      })
+      .catch(err => {
+        console.error('Error updating client:', err);
+        res.status(500).json('Error updating client');
+      });
+  });
+  
+
 // Your other code...
 
 app.get('/clients/get-client', (req, res) => {

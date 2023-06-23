@@ -69,9 +69,9 @@ useEffect(() => {
 
   const handleUpdate = useCallback(() => {
     axios
-      .post('http://localhost:5005/clients/save-client', formValues)
+      .post('http://localhost:5005/clients/update-client/:id', formValues)
       .then((res) => {
-        console.log(res.data);
+        console.log('Update response:', res.data);
         setUser(res.data);
         navigate('/drawer');
       })

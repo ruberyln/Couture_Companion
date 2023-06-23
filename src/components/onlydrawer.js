@@ -16,6 +16,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
+import ListAltIcon from '@mui/icons-material/ListAlt';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
@@ -27,6 +28,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import PeopleIcon from '@mui/icons-material/People';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { indigo , pink, blue, green, red, orange } from '@mui/material/colors';
@@ -148,7 +150,7 @@ export default function OnlyDrawer({}) {
     {/* <img src={image4}
         alt="My Image" 
         style={{width: '2%', height: '2%'}} /> */}
-    <Typography sx={{ fontFamily: "'EB Garamond', serif" }} >RUBBIE  </Typography>
+    <Typography sx={{ fontFamily: "'EB Garamond', serif" }} >  RUBBIE TECH </Typography>
     <Box sx={{ display: 'flex', alignItems: 'center', ml: 2 }}>
 
       <IconButton>
@@ -197,7 +199,7 @@ export default function OnlyDrawer({}) {
       <ListItem key={text} disablePadding sx={{ display: 'block' }}>
         <ListItemButton
           sx={{
-            minHeight: 150,
+            minHeight: 100,
             justifyContent: open ? 'initial' : 'center',
             px: 2.5,
           }}
@@ -237,7 +239,7 @@ export default function OnlyDrawer({}) {
       <ListItem key={text} disablePadding sx={{ display: 'block' }}>
         <ListItemButton
           sx={{
-            minHeight: 150,
+            minHeight: 100,
             justifyContent: open ? 'initial' : 'center',
             px: 2.5,
           }}
@@ -268,7 +270,7 @@ export default function OnlyDrawer({}) {
       <ListItem key={text} disablePadding sx={{ display: 'block' }}>
         <ListItemButton
           sx={{
-            minHeight: 150,
+            minHeight: 100,
             justifyContent: open ? 'initial' : 'center',
             px: 2.5,
           }}
@@ -294,6 +296,65 @@ export default function OnlyDrawer({}) {
   </List>
  
   <List>
+    {['Orders'].map((text,) => (
+      <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+        <ListItemButton
+          sx={{
+            minHeight: 100,
+            justifyContent: open ? 'initial' : 'center',
+            px: 2.5,
+          }}
+          component={Link}
+          href={"#"}
+        >
+          <ListItemIcon
+            sx={{
+              minWidth: 0,
+              mr: open ? 3 : 'auto',
+              justifyContent: 'center',
+            }}>
+              <Avatar sx={{ bgcolor: red[300] }}>
+  < ListAltIcon />
+  </Avatar>
+        
+
+          </ListItemIcon>
+          <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+        </ListItemButton>
+      </ListItem>
+    ))}
+  </List>
+
+  <List sx={{ fontFamily: "'EB Garamond', serif"}}>
+    {['Clients'].map((text,) => (
+      <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+        <ListItemButton
+          sx={{
+            minHeight: 100,
+            justifyContent: open ? 'initial' : 'center',
+            px: 2.5,
+          }}
+          component={Link}
+          href={"#"}
+        >
+          <ListItemIcon
+            sx={{
+              minWidth: 0,
+              mr: open ? 3 : 'auto',
+              justifyContent: 'center',
+            }}>
+              <Avatar sx={{ bgcolor: green[300] }}>
+  < PeopleIcon />
+  </Avatar>
+        
+
+          </ListItemIcon>
+          <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+        </ListItemButton>
+      </ListItem>
+    ))}
+  </List>
+  <List>
     {['Logout'].map((text,) => (
       <ListItem key={text} disablePadding sx={{ display: 'block' }}>
         <ListItemButton
@@ -313,7 +374,7 @@ export default function OnlyDrawer({}) {
               mr: open ? 3 : 'auto',
               justifyContent: 'center',
             }}>
-            {/* <LogoutPage /> */}
+          
 
           </ListItemIcon>
           <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
