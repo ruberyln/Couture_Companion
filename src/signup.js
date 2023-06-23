@@ -14,13 +14,13 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import image1 from './myImage/image1.png'
 import { useNavigate } from 'react-router-dom';
-import MiniDrawer from './drawer';
+
 
 const defaultTheme = createTheme();
 
 export default function SignUp() {
 
-    const navigate = useNavigate(); 
+  const navigate = useNavigate(); 
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -43,9 +43,9 @@ export default function SignUp() {
         console.log(result); // 'User added!' if the request was successful
 
         if (response.ok) { // If the request was successful
-            localStorage.setItem('userId', result.id); // Save the user's ID for later
-            navigate('/drawer'); // Navigate to the profile page
-          }
+          localStorage.setItem('userId', result.id); // Save the user's ID for later
+          navigate('/drawer'); // Navigate to the profile page
+        }
       };
 
   return (
@@ -131,11 +131,13 @@ export default function SignUp() {
               </Button>
               <Grid container>
                 <Grid item xs>
-          
+                  <Link href="#" variant="body2">
+                    Forgot password?
+                  </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="http://localhost:3000/signin">
-                    {"have an account? Sign In"}
+                  <Link href="#" variant="body2">
+                    {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
               </Grid>

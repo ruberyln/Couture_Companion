@@ -359,7 +359,7 @@ export default function OnlyDrawer({}) {
       <ListItem key={text} disablePadding sx={{ display: 'block' }}>
         <ListItemButton
           sx={{
-            minHeight: 250,
+            minHeight: 200,
             justifyContent: open ? 'initial' : 'center',
             px: 2.5,
           }}

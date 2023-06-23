@@ -7,24 +7,14 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import InputLabel from '@mui/material/InputLabel';
+
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import AvatarUpload from './avatarupload';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
-import PatternOutlinedIcon from '@mui/icons-material/PatternOutlined';
-import TextureOutlinedIcon from '@mui/icons-material/TextureOutlined';
-import DrawOutlinedIcon from '@mui/icons-material/DrawOutlined';
-import ContentCutOutlinedIcon from '@mui/icons-material/ContentCutOutlined';
-import CheckroomOutlinedIcon from '@mui/icons-material/CheckroomOutlined';
-import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
-import PendingActionsOutlinedIcon from '@mui/icons-material/PendingActionsOutlined';
-import BalanceOutlinedIcon from '@mui/icons-material/BalanceOutlined';
-import PriceCheckOutlinedIcon from '@mui/icons-material/PriceCheckOutlined';
+
 import OnlyDrawer from './onlydrawer';
 
 export default function Display( {avatar}) {
@@ -68,25 +58,31 @@ useEffect(() => {
   };
 
   const handleUpdate = useCallback(() => {
-    axios
-      .post('http://localhost:5005/clients/update-client/:id', formValues)
-      .then((res) => {
-        console.log('Update response:', res.data);
-        setUser(res.data);
-        navigate('/drawer');
-      })
-      .catch((err) => console.log('Error: ' + err));
-  }, [formValues, navigate]);
+    // check if user is not null or undefined and if user object is not empty and contains the id property
+    if (user && Object.keys(user).length > 0 && user.id) {
+      axios.post(`http://localhost:5005/clients/update-client/${user.id}`, formValues)
+        .then((res) => {
+          console.log('Update response:', res.data);
+          setUser(res.data);
+         navigate('/drawer', { state: { user: res.data,  formValues } });
+        })
+        .catch((err) => console.log('Error: ' + err));
+    }
+  }, [formValues, navigate, user]);
 
-  const handleDelete = useCallback(() => {
-    if (user && user._id) { // Add a null check for user object and _id property
-      axios
-        .delete(`http://localhost:5005/clients/delete-client/${user._id}`)
+const handleDelete = useCallback(() => {
+    // Check if user is not null or undefined and if user object is not empty and contains the id property
+    if (user && Object.keys(user).length > 0 && user.id) {
+      axios.delete(`http://localhost:5005/clients/delete-client/${user.id}`)
+
         .then(() => navigate('/NewUser'))
         .catch((err) => console.log('Error: ' + err));
     }
-  }, [user, navigate]);
+}, [user, navigate]);
 
+const handleSave = () => {
+  navigate('/drawer', { state: { user: formValues } });
+};
 
 
 
@@ -95,6 +91,7 @@ useEffect(() => {
     <AvatarUpload/>
     <OnlyDrawer/>
       <Box
+      onSubmit = {handleUpdate}
         component="form"
         sx={{
           '& > :not(style)': { m: 1, width: '25ch' },
@@ -379,7 +376,7 @@ useEffect(() => {
           value={formValues.elbow || ''}
           onChange={(e) => setFormValues({ ...formValues, elbow: e.target.value })}
         />
-
+{/* 
         {Object.keys(formValues).map((key, index) => {
           if (!['firstName', 'lastName', 'birthday', 'phoneNumber', 'email', 'streetAddress', 'postalCode', 'city', 'state', 'price', 'deliveryDate', 'amountPaid', 'noofOrders', 'paymentStatus', 'fabricType', 'orderSummary', 'shoulder', 'bust', 'waist', 'underBust', 'shoulderBust', 'shoulderWaist', 'hips', 'fullLength', 'shortdresslength', 'skirtLength', 'wrist', 'biceps', 'elbow'].includes(key)) {
             return (
@@ -395,7 +392,7 @@ useEffect(() => {
             );
           }
           return null;
-        })}
+        })} */}
 
         <Typography>Order Status</Typography>
         <TextField
@@ -426,7 +423,7 @@ useEffect(() => {
             </Box>
           ))}
 
-        <Button onClick={handleUpdate} variant="contained" color="primary" endIcon={<SaveAltIcon />}>
+        <Button onClick={handleSave} variant="contained" color="primary" endIcon={<SaveAltIcon />}>
           Update
         </Button>
         <Button onClick={handleDelete} variant="contained" color="secondary" startIcon={<DeleteIcon />}>

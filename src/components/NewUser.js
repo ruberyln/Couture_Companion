@@ -74,7 +74,7 @@ export default function NewUser({onAvatarChange}) {
       .post('http://localhost:5005/clients/save-client', formValues)
       .then((res) => {
         console.log(res.data);
-        navigate('/Display', { state: { user: res.data, images, formValues } });
+        navigate('/drawer', { state: { user: res.data, images, formValues } });
       })
       .catch((err) => console.log('Error: ' + err));
   };
