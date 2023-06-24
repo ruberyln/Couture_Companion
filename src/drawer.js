@@ -51,8 +51,8 @@ import Dash from './components/dash';
 
 import {  useLocation, useNavigate } from 'react-router-dom';
 import { Typography } from '@mui/material';
-const drawerWidth = 240;
 
+const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -84,145 +84,111 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-
-
-
 export default function MiniDrawer({}) {
   const location = useLocation();
   const { formData } = location.state || {}; // Extract the formData from location state
 
   const [form, setForm] = useState({});
   const theme = useTheme();
-  const { firstName } = location.state || {};
-
-
+  const { firstName, images, formValues } = location.state || {};
 
   const navigate = useNavigate();
-  // const handleClick  = () =>  {
-  //   navigate ("/Display");
-  // }
-  const handleEditClick = (clientData) => {
-    navigate("/Display", { state: { formValues: clientData } });
-  };
-  const handleClick = () => {
-    navigate("/NewUser")
 
-  }
+  const handleEditClick = (clientData) => {
+    navigate("/Display", { state: { images, formValues, user: clientData } });
+  };
+
+  const handleClick = () => {
+    navigate("/NewUser");
+  };
+
   let serialNumber = 1;
 
- 
   const [savedData, setSavedData] = useState(formData);
   const [clients, setClients] = useState([]);
 
-  // useEffect(() => {
-  //   if (formData) {
-  //     // If formData exists, send a POST request to save it in the backend
-  //     axios
-  //       .post('http://localhost:5005/clients/save-client', formData)
-  //       .then((res) => {
-  //         console.log(res.data);
-  //         setSavedData(res.data); // Update the savedData state with the response from the backend
-  //         setClients(prevClients => [...prevClients, res.data]); 
-  //       })
-  //       .catch((err) => console.error(err));
-        
-  //   }
-  // }, [formData]);
   const [totalAmountPaid, setTotalAmountPaid] = useState(0);
-  const [totalNoOfOrders, setTotalNoOfOrders] = useState(0); // Add a state variable for the total number of orders
-  const [totalClients, setTotalClients] = useState(0); // Add a state variable for the total number of clients
-
-
-  // useEffect(() => {
-  //   axios.get('http://localhost:5005/clients/get-client')
-  //     .then(res => {
-  //       setClients(res.data);
-  //     })
-  //     .catch(err => console.log('Error: ' + err));
-  // }, []);
+  const [totalNoOfOrders, setTotalNoOfOrders] = useState(0);
+  const [totalClients, setTotalClients] = useState(0);
 
   useEffect(() => {
-    axios.get('http://localhost:5005/clients/get-client')
-      .then(res => {
+    axios
+      .get('http://localhost:5005/clients/get-client')
+      .then((res) => {
         setClients(res.data);
 
-        // Calculate the sum of amounts paid
         const sumAmountPaid = res.data.reduce((sum, client) => sum + parseFloat(client.amountPaid), 0);
         setTotalAmountPaid(sumAmountPaid);
-    
-      const sumNoOfOrders = res.data.reduce((sum, client) => sum + parseFloat(client.noofOrders), 0);
+
+        const sumNoOfOrders = res.data.reduce((sum, client) => sum + parseFloat(client.noofOrders), 0);
         setTotalNoOfOrders(sumNoOfOrders);
 
         const numberOfClients = res.data.length;
         setTotalClients(numberOfClients);
       })
-      .catch(err => console.log('Error: ' + err));
+      .catch((err) => console.log('Error: ' + err));
   }, []);
-
 
   return (
     <Box sx={{ display: 'flex' }}>
-    <CssBaseline />
-  
-    
-      <OnlyDrawer/>
+      <CssBaseline />
+      <OnlyDrawer />
       <Typography variant="h6" noWrap>
-      Hello, {firstName}
-    </Typography>
+        Hello, {firstName}
+      </Typography>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-      <Dash totalAmountPaid={totalAmountPaid} totalNoOfOrders={totalNoOfOrders} totalClients={totalClients}/>
+        <Dash totalAmountPaid={totalAmountPaid} totalNoOfOrders={totalNoOfOrders} totalClients={totalClients} />
         <DrawerHeader />
-       
         <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 750, }} aria-label="simple table">
-   
-      
-   
+          <Table sx={{ minWidth: 750 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell sx={{ fontFamily: "'EB Garamond', serif" }}>S/N</TableCell>
+                <TableCell sx={{ fontFamily: "'EB Garamond', serif" }}>Name</TableCell>
+                <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Phone Number</TableCell>
+                <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Due Delivery</TableCell>
+                <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Price</TableCell>
+                <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Amount Paid</TableCell>
+                <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>No of Orders</TableCell>
+                <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Actions</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {clients.map((client) => (
+                <TableRow
+                  key={client.id}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                  <TableCell sx={{ fontFamily: "'EB Garamond', serif" }}>{serialNumber++}</TableCell>
+                  <TableCell sx={{ fontFamily: "'EB Garamond', serif" }}>{client.firstName}</TableCell>
+                  <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>
+                    {client.phoneNumber}
+                  </TableCell>
+                  <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>
+                    {client.deliveryDate}
+                  </TableCell>
+                  <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>
+                    {client.price}
+                  </TableCell>
+                  <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>
+                    {client.amountPaid}
+                  </TableCell>
+                  <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>
+                    {client.noofOrders}
+                  </TableCell>
+                  <TableCell align="right">
 
-        <TableHead >
-          <TableRow >
-          <TableCell sx={{ fontFamily: "'EB Garamond', serif" }}>S/N</TableCell>
-            <TableCell sx={{ fontFamily: "'EB Garamond', serif" }}>Name</TableCell>
-            <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Phone Number</TableCell>
-            <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Due Delivery</TableCell>
-            <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Price</TableCell>
-            <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Amount Paid</TableCell>
-            <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>No of Orders</TableCell>
-           
-
-
-         </TableRow>
-        </TableHead>
-   
-
-
-
-        <TableBody>
-        {clients.map((client) => (
-                <TableRow key={client._id}> 
-                 <TableCell sx={{ fontFamily: "'EB Garamond', serif" }}>{serialNumber++}</TableCell>
-                <TableCell sx={{ fontFamily: "'EB Garamond', serif" }}>{client.firstName}</TableCell>
-                <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>{client.phoneNumber}</TableCell>
-                <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>{client.deliveryDate}</TableCell>
-                <TableCell align="right" sx={{ color: green[800], fontFamily: "'EB Garamond', serif"  }}>{client.price}</TableCell>
-                <TableCell align="right" sx={{ color: indigo[800], fontFamily: "'EB Garamond', serif"  }}>{client.amountPaid}</TableCell>
-                <TableCell align="right" sx={{ color: red[800], fontFamily: "'EB Garamond', serif"  }}>{client.noofOrders}</TableCell>
-                
-                <TableCell align="right" >
-                <IconButton onClick={() => handleEditClick(client)}>
+                  <IconButton onClick={() => handleEditClick(client)}>
                   <Avatar sx={{ bgcolor: pink[400] }}>
   <ModeEditOutlineOutlinedIcon />
-  </Avatar>
-</IconButton>
+  </Avatar>  </IconButton>
 
-                </TableCell>
-              </TableRow>
-              
-  ))}
-        </TableBody>
-      </Table>
-      <AddButtons/>
-    </TableContainer>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </Box>
     </Box>
   );

@@ -32,13 +32,26 @@ const Client = require('./models/Client'); // import the Client model
 //         .catch(err => res.status(400).json('Error: ' + err));
 //         console.log('Endpoint /users/save-client hit');
 // });
+app.put('/clients/update-client/:id', (req, res) => {
+  const id = req.params.id;
+  const update = req.body;
+  console.log('Update client route hit with id:', req.params.id);
+  Client.findByIdAndUpdate(id, update, { new: true }, (error, result) => {
+    if (error) {
+      res.status(500).send(error);
+    } else {
+      res.send(result);
+    }
+  });
+});
 
 app.delete('/clients/delete-client/:id', (req, res) => {
-    const clientId = req.params.id;
-    Client.findByIdAndDelete(clientId)
-      .then(() => res.json('Client deleted!'))
-      .catch((err) => res.status(400).json('Error: ' + err));
-  });
+  const clientId = req.params.id;
+  Client.findByIdAndDelete(clientId)
+    .then(() => res.json('Client deleted!'))
+    .catch((err) => res.status(400).json('Error: ' + err));
+});
+
   
   // Your other code...
 
@@ -51,22 +64,17 @@ app.post('/clients/save-client', (req, res) => {
         console.log('Endpoint /clients/save-client hit');
 });
 
-app.put('/clients/update-client/:id', (req, res) => {
-    const clientId = req.params.id;
-    const updatedClientData = req.body;
-  
-    Client.findByIdAndUpdate(clientId, updatedClientData, { new: true })
-      .then(client => {
-        if (!client) {
-          return res.status(404).json('Client not found');
-        }
-        res.json('Client updated!');
-      })
-      .catch(err => {
-        console.error('Error updating client:', err);
-        res.status(500).json('Error updating client');
-      });
+app.get('/users/:id', (req, res) => {
+  const id = req.params.id;
+  const details = { '_id': new MongoClient.ObjectID(id) };
+  db.collection('users').findOne(details, (err, item) => {
+    if (err) {
+      res.status(500).send({ error: 'An error has occurred' });
+    } else {
+      res.send(item);
+    }
   });
+});
   
 
 

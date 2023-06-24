@@ -44,8 +44,9 @@ export default function SignUp() {
         console.log(result); // 'User added!' if the request was successful
 
         if (response.ok) { // If the request was successful
-          localStorage.setItem('userId', result.id); // Save the user's ID for later
-          navigate('/profile', { state: { firstName: data.get('firstName') } });// Navigate to the profile page
+          localStorage.setItem('userId', result.id);
+          localStorage.setItem('firstName', data.get('firstName')); // Save the user's ID for later
+          navigate('/profile');// Navigate to the profile page
         }
       };
 
