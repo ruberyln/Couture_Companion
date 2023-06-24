@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -14,6 +15,7 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import image3 from './myImage/image3.png'
 import { useNavigate } from 'react-router-dom';
+import  {red} from '@mui/material/colors'
 
 
 
@@ -21,33 +23,40 @@ const defaultTheme = createTheme();
 
 export default function SignIn() {
   const navigate = useNavigate(); 
+ 
+  const [errorMessage, setErrorMessage] = useState(''); // new state for error messages
   
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        const data = new FormData(event.target);
-        
-        const response = await fetch('http://localhost:5005/users/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            firstname: data.get('firstName'),
-            lastname: data.get('lastName'),
-            email: data.get('email'),
-            password: data.get('password'),
-          }),
-        });
-    
-        
-        const result = await response.json();
-        console.log(result); // 'User added!' if the request was successful
-       
-        if (response.ok) { // If the request was successful
-          localStorage.setItem('userId', result.id); // Save the user's ID for later
-          navigate('/drawer'); // Navigate to the profile page
-        }
-      };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = new FormData(event.target);
+  
+    const response = await fetch('http://localhost:5005/users/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: data.get('email'),
+        password: data.get('password'),
+      }),
+    });
+  
+    const result = await response.json();
+  
+    if (response.ok) {
+      localStorage.setItem('userId', result.id); 
+      navigate('/drawer'); 
+    } else {
+      if(result.message === 'Invalid email'){
+        setErrorMessage('Invalid email. Please try again.');
+      } else if (result.message === 'Invalid password'){
+        setErrorMessage('Invalid password. Please try again.');
+      } else {
+        setErrorMessage('Oops ! Invalid Email or Password.');
+      }
+    }
+  };
+  
   return (
     <ThemeProvider theme={defaultTheme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
@@ -69,6 +78,7 @@ export default function SignIn() {
              WELCOME BACK 
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            {errorMessage && <Typography sx= {{color:red[400]}} > {errorMessage}</Typography>}
               <TextField
                 margin="normal"
                 required
@@ -89,6 +99,7 @@ export default function SignIn() {
                 id="password"
                 autoComplete="current-password"
               />
+            
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
@@ -127,7 +138,7 @@ export default function SignIn() {
             alt="My Image" 
             style={{width: '100%', height: 'auto'}} />
 
-         
+
       </Grid>
       </Grid>
     </ThemeProvider>

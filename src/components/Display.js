@@ -57,18 +57,18 @@ useEffect(() => {
     setImages(urlArray);
   };
 
-  const handleUpdate = useCallback(() => {
-    // check if user is not null or undefined and if user object is not empty and contains the id property
-    if (user && Object.keys(user).length > 0 && user.id) {
-      axios.post('http://localhost:5005/clients/save-client', formValues)
-        .then((res) => {
-          console.log('Update response:', res.data);
-          setUser(res.data);
-         navigate('/drawer', { state: { user: res.data,  formValues } });
-        })
-        .catch((err) => console.log('Error: ' + err));
-    }
-  }, [formValues, navigate, user]);
+  // const handleUpdate = useCallback(() => {
+  //   // check if user is not null or undefined and if user object is not empty and contains the id property
+  //   if (user && Object.keys(user).length > 0 && user.id) {
+  //     axios.post('http://localhost:5005/clients/save-client', formValues)
+  //       .then((res) => {
+  //         console.log('Update response:', res.data);
+  //         setUser(res.data);
+  //        navigate('/drawer', { state: { user: res.data,  formValues } });
+  //       })
+  //       .catch((err) => console.log('Error: ' + err));
+  //   }
+  // }, [formValues, navigate, user]);
 
 const handleDelete = useCallback(() => {
     // Check if user is not null or undefined and if user object is not empty and contains the id property
@@ -87,14 +87,31 @@ const handleSave = (event) => {
   const data = new FormData(formRef.current);
   const formValues = Object.fromEntries(data.entries());
   setFormValues(formValues);
-  axios
-    .post('http://localhost:5005/clients/save-client', formValues)
-    .then((res) => {
-      console.log(res.data);
-      navigate('/drawer', { state: { user: res.data, formValues } });
-    })
-    .catch((err) => console.log('Error: ' + err));
+
+  // check if formValues contains an id
+  if (formValues.id) {
+    // if it does, send a PUT or PATCH request to update the existing user
+    axios
+      .put(`http://localhost:5005/clients/update-client/${formValues.id}`, formValues)
+      .then((res) => {
+        console.log(res.data);
+        navigate('/drawer', { state: { user: res.data, formValues } });
+      })
+      .catch((err) => console.log('Error: ' + err));
+  } else {
+    // if it does not, send a POST request to create a new user
+    axios
+      .post('http://localhost:5005/clients/save-client', formValues)
+      .then((res) => {
+        console.log(res.data);
+        navigate('/drawer', { state: { user: res.data, formValues } });
+      })
+      .catch((err) => console.log('Error: ' + err));
+  }
 };
+
+
+
 
 
 
