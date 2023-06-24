@@ -171,17 +171,22 @@ export default function OnlyDrawer({}) {
       Add New Client
     </Button>
 
-    <IconButton sx = {{ ml: 2 }}>
+    <IconButton sx = {{ ml: 2 }}
+    component={Link}
+    href={"/notifications "}>
     <Avatar sx={{ bgcolor: orange[500] }}>
   <NotificationsNoneOutlinedIcon  />
   </Avatar>
     </IconButton>
 
    
-    
+    <IconButton sx = {{ ml: 2 }}
+    component={Link}
+    href={"/profile "}>
     <Avatar sx={{ bgcolor: pink[500] }}>
   <Person2OutlinedIcon  />
   </Avatar>
+  </IconButton>
 
    
   </Toolbar>

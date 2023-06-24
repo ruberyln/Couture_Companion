@@ -14,13 +14,14 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import image1 from './myImage/image1.png'
 import { useNavigate } from 'react-router-dom';
-
+import { useState } from 'react';
 
 const defaultTheme = createTheme();
 
 export default function SignUp() {
 
   const navigate = useNavigate(); 
+  const [firstName, setFirstName] = useState('');
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -44,7 +45,7 @@ export default function SignUp() {
 
         if (response.ok) { // If the request was successful
           localStorage.setItem('userId', result.id); // Save the user's ID for later
-          navigate('/drawer'); // Navigate to the profile page
+          navigate('/profile', { state: { firstName: data.get('firstName') } });// Navigate to the profile page
         }
       };
 

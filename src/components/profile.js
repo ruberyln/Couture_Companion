@@ -10,7 +10,7 @@ import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Switch from '@mui/material/Switch';
 import { alpha, styled } from '@mui/material/styles';
-
+import { useLocation } from 'react-router-dom';
 import OnlyDrawer from './onlydrawer';
 import { Container } from '@mui/system';
 
@@ -33,6 +33,9 @@ const label = { inputProps: { 'aria-label': 'Color switch demo' } };
 
 export default function Profile() {
   const [user, setUser] = useState(null);
+  const location = useLocation();
+  const { firstName } = location.state || {};
+
   // useEffect(() => {
   //   const fetchData = async () => {
   //     const userId = localStorage.getItem('userId');
@@ -75,17 +78,23 @@ export default function Profile() {
 <Container >
 
 <OnlyDrawer /> 
-<Box sx={{ mx: 5, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-  <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" 
+<Box sx={{ mx: 5, 
+ display: 'flex',
+ flexDirection: 'column', 
+ alignItems: 'center' ,
+ marginLeft: '150px',
+  marginTop: '200px'}}>
+
+  <Avatar  src="/static/images/avatar/1.jpg" 
     sx= {{ width: 56, height: 56 }}/>
 
      
-   
-    
     <Box
       component="form"
       sx={{
         '& > :not(style)': { m: 1, width: '25ch' },
+        marginLeft: '15px',
+        marginTop: '20px'
       }}
       noValidate
       autoComplete="off"
@@ -95,24 +104,32 @@ export default function Profile() {
           fullWidth
           id="firstName"
           label="First Name"
-          variant="outlined"
-          value={user?.firstName}
+          variant="standard"
+          value={firstName}
           onChange={e => setUser({...user, firstName: e.target.value})}
         />
         <TextField
           fullWidth
           id="lastName"
           label="Last Name"
-          variant="outlined"
+          variant="standard"
           value={user?.lastName}
           onChange={e => setUser({...user, lastName: e.target.value})}
         />
 
+<TextField
+          fullWidth
+          id="email"
+          label="Email"
+          variant="standard"
+          value={user?.email}
+          onChange={e => setUser({...user, email: e.target.value})}
+        />
       <TextField   
       fullWidth sx={{ fontFamily: "'EB Garamond', serif" }}
       id="phoneNumber" 
       label="+23467892302" 
-      variant="outlined" />
+      variant="standard" />
      
       <Box >
 
@@ -121,7 +138,9 @@ export default function Profile() {
     <Stack direction="row" spacing={5}> 
     <Typography sx={{ fontFamily: "'EB Garamond', serif" }}>Client birthday</Typography>  <PinkSwitch {...label} defaultChecked /> 
     <Typography sx={{ fontFamily: "'EB Garamond', serif" }}> Due Delivery </Typography>  <PinkSwitch {...label} defaultChecked />
-    
+    <Typography variant="h6" noWrap>
+      Hello,
+    </Typography>
      </Stack>
      </Box>
      {/* <Button onClick={handleSave}>Save</Button> */}

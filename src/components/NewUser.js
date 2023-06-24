@@ -81,11 +81,18 @@ export default function NewUser({onAvatarChange}) {
 
   return (
     <>
-   
+   <Box sx={{ mx: 5, 
+ display: 'flex',
+ flexDirection: 'column', 
+ alignItems: 'center' ,
+ marginLeft: '150px',
+  marginTop: '200px'}}>
+
    <AvatarUpload src={avatar} onChange={onAvatarChange} 
       sx=  {{marginLeft: '150px',
             marginTop: '150px'
       }} />
+      </Box>
       <OnlyDrawer/>
      
       <Box
@@ -93,9 +100,12 @@ export default function NewUser({onAvatarChange}) {
         onSubmit={handleSubmit}
         sx={{ 
           '& > :not(style)': { m: 1, width: '25ch', },
-          marginLeft: '150px',
-          marginTop: '20px'
-        }}
+        //  mx: 5, 
+            marginLeft: '150px',
+             marginTop: '20px'
+            }}
+       
+       
         noValidate
         autoComplete="off"
       >

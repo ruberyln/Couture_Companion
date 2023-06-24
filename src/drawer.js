@@ -93,7 +93,7 @@ export default function MiniDrawer({}) {
 
   const [form, setForm] = useState({});
   const theme = useTheme();
-
+  const { firstName } = location.state || {};
 
 
 
@@ -166,7 +166,9 @@ export default function MiniDrawer({}) {
   
     
       <OnlyDrawer/>
-
+      <Typography variant="h6" noWrap>
+      Hello, {firstName}
+    </Typography>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
       <Dash totalAmountPaid={totalAmountPaid} totalNoOfOrders={totalNoOfOrders} totalClients={totalClients}/>
         <DrawerHeader />

@@ -69,7 +69,7 @@ app.put('/clients/update-client/:id', (req, res) => {
   });
   
 
-  res.status(401).json({ message: 'Email/password is incorrect' });
+
 
 
 app.get('/clients/get-client', (req, res) => {
