@@ -22,7 +22,10 @@ export default function SignUp() {
 
   const navigate = useNavigate(); 
   const [firstName, setFirstName] = useState('');
-
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.target);
@@ -46,7 +49,15 @@ export default function SignUp() {
         if (response.ok) { // If the request was successful
           localStorage.setItem('userId', result.id);
           localStorage.setItem('firstName', data.get('firstName')); // Save the user's ID for later
-          navigate('/profile');// Navigate to the profile page
+          navigate('/profile', {
+            state: {
+              firstName: data.get('firstName'),
+              lastName: data.get('lastName'),
+              email: data.get('email'),
+              password: data.get('password')
+            }
+          });
+        
         }
       };
 

@@ -137,9 +137,7 @@ export default function MiniDrawer({}) {
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Dash totalAmountPaid={totalAmountPaid} totalNoOfOrders={totalNoOfOrders} totalClients={totalClients} />
         <DrawerHeader />
-        {/* <Typography variant="h6" noWrap>
-        Hello, {firstName}
-      </Typography> */}
+      
         <IconButton>
 
     

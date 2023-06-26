@@ -35,6 +35,15 @@ export default function Profile() {
   const [user, setUser] = useState(null);
   const location = useLocation();
   const { firstName } = location.state || {};
+  const { lastName } = location.state || {};
+  const { email } = location.state || {};
+  const { password } = location.state || {};
+
+
+  const [editedFirstName, setEditedFirstName] = useState(firstName);
+const [editedLastName, setEditedLastName] = useState(lastName);
+const [editedPassword, setEditedPassword] = useState(password);
+
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -113,7 +122,7 @@ export default function Profile() {
           id="lastName"
           label="Last Name"
           variant="standard"
-          value={user?.lastName}
+          value={lastName}
           onChange={e => setUser({...user, lastName: e.target.value})}
         />
 
@@ -122,14 +131,18 @@ export default function Profile() {
           id="email"
           label="Email"
           variant="standard"
-          value={user?.email}
+          value={email}
           onChange={e => setUser({...user, email: e.target.value})}
         />
-      <TextField   
-      fullWidth sx={{ fontFamily: "'EB Garamond', serif" }}
-      id="phoneNumber" 
-      label="+23467892302" 
-      variant="standard" />
+        <TextField
+          fullWidth
+          id="password"
+          label="Password"
+          variant="standard"
+          value={password}
+          onChange={e => setUser({...user, email: e.target.value})}
+        />
+    
      
       <Box >
 
