@@ -106,7 +106,7 @@ export default function MiniDrawer({}) {
 
   const [savedData, setSavedData] = useState(formData);
   const [clients, setClients] = useState([]);
-
+  const [searchQuery, setSearchQuery] = useState('');
   const [totalAmountPaid, setTotalAmountPaid] = useState(0);
   const [totalNoOfOrders, setTotalNoOfOrders] = useState(0);
   const [totalClients, setTotalClients] = useState(0);
@@ -140,6 +140,17 @@ export default function MiniDrawer({}) {
         {/* <Typography variant="h6" noWrap>
         Hello, {firstName}
       </Typography> */}
+        <IconButton>
+
+    
+
+<SearchIcon />
+</IconButton>
+<InputBase
+placeholder="Search by Name..."
+value={searchQuery}
+onChange={(e) => setSearchQuery(e.target.value)}
+/>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 750 }} aria-label="simple table">
             <TableHead>
@@ -155,7 +166,11 @@ export default function MiniDrawer({}) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {clients.map((client) => (
+            {clients
+  .filter((client) =>
+    client.firstName.toLowerCase().includes(searchQuery.toLowerCase())
+  )
+  .map((client) => (
                 <TableRow
                   key={client.id}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

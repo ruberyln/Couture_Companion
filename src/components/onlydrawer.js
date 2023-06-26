@@ -23,7 +23,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
 import LogoutPage from './logout';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
-
+import SettingsIcon from '@mui/icons-material/Settings';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -110,7 +110,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function OnlyDrawer({}) {
-  
+
+
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
 
@@ -153,15 +154,8 @@ export default function OnlyDrawer({}) {
     <Typography sx={{ fontFamily: "'EB Garamond', serif" }} > COUTURE COMPANION </Typography>
     <Box sx={{ display: 'flex', alignItems: 'center', ml: 2 }}>
 
-      <IconButton>
+     
 
-    
-
-        <SearchIcon />
-      </IconButton>
-      <InputBase
-        placeholder="Search…"
-      />
     </Box>
     <Box sx={{ flexGrow: 1}} />  
 
@@ -184,7 +178,7 @@ export default function OnlyDrawer({}) {
     component={Link}
     href={"/profile "}>
     <Avatar sx={{ bgcolor: pink[500] }}>
-  <Person2OutlinedIcon  />
+  <SettingsIcon />
   </Avatar>
   </IconButton>
 
@@ -270,35 +264,7 @@ export default function OnlyDrawer({}) {
     ))}
   </List>
 
-  <List>
-    {['Profile'].map((text,) => (
-      <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-        <ListItemButton
-          sx={{
-            minHeight: 100,
-            justifyContent: open ? 'initial' : 'center',
-            px: 2.5,
-          }}
-          component={Link}
-          href={"/profile"}
-        >
-          <ListItemIcon
-            sx={{
-              minWidth: 0,
-              mr: open ? 3 : 'auto',
-              justifyContent: 'center',
-            }}>
-              <Avatar sx={{ bgcolor: pink[500] }}>
-  <Person2OutlinedIcon  />
-  </Avatar>
-        
-
-          </ListItemIcon>
-          <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-        </ListItemButton>
-      </ListItem>
-    ))}
-  </List>
+ 
  
   <List>
     {['Orders'].map((text,) => (
@@ -350,6 +316,35 @@ export default function OnlyDrawer({}) {
             }}>
               <Avatar sx={{ bgcolor: green[300] }}>
   < PeopleIcon />
+  </Avatar>
+        
+
+          </ListItemIcon>
+          <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+        </ListItemButton>
+      </ListItem>
+    ))}
+  </List>
+  <List>
+    {['Settings'].map((text,) => (
+      <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+        <ListItemButton
+          sx={{
+            minHeight: 100,
+            justifyContent: open ? 'initial' : 'center',
+            px: 2.5,
+          }}
+          component={Link}
+          href={"/profile"}
+        >
+          <ListItemIcon
+            sx={{
+              minWidth: 0,
+              mr: open ? 3 : 'auto',
+              justifyContent: 'center',
+            }}>
+              <Avatar sx={{ bgcolor: pink[500] }}>
+  <SettingsIcon />
   </Avatar>
         
 
