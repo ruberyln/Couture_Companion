@@ -133,12 +133,13 @@ export default function MiniDrawer({}) {
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <OnlyDrawer />
-      <Typography variant="h6" noWrap>
-        Hello, {firstName}
-      </Typography>
+    
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Dash totalAmountPaid={totalAmountPaid} totalNoOfOrders={totalNoOfOrders} totalClients={totalClients} />
         <DrawerHeader />
+        {/* <Typography variant="h6" noWrap>
+        Hello, {firstName}
+      </Typography> */}
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 750 }} aria-label="simple table">
             <TableHead>

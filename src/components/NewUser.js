@@ -74,7 +74,7 @@ export default function NewUser({onAvatarChange}) {
       .post('http://localhost:5005/clients/save-client', formValues)
       .then((res) => {
         console.log(res.data);
-        navigate('/drawer', { state: { user: res.data, images, formValues } });
+        navigate('/drawer',{ state: { user: res.data, images, formValues } });
       })
       .catch((err) => console.log('Error: ' + err));
   };
@@ -149,30 +149,6 @@ export default function NewUser({onAvatarChange}) {
         <TextField id="noofOrders" name="noofOrders" label="No of Orders" variant="standard" />
        
 
-        {/* <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-          <InputLabel id="paymentStatus">Payment-Status</InputLabel>
-          <Select
-            labelId="demo-simple-select-standard-label"
-            value={paymentstatus}
-            onChange={handleChanged}
-            id="paymentStatus"
-            name="paymentStatus"
-            label="paymentstatus"
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={'Pending'}>
-              <PendingActionsOutlinedIcon /> Pending
-            </MenuItem>
-            <MenuItem value={'Partial-Payment'}>
-              <BalanceOutlinedIcon /> Partial-Payment
-            </MenuItem>
-            <MenuItem value={'Fully-Paid'}>
-              <PriceCheckOutlinedIcon /> Fully-Paid
-            </MenuItem>
-          </Select>
-        </FormControl> */}
         <Typography>Payment Status </Typography>
          <FormGroup>
       <FormControlLabel control={<Checkbox  />} label="Paid" id = "paid" name = "paid" />

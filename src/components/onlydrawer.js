@@ -150,7 +150,7 @@ export default function OnlyDrawer({}) {
     {/* <img src={image4}
         alt="My Image" 
         style={{width: '2%', height: '2%'}} /> */}
-    <Typography sx={{ fontFamily: "'EB Garamond', serif" }} >  RUBBIE TECH </Typography>
+    <Typography sx={{ fontFamily: "'EB Garamond', serif" }} > COUTURE COMPANION </Typography>
     <Box sx={{ display: 'flex', alignItems: 'center', ml: 2 }}>
 
       <IconButton>
