@@ -34,17 +34,33 @@ export default function Display() {
   const navigate = useNavigate();
   const location = useLocation();
   const [images, setImages] = useState([]);
-  const [formValues, setFormValues] = useState({});
-  const [user, setUser] = useState({ id: '' });
+  const user = location.state?.user;
+  const [users, setUsers] = useState(null);
+  const [formValues, setFormValues] = useState(user || {});
 
   useEffect(() => {
     if (location.state) {
       const { images, formValues, user } = location.state;
-      setImages(images);
-      setFormValues(formValues);
-      setUser(user);
+      setImages(images || []);
+      setFormValues(formValues || {});
+      setUsers(user || {});
     }
   }, [location.state]);
+
+  // useEffect(() => {
+  //   if (location.state) {
+  //     const { images, formValues, user } = location.state;
+  // console.log (user)
+  //     setImages((prevImages) => prevImages || images);
+  //     setFormValues((prevFormValues) => prevFormValues || formValues);
+  //     setUsers((prevUser) => prevUser || user);
+  //   }
+  // }, [location.state]);
+ 
+  
+  
+  
+  
 
   const handleUploadClick = (e) => {
     const files = Array.from(e.target.files);
@@ -52,14 +68,27 @@ export default function Display() {
     setImages(urlArray);
   };
 
-  const handleDelete = useCallback(() => {
-    if (user && Object.keys(user).length > 0 && user._id) {
-      axios
-        .delete(`http://localhost:5005/clients/delete-client/${user._id}`)
-        .then(() => navigate('/drawer'))
-        .catch((err) => console.log('Error: ' + err));
+  // const handleDelete = useCallback(() => {
+  //   if (user && Object.keys(user).length > 0 && user._id) {
+  //     axios
+  //       .delete(`http://localhost:5005/clients/delete-client/${user._id}`)
+  //       .then(() => navigate('/drawer'))
+  //       .catch((err) => console.log('Error: ' + err));
+  //   }
+  // }, [user, navigate]);
+
+  const handleDelete = () => {
+    const confirmDelete = window.confirm("Are you sure you want to delete?");
+    if (confirmDelete) {
+      if (user && Object.keys(user).length > 0 && user._id) {
+        axios
+          .delete(`http://localhost:5005/clients/delete-client/${user._id}`)
+          .then(() => navigate('/drawer'))
+          .catch((err) => console.log('Error: ' + err));
+      }
     }
-  }, [user, navigate]);
+  };
+  
 
   const formRef = useRef();
 
@@ -68,6 +97,7 @@ export default function Display() {
     const data = new FormData(formRef.current);
     const formValues = Object.fromEntries(data.entries());
     setFormValues(formValues);
+    setUsers(users);
     console.log(formValues);
     if (user._id) {
       console.log(user);
@@ -76,7 +106,7 @@ export default function Display() {
         .then((res) => {
           console.log(res.data);
         
-          navigate('/drawer', { state: { user: res.data, formValues, images } });
+          navigate('/drawer', { state: { users: res.data, formValues, images } });
         })
         .catch((err) => console.log('Error: ' + err));
     }
@@ -96,7 +126,7 @@ export default function Display() {
 
   return (
     <>
-    <AvatarUpload />
+    {/* <AvatarUpload /> */}
 
     <OnlyDrawer />
 

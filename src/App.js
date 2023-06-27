@@ -53,9 +53,9 @@ export default function App(props) {
       <Route path='signin' element={<SignIn/>}/>
       <Route path='logout' element={<LogoutPage/>}/>
       <Route path='notifications' element={<Notifications/>}/>
-      <Route path='NewUser' element={<NewUser setFormData={setFormData} onAvatarChange={setAvatar}   />}/>
+      <Route path='NewUser' element={<NewUser setFormData={setFormData}  />}/>
       <Route path='drawer' element={<MiniDrawer formData={userData}/>}/>
-      <Route path='Display' element={<Display onSave={setUserData} avatar={avatar} />}/>
+      <Route path='Display' element={<Display onSave={setUserData} formData={formData} />}/>
       </Routes>
       </Router>
   );
