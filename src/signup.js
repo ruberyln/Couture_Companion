@@ -130,10 +130,7 @@ export default function SignUp() {
                 autoComplete="current-password"
               />
               </Grid>
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
+             
               <Button
                 type="submit"
                 fullWidth
