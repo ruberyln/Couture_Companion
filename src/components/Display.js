@@ -7,13 +7,26 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import PriceCheckOutlinedIcon from '@mui/icons-material/PriceCheckOutlined';
+import PendingActionsOutlinedIcon from '@mui/icons-material/PendingActionsOutlined';
+import BalanceOutlinedIcon from '@mui/icons-material/BalanceOutlined';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import DrawOutlinedIcon from '@mui/icons-material/DrawOutlined';
+import SaveAltIcon from '@mui/icons-material/SaveAlt';
+import PatternOutlinedIcon from '@mui/icons-material/PatternOutlined';
+import TextureOutlinedIcon from '@mui/icons-material/TextureOutlined';
+import ContentCutOutlinedIcon from '@mui/icons-material/ContentCutOutlined';
+import CheckroomOutlinedIcon from '@mui/icons-material/CheckroomOutlined';
+import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import AvatarUpload from './avatarupload';
 
-import SaveAltIcon from '@mui/icons-material/SaveAlt';
+
 
 import OnlyDrawer from './onlydrawer';
 
@@ -63,7 +76,7 @@ export default function Display() {
         .then((res) => {
           console.log(res.data);
         
-          navigate('/drawer', { state: { user: res.data, formValues } });
+          navigate('/drawer', { state: { user: res.data, formValues, images } });
         })
         .catch((err) => console.log('Error: ' + err));
     }
@@ -211,44 +224,42 @@ export default function Display() {
           onChange={(e) => setFormValues({ ...formValues, noofOrders: e.target.value })}
         />
 
-<FormGroup 
->
-      <FormControlLabel 
-      control={<Checkbox  />} 
-      label="Paid" 
-      id = "paid" 
-      name = "paid"
-      value={formValues?.paid || ''}
-      onChange={(e) => setFormValues({ ...formValues, paid: e.target.value })}
-       />
-      <FormControlLabel control={<Checkbox  />} 
-      label="Partial-Payment"
-       id = "partial" 
-       name = "partial" 
-       value={formValues?.partial || ''}
-       onChange={(e) => setFormValues({ ...formValues, partial: e.target.value })}/>
-
-      <FormControlLabel control={<Checkbox  />} 
-      label="Pending" 
-      id = "pending" 
-      name = "pending"
-      value={formValues?.pending || ''}
-      onChange={(e) => setFormValues({ ...formValues, pending: e.target.value })}
-       />
-      
-      </FormGroup>
-{/* 
-      <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-          <InputLabel id="paymentStatus">Payment-Status</InputLabel>
-          <Select
-                 id="paymentStatus"
+      <TextField
+          id="paymentStatus"
           name="paymentStatus"
           label="Payment Status"
           variant="standard"
-          value={formValues.paymentStatus || ''}
+          value={formValues?.paymentStatus || ''}
           onChange={(e) => setFormValues({ ...formValues, paymentStatus: e.target.value })}
         />
-        </FormControl> */}
+<FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel id="demo-simple-select-standard-label">Payment Status</InputLabel>
+            <Select
+              labelId="demo-simple-select-standard-label"
+              id="paymentStatus"
+              name="paymentStatus"
+             // onChange={handleChange}
+              label="paymentstatus"
+              value={formValues?.paymentStatus || ''}
+              onChange={(e) => setFormValues({ ...formValues, paymentStatus: e.target.value })}
+            
+            >
+               <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={'Paid'}>
+                <PriceCheckOutlinedIcon /> Paid
+              </MenuItem>
+              <MenuItem value={'PArtially-Paid'}>
+                <BalanceOutlinedIcon /> Partially-PAid
+              </MenuItem>
+              <MenuItem value={'Pending'}>
+                <PendingActionsOutlinedIcon  /> Pending
+              </MenuItem>
+          </Select>
+          </FormControl>
+
+  
 
         <Typography>Order Details and Measurements</Typography>
         <TextField
@@ -377,14 +388,43 @@ export default function Display() {
 
 
         <Typography>Order Status</Typography>
-        <TextField
-          id="orderStatus"
-          name="orderStatus"
-          label="Order Status"
-          variant="outlined"
-          value={formValues?.orderStatus || ''}
-          onChange={(e) => setFormValues({ ...formValues, orderStatus: e.target.value })}
-        />
+        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel id="demo-simple-select-standard-label">Order-Status</InputLabel>
+            <Select
+              labelId="demo-simple-select-standard-label"
+              id="orderStatus"
+              name="orderStatus"
+             // onChange={handleChange}
+              label="orderstatus"
+              value={formValues?.orderStatus || ''}
+              onChange={(e) => setFormValues({ ...formValues, orderStatus: e.target.value })}
+            
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={'Sketch'}>
+                <DrawOutlinedIcon /> Sketch
+              </MenuItem>
+              <MenuItem value={'Fabric-Sourcing'}>
+                <TextureOutlinedIcon /> Fabric-Sourcing
+              </MenuItem>
+              <MenuItem value={'Pattern-Drafting'}>
+                <PatternOutlinedIcon /> Pattern-Drafting
+              </MenuItem>
+              <MenuItem value={'Cutting'}>
+                <ContentCutOutlinedIcon /> Cutting
+              </MenuItem>
+              <MenuItem value={'Sewing'}>
+                <CheckroomOutlinedIcon /> Sewing
+              </MenuItem>
+              <MenuItem value={'Delivery'}>
+                <LocalShippingOutlinedIcon /> Delivery
+              </MenuItem>
+            </Select>
+          </FormControl>
+
+         
 
 <Typography>Upload Image</Typography>
         <Button

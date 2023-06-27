@@ -49,7 +49,7 @@ export default function SignUp() {
         if (response.ok) { // If the request was successful
           localStorage.setItem('userId', result.id);
           localStorage.setItem('firstName', data.get('firstName')); // Save the user's ID for later
-          navigate('/profile', {
+          navigate('/drawer','/profile', {
             state: {
               firstName: data.get('firstName'),
               lastName: data.get('lastName'),
@@ -144,13 +144,11 @@ export default function SignUp() {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
+                  
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
+                  <Link href="http://localhost:3000/signin">
+                    {" have an account? Sign In"}
                   </Link>
                 </Grid>
               </Grid>

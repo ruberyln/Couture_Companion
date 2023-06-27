@@ -88,10 +88,10 @@ export default function NewUser({onAvatarChange}) {
  marginLeft: '150px',
   marginTop: '200px'}}>
 
-   <AvatarUpload src={avatar} onChange={onAvatarChange} 
+   {/* <AvatarUpload src={avatar} onChange={onAvatarChange} 
       sx=  {{marginLeft: '150px',
             marginTop: '150px'
-      }} />
+      }} /> */}
       </Box>
       <OnlyDrawer/>
      
@@ -150,14 +150,32 @@ export default function NewUser({onAvatarChange}) {
        
 
         <Typography>Payment Status </Typography>
-         <FormGroup>
-      <FormControlLabel control={<Checkbox  />} label="Paid" id = "paid" name = "paid" />
-      <FormControlLabel control={<Checkbox  />} label="Partial- Payment" id = "partial" name = "partial" />
-      <FormControlLabel control={<Checkbox  />} label="Pending" id = "pending" name = "pending" />
-      </FormGroup>
+        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel id="demo-simple-select-standard-label">Payment Status</InputLabel>
+            <Select
+              labelId="demo-simple-select-standard-label"
+              id="paymentStatus"
+              name="paymentStatus"
+              value={paymentstatus}
+              onChange={handleChanged}
+              label="Payment Status"
+            >
+             <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={'Paid'}>
+                <PriceCheckOutlinedIcon /> Paid
+              </MenuItem>
+              <MenuItem value={'PArtially-Paid'}>
+                <BalanceOutlinedIcon /> Partially-PAid
+              </MenuItem>
+              <MenuItem value={'Pending'}>
+                <PendingActionsOutlinedIcon  /> Pending
+              </MenuItem>
+          </Select>
+          </FormControl>
 
-
-
+       
 
 
 

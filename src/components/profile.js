@@ -94,8 +94,6 @@ const [editedPassword, setEditedPassword] = useState(password);
  marginLeft: '150px',
   marginTop: '200px'}}>
 
-  <Avatar  src="/static/images/avatar/1.jpg" 
-    sx= {{ width: 56, height: 56 }}/>
 
      
     <Box
