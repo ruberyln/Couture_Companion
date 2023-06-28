@@ -31,6 +31,8 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import PeopleIcon from '@mui/icons-material/People';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
+import Orders from './orders';
+import Clients from './clients';
 import { indigo , pink, blue, green, red, orange } from '@mui/material/colors';
 import { Typography } from '@mui/material';
 // import image4 from './myImage/image4.JPG'
@@ -173,14 +175,14 @@ export default function OnlyDrawer({}) {
   </Avatar>
     </IconButton>
 
-   
+{/*    
     <IconButton sx = {{ ml: 2 }}
     component={Link}
     href={"/profile "}>
     <Avatar sx={{ bgcolor: pink[500] }}>
   <SettingsIcon />
   </Avatar>
-  </IconButton>
+  </IconButton> */}
 
    
   </Toolbar>
@@ -276,7 +278,7 @@ export default function OnlyDrawer({}) {
             px: 2.5,
           }}
           component={Link}
-          href={"#"}
+          href={"orders"}
         >
           <ListItemIcon
             sx={{
@@ -306,7 +308,7 @@ export default function OnlyDrawer({}) {
             px: 2.5,
           }}
           component={Link}
-          href={"#"}
+          href={"/clients"}
         >
           <ListItemIcon
             sx={{
@@ -324,8 +326,8 @@ export default function OnlyDrawer({}) {
         </ListItemButton>
       </ListItem>
     ))}
-  </List>
-  <List>
+   </List>
+  {/*<List>
     {['Settings'].map((text,) => (
       <ListItem key={text} disablePadding sx={{ display: 'block' }}>
         <ListItemButton
@@ -353,7 +355,8 @@ export default function OnlyDrawer({}) {
         </ListItemButton>
       </ListItem>
     ))}
-  </List>
+  </List> */}
+
   <List>
     {['Logout'].map((text,) => (
       <ListItem key={text} disablePadding sx={{ display: 'block' }}>

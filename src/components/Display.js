@@ -137,7 +137,7 @@ export default function Display() {
       sx={{
         '& > :not(style)': { m: 1, width: '25ch' },
         marginLeft: '150px',
-        marginTop: '20px',
+        marginTop: '200px',
       }}
       noValidate
       autoComplete="off"

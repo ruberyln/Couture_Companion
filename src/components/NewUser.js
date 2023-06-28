@@ -181,14 +181,7 @@ export default function NewUser({onAvatarChange}) {
 
         <Typography>Order Details and Measurements</Typography>
         <TextField id="fabricType" name="fabricType" label="Fabric Type" variant="standard" />
-        <TextField
-          id="orderSummary"
-          name="orderSummary"
-          label="Order summary"
-          multiline
-          rows={4}
-          placeholder="Describe order in details, example: Long sleeve dress with tiny sleeves and stoned neck"
-        />
+      
 
         <TextField id="shoulder" name="shoulder" label="Shoulder" variant="outlined" />
         <TextField id="bust" name="bust" label="Bust" variant="outlined" />
@@ -222,6 +215,14 @@ export default function NewUser({onAvatarChange}) {
         </Button>
 
         <Box>
+        <TextField
+          id="orderSummary"
+          name="orderSummary"
+          label="Order summary"
+          multiline
+          rows={4}
+          placeholder="Describe order in details, example: Long sleeve dress with tiny sleeves and stoned neck"
+        />
           <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
             <InputLabel id="demo-simple-select-standard-label">Order-Status</InputLabel>
             <Select
@@ -232,6 +233,7 @@ export default function NewUser({onAvatarChange}) {
               onChange={handleChange}
               label="orderstatus"
             >
+
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
