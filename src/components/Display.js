@@ -300,16 +300,7 @@ export default function Display() {
           value={formValues?.fabricType || ''}
           onChange={(e) => setFormValues({ ...formValues, fabricType: e.target.value })}
         />
-        <TextField
-          id="orderSummary"
-          name="orderSummary"
-          label="Order summary"
-          multiline
-          rows={4}
-          placeholder="Describe order in details, example: Long sleeve dress with tiny sleeves and stoned neck"
-          value={formValues?.orderSummary || ''}
-          onChange={(e) => setFormValues({ ...formValues, orderSummary: e.target.value })}
-        />
+       
 
         <TextField
           id="shoulder"
@@ -415,7 +406,16 @@ export default function Display() {
           value={formValues?.elbow || ''}
           onChange={(e) => setFormValues({ ...formValues, elbow: e.target.value })}
         />
-
+ <TextField
+          id="orderSummary"
+          name="orderSummary"
+          label="Order summary"
+          multiline
+          rows={4}
+          placeholder="Describe order in details, example: Long sleeve dress with tiny sleeves and stoned neck"
+          value={formValues?.orderSummary || ''}
+          onChange={(e) => setFormValues({ ...formValues, orderSummary: e.target.value })}
+        />
 
         <Typography>Order Status</Typography>
         <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
