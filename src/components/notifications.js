@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Card, CardContent, Typography } from '@mui/material';
+import { red } from '@mui/material/colors'; 
 
 const Notifications = () => {
   const [clients, setClients] = useState([]);
@@ -29,18 +31,28 @@ const Notifications = () => {
 
   return (
     <div>
-      <h2>Upcoming Birthdays</h2>
+   {/* <Card sx={{ minWidth: 400, margin: '0 5px', bgcolor: red[100] }}> */}
+      <Card>
+       <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+     <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 50, textAlign: 'center', color: red[300] }}>Upcoming Birthdays</Typography>
       {upcomingBirthdays.map(client => (
         <div key={client.id}>
-          <p>{client.firstName}'s birthday is coming up on {client.birthday}</p>
+                  <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 14, textAlign: 'center', color: red[300] }}>{client.firstName}'s birthday is coming up on {client.birthday}
+                  </Typography>
         </div>
+        
       ))}
+      </CardContent>
+      </Card>
+      <Card>
       <h2>Due Deliveries</h2>
       {dueDeliveries.map(client => (
         <div key={client.id}>
           <p>Delivery for {client.firstName} is due on {client.deliveryDate}</p>
         </div>
       ))}
+      </Card>
+    {/* </Card> */}
     </div>
   )
 }

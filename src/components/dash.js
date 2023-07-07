@@ -48,7 +48,7 @@ export default function Dash({ totalAmountPaid, totalNoOfOrders, totalClients })
             <PaidIcon />
           </Avatar>
           <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 50, textAlign: 'center', color: indigo[300] }}>
-            {isVisible.payment ? totalAmountPaid.toFixed(2) : "******"}
+            {isVisible.payment ? totalAmountPaid?.toFixed(2) : "******"}
           </Typography>
           <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 14, textAlign: 'center', color: indigo[300] }}>
             Total Amount Paid

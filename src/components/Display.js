@@ -38,14 +38,16 @@ export default function Display() {
   const [users, setUsers] = useState(null);
   const [formValues, setFormValues] = useState(user || {});
 
-  useEffect(() => {
-    if (location.state) {
-      const { images, formValues, user } = location.state;
-      setImages(images || []);
-      setFormValues(formValues || {});
-      setUsers(user || {});
-    }
-  }, [location.state]);
+    useEffect(() => {
+      if (location.state) {
+        const { images, formValues, user } = location.state;
+        console.log(user)
+        setImages(user.images || []);
+        setFormValues(user || {});
+        setUsers(user || {});
+      }
+      
+    }, [location.state]);
 
   // useEffect(() => {
   //   if (location.state) {
@@ -96,6 +98,7 @@ export default function Display() {
     event.preventDefault();
     const data = new FormData(formRef.current);
     const formValues = Object.fromEntries(data.entries());
+    formValues.images=images
     setFormValues(formValues);
     setUsers(users);
     console.log(formValues);

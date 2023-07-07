@@ -87,7 +87,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-export default function MiniDrawer({}) {
+export default function Orders({}) {
   const location = useLocation();
   const { formData } = location.state || {}; // Extract the formData from location state
 
