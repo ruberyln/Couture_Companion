@@ -79,11 +79,18 @@ const DrawerHeader = styled('div')(({ theme }) => ({
         <CssBaseline />
 
         <OnlyDrawer/>
-        <Typography variant="h6" noWrap>
-          Hello, {firstName}
-        </Typography>
+        
+       
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-          <Dash  totalNoOfOrders={totalNoOfOrders} />
+        <Typography variant="h6" noWrap    sx={{
+        '& > :not(style)': { m: 1, width: '25ch' },
+        marginLeft: '50px',
+        marginTop: '50px',
+        fontFamily: "'EB Garamond', serif" 
+      }}>
+       ORDERS
+        </Typography>
+          {/* <Dash  totalNoOfOrders={totalNoOfOrders} /> */}
           <DrawerHeader />
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 750 }} aria-label="simple table">
@@ -133,6 +140,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
               </TableBody>
             </Table>
           </TableContainer>
+         
         </Box>
       </Box>
     );
