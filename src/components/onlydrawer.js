@@ -26,6 +26,9 @@ import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNone
 import SettingsIcon from '@mui/icons-material/Settings';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
+import Badge from '@mui/material/Badge';
+
+
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import PeopleIcon from '@mui/icons-material/People';
@@ -36,6 +39,7 @@ import Clients from './clients';
 import { indigo , pink, blue, green, red, orange } from '@mui/material/colors';
 import { Typography } from '@mui/material';
 // import image4 from './myImage/image4.JPG'
+import Notifications from './notifications';
 
 // import LogoutPage from './components/logout';
 
@@ -112,7 +116,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function OnlyDrawer({}) {
-
+  const [clients, setClients] = useState([]);
 
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
@@ -129,6 +133,28 @@ export default function OnlyDrawer({}) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  useEffect(() => {
+    axios.get('http://localhost:5005/clients/get-client')
+      .then(res => {
+        setClients(res.data);
+      })
+      .catch(err => {
+        console.error(err);
+      })
+  }, []);
+
+  const checkUpcomingDates = (date) => {
+    const today = new Date();
+    const targetDate = new Date(date);
+    const diffTime = Math.abs(targetDate - today);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays <= 7;
+  };
+
+  const upcomingBirthdays = clients.filter(client => checkUpcomingDates(client.birthday));
+  const dueDeliveries = clients.filter(client => checkUpcomingDates(client.deliveryDate));
+  //...
+
 
  return(
 
@@ -167,20 +193,22 @@ export default function OnlyDrawer({}) {
       Add New Client
     </Button>
 
-    <IconButton sx = {{ ml: 2 }}
-    component={Link}
-    href={"/notifications "}>
-    <Avatar sx={{ bgcolor: orange[500] }}>
-  <NotificationsNoneOutlinedIcon  />
+   <IconButton sx = {{ ml: 2 }}
+component={Link}
+href={"/notifications"}>
+<Badge badgeContent={upcomingBirthdays.length + dueDeliveries.length} color="secondary">
+  <Avatar sx={{ bgcolor: orange[500] }}>
+    <NotificationsIcon />
   </Avatar>
-    </IconButton>
+</Badge>
+</IconButton>
 
-{/*    
-    <IconButton sx = {{ ml: 2 }}
+   
+    {/* <IconButton sx = {{ ml: 2 }}
     component={Link}
     href={"/profile "}>
     <Avatar sx={{ bgcolor: pink[500] }}>
-  <SettingsIcon />
+  <SettingsIcon  />
   </Avatar>
   </IconButton> */}
 
@@ -247,19 +275,19 @@ export default function OnlyDrawer({}) {
           component={Link}
           href={"/notifications "}
         >
-          <ListItemIcon
-            sx={{
-              minWidth: 0,
-              mr: open ? 3 : 'auto',
-              justifyContent: 'center',
-            }}>
-
-<Avatar sx={{ bgcolor: orange[500] }}>
-  <NotificationsNoneOutlinedIcon  />
+         <ListItemIcon
+  sx={{
+    minWidth: 0,
+    mr: open ? 3 : 'auto',
+    justifyContent: 'center',
+  }}>
+<Badge badgeContent={upcomingBirthdays.length + dueDeliveries.length} color="secondary">
+  <Avatar sx={{ bgcolor: orange[500] }}>
+    <NotificationsIcon  />
   </Avatar>
-            
+</Badge>
+</ListItemIcon>
 
-          </ListItemIcon>
           <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
         </ListItemButton>
       </ListItem>

@@ -25,6 +25,9 @@ import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNone
 import BasicTable from './table';
 import OnlyDrawer from './components/onlydrawer';
 import Avatar from '@mui/material/Avatar';
+import Badge from '@mui/material/Badge';
+
+
 import Button from '@mui/material/Button';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -111,6 +114,9 @@ export default function MiniDrawer({}) {
   const [totalNoOfOrders, setTotalNoOfOrders] = useState(0);
   const [totalClients, setTotalClients] = useState(0);
 
+
+
+
   useEffect(() => {
     axios
       .get('http://localhost:5005/clients/get-client')
@@ -134,6 +140,7 @@ export default function MiniDrawer({}) {
       <CssBaseline />
       <OnlyDrawer />
     
+
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Dash totalAmountPaid={totalAmountPaid} totalNoOfOrders={totalNoOfOrders} totalClients={totalClients} />
         <DrawerHeader />
@@ -149,6 +156,7 @@ placeholder="Search by Name..."
 value={searchQuery}
 onChange={(e) => setSearchQuery(e.target.value)}
 />
+
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 750 }} aria-label="simple table">
             <TableHead>
