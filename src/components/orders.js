@@ -94,8 +94,8 @@ const DrawerHeader = styled('div')(({ theme }) => ({
                   <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>No of Orders</TableCell>
                   <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Delivery Date</TableCell>
                   <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Order summary</TableCell>
-                  {/* <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Amount Paid</TableCell>
-                  <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>No of Orders</TableCell> */}
+                 
+                  <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>No of Orders</TableCell> 
                   <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Actions</TableCell>
                 </TableRow>
               </TableHead>
@@ -106,7 +106,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
                     <TableCell sx={{ fontFamily: "'EB Garamond', serif" }}>{serialNumber++}</TableCell>
-                    <TableCell sx={{ fontFamily: "'EB Garamond', serif" }}>{client.firstName.lastName}</TableCell>
+                    <TableCell sx={{ fontFamily: "'EB Garamond', serif" }}>{client.firstName} </TableCell>
                     <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>
                       {client.noofOrders}
                     </TableCell>
@@ -116,12 +116,10 @@ const DrawerHeader = styled('div')(({ theme }) => ({
                     <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>
                       {client.orderSummary}
                     </TableCell>
-                    {/* <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>
-                      {client.amountPaid}
-                    </TableCell>
+                  
                     <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>
                       {client.noofOrders}
-                    </TableCell> */}
+                    </TableCell> 
                     <TableCell align="right">
   
                     <IconButton onClick={() => handleEditClick(client)}>

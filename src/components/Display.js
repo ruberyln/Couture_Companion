@@ -41,7 +41,7 @@ export default function Display() {
     useEffect(() => {
       if (location.state) {
         const { images, formValues, user } = location.state;
-        console.log(user)
+        console.log("user",user)
         setImages(user.images || []);
         setFormValues(user || {});
         setUsers(user || {});
@@ -98,10 +98,11 @@ export default function Display() {
     event.preventDefault();
     const data = new FormData(formRef.current);
     const formValues = Object.fromEntries(data.entries());
-    formValues.images=images
+    formValues.images =images
+console.log(formValues)
     setFormValues(formValues);
     setUsers(users);
-    console.log(formValues);
+  
     if (user._id) {
       console.log(user);
       axios
@@ -304,23 +305,24 @@ export default function Display() {
           onChange={(e) => setFormValues({ ...formValues, fabricType: e.target.value })}
         />
        
-
-        <TextField
+       <TextField
           id="shoulder"
           name="shoulder"
           label="Shoulder"
-          variant="outlined"
+          variant="standard"
           value={formValues?.shoulder || ''}
           onChange={(e) => setFormValues({ ...formValues, shoulder: e.target.value })}
         />
-        <TextField
-          id="bust"
-          name="bust"
-          label="Bust"
-          variant="outlined"
-          value={formValues?.bust || ''}
-          onChange={(e) => setFormValues({ ...formValues, bust: e.target.value })}
-        />
+       
+     
+     <TextField
+  id="bust"
+  name="bust"
+  label="Bust"
+  variant="outlined"
+  value={formValues?.bust || ''}
+  onChange={(e) => setFormValues({ ...formValues, bust: e.target.value })}
+/>
         <TextField
           id="waist"
           name="waist"

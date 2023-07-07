@@ -68,6 +68,8 @@ export default function NewUser({onAvatarChange}) {
     event.preventDefault();
     const data = new FormData(event.target);
     const formValues = Object.fromEntries(data);
+
+    console.log("formmmm from save",formValues)
     setFormValues(formValues);
 
     axios
@@ -181,8 +183,6 @@ export default function NewUser({onAvatarChange}) {
 
         <Typography>Order Details and Measurements</Typography>
         <TextField id="fabricType" name="fabricType" label="Fabric Type" variant="standard" />
-      
-
         <TextField id="shoulder" name="shoulder" label="Shoulder" variant="outlined" />
         <TextField id="bust" name="bust" label="Bust" variant="outlined" />
         <TextField id="waist" name="waist" label="Waist" variant="outlined" />
