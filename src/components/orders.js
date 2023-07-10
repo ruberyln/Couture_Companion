@@ -47,7 +47,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
       navigate("/NewUser");
     };
   
-    let serialNumber = 1;
+    let serialNumber = 1010;
   
     const [savedData, setSavedData] = useState(formData);
     const [clients, setClients] = useState([]);
@@ -96,7 +96,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
             <Table sx={{ minWidth: 750 }} aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell sx={{ fontFamily: "'EB Garamond', serif" }}>S/N</TableCell>
+                  <TableCell sx={{ fontFamily: "'EB Garamond', serif" }}>Order Number</TableCell>
                   <TableCell sx={{ fontFamily: "'EB Garamond', serif" }}>Name</TableCell>
                   <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>No of Orders</TableCell>
                   <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Delivery Date</TableCell>
