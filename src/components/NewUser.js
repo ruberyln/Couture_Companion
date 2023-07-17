@@ -168,7 +168,7 @@ export default function NewUser({onAvatarChange}) {
               <MenuItem value={'Paid'}>
                 <PriceCheckOutlinedIcon /> Paid
               </MenuItem>
-              <MenuItem value={'PArtially-Paid'}>
+              <MenuItem value={'Partially-Paid'}>
                 <BalanceOutlinedIcon /> Partially-Paid
               </MenuItem>
               <MenuItem value={'Pending'}>

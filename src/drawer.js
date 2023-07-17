@@ -166,6 +166,7 @@ onChange={(e) => setSearchQuery(e.target.value)}
                 <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Phone Number</TableCell>
                 <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Due Delivery</TableCell>
                 <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Price</TableCell>
+                <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Payment Status</TableCell>
                 <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Amount Paid</TableCell>
                 <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>No of Orders</TableCell>
                 <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Actions</TableCell>
@@ -191,6 +192,9 @@ onChange={(e) => setSearchQuery(e.target.value)}
                   </TableCell>
                   <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>
                     {client.price}
+                  </TableCell>
+                   <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>
+                    {client.paymentStatus}
                   </TableCell>
                   <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>
                     {client.amountPaid}

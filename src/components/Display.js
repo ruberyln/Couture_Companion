@@ -187,7 +187,11 @@ console.log(formValues)
           id="birthday"
           name="birthday"
           label="Birthday"
+          type = "date"
           variant="standard"
+          InputLabelProps={{
+              shrink: true,
+           }}
           value={formValues?.birthday || ''}
           onChange={(e) => setFormValues({ ...formValues, birthday: e.target.value })}
         />
@@ -255,7 +259,11 @@ console.log(formValues)
           id="deliveryDate"
           name="deliveryDate"
           label="Delivery Date"
-          variant="standard"
+          type = "date"
+        variant="standard"
+        InputLabelProps={{
+            shrink: true,
+         }}
           value={formValues?.deliveryDate || ''}
           onChange={(e) => setFormValues({ ...formValues, deliveryDate: e.target.value })}
         />
@@ -275,7 +283,14 @@ console.log(formValues)
           value={formValues?.noofOrders || ''}
           onChange={(e) => setFormValues({ ...formValues, noofOrders: e.target.value })}
         />
-
+  <TextField
+          id="fabricType"
+          name="fabricType"
+          label="Fabric Type"
+          variant="standard"
+          value={formValues?.fabricType || ''}
+          onChange={(e) => setFormValues({ ...formValues, fabricType: e.target.value })}
+        />
       <TextField
           id="paymentStatus"
           name="paymentStatus"
@@ -314,14 +329,8 @@ console.log(formValues)
   
 
         <Typography>Order Details and Measurements</Typography>
-        <TextField
-          id="fabricType"
-          name="fabricType"
-          label="Fabric Type"
-          variant="standard"
-          value={formValues?.fabricType || ''}
-          onChange={(e) => setFormValues({ ...formValues, fabricType: e.target.value })}
-        />
+        <Typography>Upper body Measurements</Typography>
+      
        
        <TextField
           id="shoulder"
@@ -373,7 +382,37 @@ console.log(formValues)
           value={formValues?.shoulderWaist || ''}
           onChange={(e) => setFormValues({ ...formValues, shoulderWaist: e.target.value })}
         />
+
+
+       
+ <Typography>Arms </Typography>
+ <TextField
+          id="wrist"
+          name="wrist"
+          label="Wrist"
+          variant="outlined"
+          value={formValues?.wrist || ''}
+          onChange={(e) => setFormValues({ ...formValues, wrist: e.target.value })}
+        />
         <TextField
+          id="biceps"
+          name="biceps"
+          label="Biceps"
+          variant="outlined"
+          value={formValues?.biceps || ''}
+          onChange={(e) => setFormValues({ ...formValues, biceps: e.target.value })}
+        />
+        <TextField
+          id="elbow"
+          name="elbow"
+          label="Elbow"
+          variant="outlined"
+          value={formValues?.elbow || ''}
+          onChange={(e) => setFormValues({ ...formValues, elbow: e.target.value })}
+        />
+        
+         <Typography>Lower Body Measurements </Typography>
+         <TextField
           id="hips"
           name="hips"
           label="Hips"
@@ -405,30 +444,7 @@ console.log(formValues)
           value={formValues?.skirtLength || ''}
           onChange={(e) => setFormValues({ ...formValues, skirtLength: e.target.value })}
         />
-        <TextField
-          id="wrist"
-          name="wrist"
-          label="Wrist"
-          variant="outlined"
-          value={formValues?.wrist || ''}
-          onChange={(e) => setFormValues({ ...formValues, wrist: e.target.value })}
-        />
-        <TextField
-          id="biceps"
-          name="biceps"
-          label="Biceps"
-          variant="outlined"
-          value={formValues?.biceps || ''}
-          onChange={(e) => setFormValues({ ...formValues, biceps: e.target.value })}
-        />
-        <TextField
-          id="elbow"
-          name="elbow"
-          label="Elbow"
-          variant="outlined"
-          value={formValues?.elbow || ''}
-          onChange={(e) => setFormValues({ ...formValues, elbow: e.target.value })}
-        />
+        
  <TextField
           id="orderSummary"
           name="orderSummary"
