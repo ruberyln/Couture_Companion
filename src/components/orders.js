@@ -98,7 +98,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
                 <TableRow>
                   <TableCell sx={{ fontFamily: "'EB Garamond', serif" }}>Order Number</TableCell>
                   <TableCell sx={{ fontFamily: "'EB Garamond', serif" }}>Name</TableCell>
-                  <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>No of Orders</TableCell>
+                  <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Order Status</TableCell>
                   <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Delivery Date</TableCell>
                   <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Order summary</TableCell>
                  
@@ -115,7 +115,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
                     <TableCell sx={{ fontFamily: "'EB Garamond', serif" }}>{serialNumber++}</TableCell>
                     <TableCell sx={{ fontFamily: "'EB Garamond', serif" }}>{client.firstName} </TableCell>
                     <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>
-                      {client.noofOrders}
+                      {client.orderStatus}
                     </TableCell>
                     <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>
                       {client.deliveryDate}

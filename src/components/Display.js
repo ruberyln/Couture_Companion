@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Box from '@mui/material/Box';
+import { confirmAlert } from 'react-confirm-alert'; 
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import TextField from '@mui/material/TextField';
 import { Typography } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -79,16 +81,31 @@ export default function Display() {
   //   }
   // }, [user, navigate]);
 
+
+  // ...
+  
   const handleDelete = () => {
-    const confirmDelete = window.confirm("Are you sure you want to delete?");
-    if (confirmDelete) {
-      if (user && Object.keys(user).length > 0 && user._id) {
-        axios
-          .delete(`http://localhost:5005/clients/delete-client/${user._id}`)
-          .then(() => navigate('/drawer'))
-          .catch((err) => console.log('Error: ' + err));
-      }
-    }
+    confirmAlert({
+      title: 'Confirm to delete',
+      message: 'Are you sure you want to delete?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {
+            if (user && Object.keys(user).length > 0 && user._id) {
+              axios
+                .delete(`http://localhost:5005/clients/delete-client/${user._id}`)
+                .then(() => navigate('/drawer'))
+                .catch((err) => console.log('Error: ' + err));
+            }
+          }
+        },
+        {
+          label: 'No',
+          // No action on No
+        }
+      ]
+    });
   };
   
 
@@ -155,6 +172,7 @@ console.log(formValues)
   variant="standard"
   value={formValues?.firstName || ''}
   onChange={(e) => setFormValues({ ...formValues, firstName: e.target.value })}
+  autoComplete="off"
 />
 
         <TextField
@@ -285,7 +303,7 @@ console.log(formValues)
                 <PriceCheckOutlinedIcon /> Paid
               </MenuItem>
               <MenuItem value={'PArtially-Paid'}>
-                <BalanceOutlinedIcon /> Partially-PAid
+                <BalanceOutlinedIcon /> Partially-Paid
               </MenuItem>
               <MenuItem value={'Pending'}>
                 <PendingActionsOutlinedIcon  /> Pending

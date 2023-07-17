@@ -149,7 +149,7 @@ export default function NewUser({onAvatarChange}) {
 
         <TextField id="amountPaid" name="amountPaid" label="Amount Paid" variant="standard" />
         <TextField id="noofOrders" name="noofOrders" label="No of Orders" variant="standard" />
-       
+        <TextField id="fabricType" name="fabricType" label="Fabric Type" variant="standard" />
 
         <Typography>Payment Status </Typography>
         <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
@@ -169,7 +169,7 @@ export default function NewUser({onAvatarChange}) {
                 <PriceCheckOutlinedIcon /> Paid
               </MenuItem>
               <MenuItem value={'PArtially-Paid'}>
-                <BalanceOutlinedIcon /> Partially-PAid
+                <BalanceOutlinedIcon /> Partially-Paid
               </MenuItem>
               <MenuItem value={'Pending'}>
                 <PendingActionsOutlinedIcon  /> Pending
@@ -182,22 +182,27 @@ export default function NewUser({onAvatarChange}) {
 
 
         <Typography>Order Details and Measurements</Typography>
-        <TextField id="fabricType" name="fabricType" label="Fabric Type" variant="standard" />
+        <Typography>Upper body Measurements </Typography>
+        
         <TextField id="shoulder" name="shoulder" label="Shoulder" variant="outlined" />
         <TextField id="bust" name="bust" label="Bust" variant="outlined" />
         <TextField id="waist" name="waist" label="Waist" variant="outlined" />
         <TextField id="underBust" name="underBust" label="Underbust" variant="outlined" />
         <TextField id="shoulderBust" name="shoulderBust" label="Shoulder-bust" variant="outlined" />
         <TextField id="shoulderWaist" name="shoulderWaist" label="Shoulder-Waist" variant="outlined" />
-        <TextField id="hips" name="hips" label="Hips" variant="outlined" />
-        <TextField id="fullLength" name="fullLength" label="Full Length" variant="outlined" />
-        <TextField id="shortdresslength" name="shortdresslength" label="Short Dress Length" variant="outlined" />
-        <TextField id="skirtLength" name="skirtLength" label="Skirt Length" variant="outlined" />
+        <Typography>Arms </Typography>
         <TextField id="wrist" name="wrist" label="Wrist" variant="outlined" />
         <TextField id="biceps" name="biceps" label="Biceps" variant="outlined" />
         <TextField id="elbow" name="elbow" label="Elbow" variant="outlined" />
 
-        <Typography>Additional Measurements</Typography>
+        <Typography>Lower Body Measuremenrs </Typography>
+        <TextField id="hips" name="hips" label="Hips" variant="outlined" />
+        <TextField id="fullLength" name="fullLength" label="Full Length" variant="outlined" />
+        <TextField id="shortdresslength" name="shortdresslength" label="Short Dress Length" variant="outlined" />
+        <TextField id="skirtLength" name="skirtLength" label="Skirt Length" variant="outlined" />
+
+      
+        <Typography sx= {{alignItems: "center", justifyContent : "center"}}>Additional Measurements</Typography>
         {fieldLabels.map((label, index) => (
           <TextField key={index} id={`add${index}`} name={`add${index}`} label={label} variant="outlined" />
         ))}
@@ -220,7 +225,8 @@ export default function NewUser({onAvatarChange}) {
           name="orderSummary"
           label="Order summary"
           multiline
-          rows={4}
+          rows={7}
+         
           placeholder="Describe order in details, example: Long sleeve dress with tiny sleeves and stoned neck"
         />
           <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>

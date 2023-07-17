@@ -2,13 +2,19 @@
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Card, CardContent, Typography, Avatar } from '@mui/material';
+import { Card, CardContent, Typography, Avatar, IconButton, Tooltip, AlertTitle } from '@mui/material';
 
-import { indigo, red } from '@mui/material/colors'; 
-
+import { indigo,black, red, blue, cyan, orange } from '@mui/material/colors'; 
+import EmailIcon from '@mui/icons-material/Email';
+import MessageIcon from '@mui/icons-material/Message';
+import CakeIcon from '@mui/icons-material/Cake';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import OnlyDrawer from './onlydrawer';
+import{Alert} from '@mui/material';
 const Notifications = () => {
   const [clients, setClients] = useState([]);
 
+  
   useEffect(() => {
     axios.get('http://localhost:5005/clients/get-client')
       .then(res => {
@@ -31,33 +37,49 @@ const Notifications = () => {
   const dueDeliveries = clients.filter(client => checkUpcomingDates(client.deliveryDate));
 
   return (
+    
     <div style={{ display: 'flex', justifyContent: 'center', marginTop: '120px' }}>
-   {/* <Card sx={{ minWidth: 400, margin: '0 5px', bgcolor: red[100] }}> */}
-   <Card sx={{ minWidth: 40, margin: '0 5px', bgcolor: red[100] }}>
+   <OnlyDrawer/>
+   <Card sx={{ minWidth: 40, margin: '0 5px'}}>
        <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-       <Avatar sx={{ bgcolor: red[300], alignItems: 'center' }}>
-           
+       <Avatar sx={{ bgcolor: blue[300], alignItems: 'center' }}>
+       <CakeIcon/>
           </Avatar>
-     <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 50, textAlign: 'center', color: red[300] }}>Upcoming Birthdays</Typography>
+          <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 25, textAlign: 'center', color: blue[300] }}>Upcoming Birthdays</Typography>
       {upcomingBirthdays.map(client => (
         <div key={client.id}>
-                  <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 14, textAlign: 'center', color: red[300] }}>{client.firstName}'s birthday is coming up on {client.birthday}
-                  </Typography>
+                <Alert severity="info"> 
+                <AlertTitle>Birthday</AlertTitle>
+                 {client.firstName}'s birthday is coming up on {client.birthday}  <Tooltip title="Email" arrow ><IconButton sx= {{color: blue[500]}} component="a" href={`mailto:${client.email}`}>  <EmailIcon/> </IconButton></Tooltip>
+
+                 <Tooltip title="Message" arrow>
+    <IconButton sx={{color: blue[500]}} component="a" href={`sms:${client.phoneNumber}`}>
+      <MessageIcon/>
+    </IconButton>
+  </Tooltip>
+                </Alert>
         </div>
         
       ))}
       </CardContent>
       </Card>
-      <Card sx={{ minWidth: 40, margin: '0 5px', bgcolor: indigo[100] }}>
+      <Card sx={{ minWidth: 40, margin: '0 5px'}}>
       <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <Avatar sx={{ bgcolor: indigo[300], alignItems: 'center' }}>
-        
+      <Avatar sx={{ bgcolor: orange[300], alignItems: 'center' }}>
+        <LocalShippingIcon/>
           </Avatar>
-      <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 50, textAlign: 'center', color: indigo[300] }}>Due Deliveries</Typography>
+      <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 25, textAlign: 'center', color: orange[300] }}>Upcoming Deliveries</Typography>
       {dueDeliveries.map(client => (
         <div key={client.id}>
-        <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 14, textAlign: 'center', color: indigo[300] }}>
-          Delivery for {client.firstName} is due on {client.deliveryDate}</Typography>
+     <Alert severity="warning">
+     <AlertTitle>Due Delivery</AlertTitle>
+          Delivery for {client.firstName} is due on {client.deliveryDate}  <Tooltip title="Email" arrow ><IconButton sx= {{color: orange[500]}} component="a" href={`mailto:${client.email}`}>  <EmailIcon/> </IconButton></Tooltip>
+          <Tooltip title="Message" arrow>
+    <IconButton sx={{color: orange[500]}} component="a" href={`sms:${client.phoneNumber}`}>
+      <MessageIcon/>
+    </IconButton>
+  </Tooltip>
+          </Alert>
         </div>
       ))}
       </CardContent>
