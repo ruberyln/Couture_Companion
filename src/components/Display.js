@@ -39,6 +39,8 @@ export default function Display() {
   const user = location.state?.user;
   const [users, setUsers] = useState(null);
   const [formValues, setFormValues] = useState(user || {});
+  const [fieldLabels, setFieldLabels] = React.useState([]);
+  const [newFieldLabel, setNewFieldLabel] = useState('');
 
     useEffect(() => {
       if (location.state) {
@@ -51,6 +53,13 @@ export default function Display() {
       
     }, [location.state]);
 
+    const addNewField = () => {
+      if (newFieldLabel) {
+        setFieldLabels([...fieldLabels, newFieldLabel]);
+        setNewFieldLabel('');
+        setFormValues((prevFormValues) => ({ ...prevFormValues, [newFieldLabel]: '' }));
+      }
+    };
   // useEffect(() => {
   //   if (location.state) {
   //     const { images, formValues, user } = location.state;
@@ -410,7 +419,7 @@ console.log(formValues)
           value={formValues?.elbow || ''}
           onChange={(e) => setFormValues({ ...formValues, elbow: e.target.value })}
         />
-        
+
          <Typography>Lower Body Measurements </Typography>
          <TextField
           id="hips"
@@ -493,7 +502,24 @@ console.log(formValues)
             </Select>
           </FormControl>
 
-         
+
+         <Typography sx= {{alignItems: "center", justifyContent : "center"}}>Additional Measurements</Typography>
+        {fieldLabels.map((label, index) => (
+          <TextField key={index} id={`add${index}`} name={`add${index}`} label={label} variant="outlined" />
+        ))}
+
+        <TextField
+          id="additionalMeasurements"
+          // label={label}
+          name = "additionalMeasurements"
+          variant="outlined"
+          value={formValues?.additionalMeasurements || ''}
+          onChange={(e) => setFormValues({ ...formValues, additionalMeasurements: e.target.value })}
+        /> 
+
+        <Button variant="contained" color="primary" onClick={addNewField}>
+          Add New Field
+        </Button>
 
 <Typography>Upload Image</Typography>
         <Button

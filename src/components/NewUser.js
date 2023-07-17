@@ -33,6 +33,8 @@ export default function NewUser({onAvatarChange}) {
   const [newFieldLabel, setNewFieldLabel] = useState('');
   const [images, setImages] = useState([]);
   const [formValues, setFormValues] = useState({});
+
+
   const navigate = useNavigate();
 
   const handleUploadClick = (e) => {
@@ -66,9 +68,16 @@ export default function NewUser({onAvatarChange}) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const requiredFields = ["firstName", "amountPaid", "noofOrders", "paymentStatus", "price"];
     const data = new FormData(event.target);
     const formValues = Object.fromEntries(data);
-
+ // check if all required fields are filled
+ for (let field of requiredFields) {
+  if (!formValues[field]) {
+    alert(`Error: Field "${field}" is required`);
+    return;
+  }
+}
     console.log("formmmm from save",formValues)
     setFormValues(formValues);
 
@@ -114,7 +123,7 @@ export default function NewUser({onAvatarChange}) {
        
         <Typography>Personal Details</Typography>
 
-        <TextField id="firstName" name="firstName" label="First Name" variant="standard" />
+        <TextField id="firstName" name="firstName" label="First Name" variant="standard"  required/>
         <TextField id="lastName" name="lastName" label="Last Name" variant="standard" />
         <TextField 
         id="birthday" 
@@ -124,7 +133,8 @@ export default function NewUser({onAvatarChange}) {
         variant="standard"
         InputLabelProps={{
             shrink: true,
-         }} />
+         }} 
+         required/>
         <TextField id="phoneNumber" name="phoneNumber" label="Phone Number" variant="standard" />
         <TextField id="email" name="email" label="Email" variant="standard" />
 
@@ -135,7 +145,7 @@ export default function NewUser({onAvatarChange}) {
         <TextField id="state" name="state" label="State/Province" variant="standard" />
 
         <Typography>Price & Duration</Typography>
-        <TextField id="price" name="price" label="Price" variant="standard" />
+        <TextField id="price" name="price" label="Price" variant="standard"  required/>
         <TextField
   id="deliveryDate"
   name="deliveryDate"
@@ -145,10 +155,11 @@ export default function NewUser({onAvatarChange}) {
   InputLabelProps={{
     shrink: true,
   }}
+  required
 />
 
-        <TextField id="amountPaid" name="amountPaid" label="Amount Paid" variant="standard" />
-        <TextField id="noofOrders" name="noofOrders" label="No of Orders" variant="standard" />
+        <TextField id="amountPaid" name="amountPaid" label="Amount Paid" variant="standard"  required/>
+        <TextField id="noofOrders" name="noofOrders" label="No of Orders" variant="standard"  required/>
         <TextField id="fabricType" name="fabricType" label="Fabric Type" variant="standard" />
 
         <Typography>Payment Status </Typography>
@@ -190,6 +201,7 @@ export default function NewUser({onAvatarChange}) {
         <TextField id="underBust" name="underBust" label="Underbust" variant="outlined" />
         <TextField id="shoulderBust" name="shoulderBust" label="Shoulder-bust" variant="outlined" />
         <TextField id="shoulderWaist" name="shoulderWaist" label="Shoulder-Waist" variant="outlined" />
+       
         <Typography>Arms </Typography>
         <TextField id="wrist" name="wrist" label="Wrist" variant="outlined" />
         <TextField id="biceps" name="biceps" label="Biceps" variant="outlined" />
@@ -202,22 +214,8 @@ export default function NewUser({onAvatarChange}) {
         <TextField id="skirtLength" name="skirtLength" label="Skirt Length" variant="outlined" />
 
       
-        <Typography sx= {{alignItems: "center", justifyContent : "center"}}>Additional Measurements</Typography>
-        {fieldLabels.map((label, index) => (
-          <TextField key={index} id={`add${index}`} name={`add${index}`} label={label} variant="outlined" />
-        ))}
 
-        <TextField
-          id="outlined-basic-new"
-          label="Add new field"
-          variant="outlined"
-          value={newFieldLabel}
-          onChange={(e) => setNewFieldLabel(e.target.value)}
-        />
-
-        <Button variant="contained" color="primary" onClick={addNewField}>
-          Add New Field
-        </Button>
+        
 
         <Box>
         <TextField
@@ -264,6 +262,23 @@ export default function NewUser({onAvatarChange}) {
             </Select>
           </FormControl>
         </Box>
+
+        <Typography sx= {{alignItems: "center", justifyContent : "center"}}>Additional Measurements</Typography>
+        {fieldLabels.map((label, index) => (
+          <TextField key={index} id={`add${index}`} name={`add${index}`} label={label} variant="outlined" />
+        ))}
+
+        <TextField
+          id="additionalMeasurements"
+          label="Add a new Field"
+          variant="outlined"
+          value={newFieldLabel}
+          onChange={(e) => setNewFieldLabel(e.target.value)}
+        /> 
+
+        <Button variant="contained" color="primary" onClick={addNewField}>
+          Add New Field
+        </Button>
 
         <Typography>Upload Image</Typography>
         <Button variant="outlined" component="label" startIcon={<CloudUploadIcon />}>
