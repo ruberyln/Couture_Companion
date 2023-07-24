@@ -11,6 +11,8 @@ import PatternOutlinedIcon from '@mui/icons-material/PatternOutlined';
 import TextureOutlinedIcon from '@mui/icons-material/TextureOutlined';
 import axios from 'axios';
 import AvatarUpload from './avatarupload';
+import {Snackbar} from '@mui/material';
+import {Alert} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import ContentCutOutlinedIcon from '@mui/icons-material/ContentCutOutlined';
 import InputLabel from '@mui/material/InputLabel';
@@ -34,6 +36,8 @@ export default function NewUser({onAvatarChange}) {
   const [images, setImages] = useState([]);
   const [formValues, setFormValues] = useState({});
 
+  const [error, setError] = useState(null);
+  const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -87,10 +91,13 @@ export default function NewUser({onAvatarChange}) {
  // check if all required fields are filled
  for (let field of requiredFields) {
   if (!formValues[field]) {
-    alert(`Error: Field "${field}" is required`);
+    setError(`Error: Field "${field}" is required`);
+    setOpen(true);
     return;
   }
 }
+setError(null);
+setOpen(false);
     console.log("formmmm from save",formValues)
     setFormValues(formValues);
 
@@ -102,6 +109,14 @@ export default function NewUser({onAvatarChange}) {
       })
       .catch((err) => console.log('Error: ' + err));
   };
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
 
   return (
     <>
@@ -118,7 +133,11 @@ export default function NewUser({onAvatarChange}) {
       }} /> */}
       </Box>
       <OnlyDrawer/>
-     
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+          {error}
+        </Alert>
+      </Snackbar>
       <Box
         component="form"
         onSubmit={handleSubmit}
@@ -137,6 +156,7 @@ export default function NewUser({onAvatarChange}) {
         <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 25 }}>Personal Details</Typography>
 
         <TextField id="firstName" name="firstName" label="First Name" variant="standard"  required/>
+    
         <TextField id="lastName" name="lastName" label="Last Name" variant="standard" />
         <TextField 
         id="birthday" 
