@@ -44,8 +44,21 @@ export default function NewUser({onAvatarChange}) {
   };
 
   const handleSave = () => {
-    navigate('/Display', { state: { user: avatar, images, formValues } });
-  };
+    const requiredFields = ["firstName", "amountPaid", "noofOrders", "paymentStatus", "price"];
+    for (let field of requiredFields) {
+      if (!formValues[field]) {
+        // alert(`Error: Field "${field}" is required`);
+        // navigate('NewUser')
+        return;
+      }
+    }
+    navigate('/Display', { state: { user: avatar, images, formValues } });      
+}
+
+
+  
+   
+  
 
   const addNewField = () => {
     if (newFieldLabel) {

@@ -86,8 +86,8 @@ export default function SignIn() {
                 id="email"
                 label="Email Address"
                 name="email"
-                autoComplete="email"
-                autoFocus
+              
+             
               />
               <TextField
                 margin="normal"
@@ -97,7 +97,7 @@ export default function SignIn() {
                 label="Password"
                 type="password"
                 id="password"
-                autoComplete="current-password"
+                autoComplete="off"
               />
             
             

@@ -168,6 +168,7 @@ onChange={(e) => setSearchQuery(e.target.value)}
                 <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Price</TableCell>
                 <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Payment Status</TableCell>
                 <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Amount Paid</TableCell>
+                <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Balance</TableCell>
                 <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>No of Orders</TableCell>
                 <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Actions</TableCell>
               </TableRow>
@@ -193,11 +194,14 @@ onChange={(e) => setSearchQuery(e.target.value)}
                   <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>
                     {client.price}
                   </TableCell>
-                   <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>
+                   <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif", color: "orange" }}>
                     {client.paymentStatus}
                   </TableCell>
                   <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>
                     {client.amountPaid}
+                  </TableCell>
+                  <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" , color: "red" }}>
+                    {client.price - client.amountPaid}
                   </TableCell>
                   <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>
                     {client.noofOrders}

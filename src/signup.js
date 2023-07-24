@@ -91,7 +91,7 @@ export default function SignUp() {
                 id="firstname"
                 label="First Name"
                 name="firstName"
-                autoComplete="firstname"
+                autoComplete="off"
                 autoFocus
               />
 
@@ -102,8 +102,8 @@ export default function SignUp() {
                 id="lastname"
                 label="Last Name"
                 name="lastName"
-                autoComplete="lastname"
-                autoFocus
+                autoComplete= "off"
+             
               />
               
                <TextField
@@ -113,8 +113,8 @@ export default function SignUp() {
                 id="email"
                 label="Email Address"
                 name="email"
-                autoComplete="email"
-                autoFocus
+                autoComplete="off"
+            
               />
             
 
@@ -127,7 +127,7 @@ export default function SignUp() {
                 label="Password"
                 type="password"
                 id="password"
-                autoComplete="current-password"
+                autoComplete="off"
               />
               </Grid>
              
