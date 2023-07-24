@@ -172,7 +172,7 @@ console.log(formValues)
       noValidate
       autoComplete="off"
     >
-        <Typography>Personal Details</Typography>
+        <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 25 }}>Personal Details</Typography>
 
         <TextField
   id="firstName"
@@ -221,7 +221,7 @@ console.log(formValues)
           onChange={(e) => setFormValues({ ...formValues, email: e.target.value })}
         />
 
-        <Typography>Location</Typography>
+        <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 25 }}>Location</Typography>
         <TextField
           id="streetAddress"
           name="streetAddress"
@@ -255,7 +255,7 @@ console.log(formValues)
           onChange={(e) => setFormValues({ ...formValues, state: e.target.value })}
         />
 
-        <Typography>Price & Duration</Typography>
+        <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 25 }}>Price & Duration</Typography>
         <TextField
           id="price"
           name="price"
@@ -337,8 +337,8 @@ console.log(formValues)
 
   
 
-        <Typography>Order Details and Measurements</Typography>
-        <Typography>Upper body Measurements</Typography>
+        <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 25 }}>Order Details and Measurements</Typography>
+        <Typography  sx={{ fontFamily: "'EB Garamond', serif", fontSize: 20 }}>Upper body Measurements</Typography>
       
        
        <TextField
@@ -394,7 +394,7 @@ console.log(formValues)
 
 
        
- <Typography>Arms </Typography>
+ <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 20 }}>Arms </Typography>
  <TextField
           id="wrist"
           name="wrist"
@@ -420,7 +420,7 @@ console.log(formValues)
           onChange={(e) => setFormValues({ ...formValues, elbow: e.target.value })}
         />
 
-         <Typography>Lower Body Measurements </Typography>
+         <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 20 }}>Lower Body Measurements </Typography>
          <TextField
           id="hips"
           name="hips"
@@ -465,7 +465,7 @@ console.log(formValues)
           onChange={(e) => setFormValues({ ...formValues, orderSummary: e.target.value })}
         />
 
-        <Typography>Order Status</Typography>
+        <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 20 }} >Order Status</Typography>
         <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
             <InputLabel id="demo-simple-select-standard-label">Order-Status</InputLabel>
             <Select
@@ -496,7 +496,7 @@ console.log(formValues)
               <MenuItem value={'Sewing'}>
                 <CheckroomOutlinedIcon /> Sewing
               </MenuItem>
-              <MenuItem value={'Delivery'}>
+              <MenuItem value = {'Delivery'}>
                 <LocalShippingOutlinedIcon /> Delivery
               </MenuItem>
             </Select>
@@ -504,9 +504,9 @@ console.log(formValues)
 
 
          <Typography sx= {{alignItems: "center", justifyContent : "center"}}>Additional Measurements</Typography>
-        {fieldLabels.map((label, index) => (
+        {/* {fieldLabels.map((label, index) => (
           <TextField key={index} id={`add${index}`} name={`add${index}`} label={label} variant="outlined" />
-        ))}
+        ))} */}
 
         <TextField
           id="additionalMeasurements"
@@ -521,7 +521,7 @@ console.log(formValues)
           Add New Field
         </Button>
 
-<Typography>Upload Image</Typography>
+<Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 20 }}>Image(s)</Typography>
         <Button
           variant="outlined"
           component="label"

@@ -134,7 +134,7 @@ export default function NewUser({onAvatarChange}) {
         autoComplete="off"
       >
        
-        <Typography>Personal Details</Typography>
+        <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 25 }}>Personal Details</Typography>
 
         <TextField id="firstName" name="firstName" label="First Name" variant="standard"  required/>
         <TextField id="lastName" name="lastName" label="Last Name" variant="standard" />
@@ -151,13 +151,13 @@ export default function NewUser({onAvatarChange}) {
         <TextField id="phoneNumber" name="phoneNumber" label="Phone Number" variant="standard" />
         <TextField id="email" name="email" label="Email" variant="standard" />
 
-        <Typography>Location</Typography>
+        <Typography sx={{ fontFamily: "'EB Garamond', serif" , fontSize: 25 }}>Location</Typography>
         <TextField id="streetAddress" name="streetAddress" label="Street Address" variant="standard" />
         <TextField id="postalCode" name="postalCode" label="Postal Code" variant="standard" />
         <TextField id="city" name="city" label="City" variant="standard" />
         <TextField id="state" name="state" label="State/Province" variant="standard" />
 
-        <Typography>Price & Duration</Typography>
+        <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 25 }}>Price & Duration</Typography>
         <TextField id="price" name="price" label="Price" variant="standard"  required/>
         <TextField
   id="deliveryDate"
@@ -175,7 +175,7 @@ export default function NewUser({onAvatarChange}) {
         <TextField id="noofOrders" name="noofOrders" label="No of Orders" variant="standard"  required/>
         <TextField id="fabricType" name="fabricType" label="Fabric Type" variant="standard" />
 
-        <Typography>Payment Status </Typography>
+        <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 25 }}>Payment Status </Typography>
         <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
             <InputLabel id="demo-simple-select-standard-label">Payment Status</InputLabel>
             <Select
@@ -205,8 +205,8 @@ export default function NewUser({onAvatarChange}) {
 
 
 
-        <Typography>Order Details and Measurements</Typography>
-        <Typography>Upper body Measurements </Typography>
+        <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 25 }} >Order Details and Measurements</Typography>
+        <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 20 }}>Upper body Measurements </Typography>
         
         <TextField id="shoulder" name="shoulder" label="Shoulder" variant="outlined" />
         <TextField id="bust" name="bust" label="Bust" variant="outlined" />
@@ -215,12 +215,12 @@ export default function NewUser({onAvatarChange}) {
         <TextField id="shoulderBust" name="shoulderBust" label="Shoulder-bust" variant="outlined" />
         <TextField id="shoulderWaist" name="shoulderWaist" label="Shoulder-Waist" variant="outlined" />
        
-        <Typography>Arms </Typography>
+        <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 20 }}>Arms </Typography>
         <TextField id="wrist" name="wrist" label="Wrist" variant="outlined" />
         <TextField id="biceps" name="biceps" label="Biceps" variant="outlined" />
         <TextField id="elbow" name="elbow" label="Elbow" variant="outlined" />
 
-        <Typography>Lower Body Measuremenrs </Typography>
+        <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 20 }}>Lower Body Measuremenrs </Typography>
         <TextField id="hips" name="hips" label="Hips" variant="outlined" />
         <TextField id="fullLength" name="fullLength" label="Full Length" variant="outlined" />
         <TextField id="shortdresslength" name="shortdresslength" label="Short Dress Length" variant="outlined" />
@@ -281,8 +281,9 @@ export default function NewUser({onAvatarChange}) {
           <TextField key={index} id={`add${index}`} name={`add${index}`} label={label} variant="outlined" />
         ))}
 
-        <TextField
+        <TextField 
           id="additionalMeasurements"
+          name = "additionalMeasurements"
           label="Add a new Field"
           variant="outlined"
           value={newFieldLabel}
@@ -293,7 +294,7 @@ export default function NewUser({onAvatarChange}) {
           Add New Field
         </Button>
 
-        <Typography>Upload Image</Typography>
+        <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 20 }}>Upload Image</Typography>
         <Button variant="outlined" component="label" startIcon={<CloudUploadIcon />}>
           Upload Image
           <input

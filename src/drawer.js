@@ -194,9 +194,10 @@ onChange={(e) => setSearchQuery(e.target.value)}
                   <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>
                     {client.price}
                   </TableCell>
-                   <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif", color: "orange" }}>
-                    {client.paymentStatus}
-                  </TableCell>
+                  <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif", color: client.paymentStatus === 'Paid' ? "green" : client.paymentStatus === 'Partially-Paid' ? 'orange' :  client.paymentStatus === 'Pending' ? 'red' :'orange'}}>
+    {client.paymentStatus}
+</TableCell>
+
                   <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>
                     {client.amountPaid}
                   </TableCell>
