@@ -44,7 +44,7 @@ export default function NewUser({onAvatarChange}) {
   };
 
   const handleSave = () => {
-    const requiredFields = ["firstName", "amountPaid", "noofOrders", "paymentStatus", "price"];
+    const requiredFields = ["firstName", "amountPaid", "noofOrders", "paymentStatus", "price", "deliveryDate", "birthday"];
     for (let field of requiredFields) {
       if (!formValues[field]) {
         // alert(`Error: Field "${field}" is required`);
