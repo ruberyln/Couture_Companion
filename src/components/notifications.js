@@ -16,15 +16,17 @@ const Notifications = () => {
 
   
   useEffect(() => {
-    axios.get('http://localhost:5005/clients/get-client')
+    axios
+    .get('http://localhost:5005/clients/get-client',{headers:{Authorization:localStorage.getItem('userId')}})
       .then(res => {
         setClients(res.data);
+
+      
       })
       .catch(err => {
         console.error(err);
       })
   }, []);
-
   const checkUpcomingDates = (date) => {
     const today = new Date();
     const targetDate = new Date(date);
@@ -33,9 +35,14 @@ const Notifications = () => {
     return diffDays <= 7;
   };
 
+
+
   const upcomingBirthdays = clients.filter(client => checkUpcomingDates(client.birthday));
   const dueDeliveries = clients.filter(client => checkUpcomingDates(client.deliveryDate));
 
+
+  // console.log(upcomingBirthdays)
+  // console.log(dueDeliveries)
   return (
     
     <div style={{ display: 'flex', justifyContent: 'center', marginTop: '120px' }}>

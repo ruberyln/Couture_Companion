@@ -134,8 +134,9 @@ export default function OnlyDrawer({}) {
     setOpen(false);
   };
   useEffect(() => {
-    axios.get('http://localhost:5005/clients/get-client')
+    axios.get('http://localhost:5005/clients/get-client',{headers:{Authorization:localStorage.getItem('userId')}})
       .then(res => {
+        console.log('client',res.data)
         setClients(res.data);
       })
       .catch(err => {
@@ -153,8 +154,6 @@ export default function OnlyDrawer({}) {
 
   const upcomingBirthdays = clients.filter(client => checkUpcomingDates(client.birthday));
   const dueDeliveries = clients.filter(client => checkUpcomingDates(client.deliveryDate));
-  //...
-
 
  return(
 

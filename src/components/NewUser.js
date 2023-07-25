@@ -100,6 +100,7 @@ setError(null);
 setOpen(false);
     console.log("formmmm from save",formValues)
     setFormValues(formValues);
+formValues.addedBy=localStorage.getItem('userId')
 
     axios
       .post('http://localhost:5005/clients/save-client', formValues)

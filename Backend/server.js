@@ -53,7 +53,20 @@ app.delete('/clients/delete-client/:id', (req, res) => {
 });
 
   
-  // Your other code...
+app.post('/logout', (req, res) => {
+  if(req.session) {
+    req.session.destroy((err) => {
+      if(err) {
+        return res.json({ logout: false, error: 'Failed to logout.' });
+      }
+      res.clearCookie('session-name');
+      return res.json({ logout: true });
+    });
+  } else {
+    return res.json({ logout: false, error: 'No active session.' });
+  }
+});
+
 
 // Changed '/users/save-client' to '/clients/save-client'
 app.post('/clients/save-client', (req, res) => {
@@ -81,10 +94,11 @@ app.get('/users/:id', (req, res) => {
 
 
 app.get('/clients/get-client', (req, res) => {
-    Client.find()
+
+    Client.find({addedBy:req.headers.authorization})
       .then((clients) => res.json(clients))
       .catch((err) => res.status(400).json('Error: ' + err));
   });
-app.listen(5005, () => {
+app.listen(5005, ()  => {
     console.log("Server is running on Port: 5005");
 });

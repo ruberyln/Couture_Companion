@@ -42,12 +42,13 @@ export default function SignUp() {
             password: data.get('password'),
           }),
         });
-    
+    console.log('response',response);
         const result = await response.json();
+      
         console.log(result); // 'User added!' if the request was successful
 
         if (response.ok) { // If the request was successful
-          localStorage.setItem('userId', result.id);
+          localStorage.setItem('userId', result._id);
           localStorage.setItem('firstName', data.get('firstName')); // Save the user's ID for later
           navigate('/drawer','/profile', {
             state: {

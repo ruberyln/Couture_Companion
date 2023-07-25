@@ -44,7 +44,7 @@ export default function SignIn() {
     const result = await response.json();
   
     if (response.ok) {
-      localStorage.setItem('userId', result.id); 
+      localStorage.setItem('userId', result._id); 
       navigate('/drawer'); 
     } else {
       if(result.message === 'Invalid email'){
@@ -97,7 +97,7 @@ export default function SignIn() {
                 label="Password"
                 type="password"
                 id="password"
-                autoComplete="off"
+                
               />
             
             

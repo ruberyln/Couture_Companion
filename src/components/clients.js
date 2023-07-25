@@ -58,7 +58,8 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   
     useEffect(() => {
       axios
-        .get('http://localhost:5005/clients/get-client')
+      .get('http://localhost:5005/clients/get-client',{headers:{Authorization:localStorage.getItem('userId')}})
+
         .then((res) => {
           setClients(res.data);
   

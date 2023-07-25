@@ -3,13 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import { IconButton } from '@mui/material';
 import  {Avatar}  from '@mui/material';
-import { indigo , pink, blue, green, red, orange } from '@mui/material/colors';
+import axios from 'axios';
+import { indigo } from '@mui/material/colors';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 
 function LogoutPage() {
     const [open, setOpen] = useState(false);
     const navigate = useNavigate();
-
+   
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -17,19 +18,31 @@ function LogoutPage() {
     const handleClose = () => {
         setOpen(false);
     };
-
-    const handleLogout = () => {
-        console.log('Logging out...');
-        navigate("/signin");
-    };
+   
+    const handleLogout = async () => {
+        
+        const response = await fetch('http://localhost:5005/logout', {
+            method: 'post',
+            withCredentials: true
+        })
+        .then(function(response) {
+            // Handle success
+            console.log('Logged out');
+            handleClose();
+            navigate('/signin'); // or wherever you want to redirect after logging out
+        })
+        .catch(function(error) {
+            // Handle error
+            console.log('Logout error:', error);
+        });
+    }
 
     return (
         <div>
             <IconButton onClick={handleClickOpen}>
-            <Avatar sx={{ bgcolor: indigo[500] }}>
-            <PowerSettingsNewIcon/>
-            </Avatar>
-
+                <Avatar sx={{ bgcolor: indigo[500] }}>
+                    <PowerSettingsNewIcon/>
+                </Avatar>
             </IconButton>
             <Dialog
                 open={open}
