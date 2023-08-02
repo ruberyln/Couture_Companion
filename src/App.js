@@ -17,6 +17,7 @@ import AvatarUpload from './components/avatarupload';
 import { Dashboard } from '@mui/icons-material';
 import Orders from './components/orders';
 import Clients from './components/clients';
+import Album from './Album';
 // import Landing from './components/landing';
 
 
@@ -46,9 +47,10 @@ export default function App(props) {
   return (
   <Router>
       <Routes>
-      <Route  path='signup' element={<SignUp/>} />
+      <Route  path='/' element={<SignUp/>} />
       <Route  path='avatarUpload' element={<AvatarUpload/>} />
       <Route  path='dash' element={<Dash/>} />
+      <Route  path='Album' element={<Album/>} />
       <Route  path='orders' element={<Orders/>} />
       <Route  path='clients' element={<Clients/>} />
       {/* <Route  path='landing' element={<Landing/>} /> */}

@@ -136,7 +136,7 @@ export default function OnlyDrawer({}) {
   useEffect(() => {
     axios.get('http://localhost:5005/clients/get-client',{headers:{Authorization:localStorage.getItem('userId')}})
       .then(res => {
-        console.log('client',res.data)
+      
         setClients(res.data);
       })
       .catch(err => {

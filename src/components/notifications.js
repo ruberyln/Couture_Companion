@@ -57,7 +57,9 @@ const Notifications = () => {
         <div key={client.id}>
                 <Alert severity="info"> 
                 <AlertTitle>Birthday</AlertTitle>
-                 {client.firstName}'s birthday is coming up on {client.birthday}  <Tooltip title="Email" arrow ><IconButton sx= {{color: blue[500]}} component="a" href={`mailto:${client.email}`}>  <EmailIcon/> </IconButton></Tooltip>
+                 {client.firstName}'s birthday is coming up on {client.birthday}  <Tooltip title="Email" arrow ><IconButton sx= {{color: blue[500]}} 
+                  component="a" href={`mailto:${client.email}?subject=Happy Birthday ${client.firstName}&body=Happy Birthday ${client.firstName}!! Your birthday is  on ${client.birthday} and we specially want to thank you for your patronage with our brand.  Here is 20% off your next order using code Birthday${client.firstName} 
+                ` }  >  <EmailIcon/> </IconButton></Tooltip>
 
                  <Tooltip title="Message" arrow>
     <IconButton sx={{color: blue[500]}} component="a" href={`sms:${client.phoneNumber}`}>
@@ -80,7 +82,9 @@ const Notifications = () => {
         <div key={client.id}>
      <Alert severity="warning">
      <AlertTitle>Due Delivery</AlertTitle>
-          Delivery for {client.firstName} is due on {client.deliveryDate}  <Tooltip title="Email" arrow ><IconButton sx= {{color: orange[500]}} component="a" href={`mailto:${client.email}`}>  <EmailIcon/> </IconButton></Tooltip>
+          Delivery for {client.firstName} is due on {client.deliveryDate}  <Tooltip title="Email" arrow ><IconButton sx= {{color: orange[500]}} 
+          component="a" href={`mailto:${client.email}?subject=Your Order is ready ${client.firstName} !&body=Hi ${client.firstName}!!  Your Order is ready and we will be delivered to  ${client.streetAddress}, ${client.phoneNumber}  if you would like to opt for  pick up please call company line  +234803309878 or response to this email . Thank you again for patronizing us, looking forward to more orders. 
+         `} >  <EmailIcon/> </IconButton></Tooltip>
           <Tooltip title="Message" arrow>
     <IconButton sx={{color: orange[500]}} component="a" href={`sms:${client.phoneNumber}`}>
       <MessageIcon/>
