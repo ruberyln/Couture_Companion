@@ -101,11 +101,12 @@ setOpen(false);
     console.log("formmmm from save",formValues)
     setFormValues(formValues);
 formValues.addedBy=localStorage.getItem('userId')
-
+formValues.images=images
     axios
       .post('http://localhost:5005/clients/save-client', formValues)
       .then((res) => {
         console.log(res.data);
+        setImages([])
         navigate('/drawer',{ state: { user: res.data, images, formValues } });
       })
       .catch((err) => console.log('Error: ' + err));
