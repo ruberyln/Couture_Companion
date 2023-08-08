@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Typography } from '@mui/material';
@@ -82,6 +82,13 @@ export default function NewUser({onAvatarChange}) {
   const handleChanged = (event) => {
     setPaymentStatus(event.target.value);
   };
+  const [today, setToday] = useState('');
+
+  useEffect(() => {
+      const currentDate = new Date();
+      const formattedDate = currentDate.toISOString().split('T')[0];
+      setToday(formattedDate);
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -182,16 +189,19 @@ formValues.images=images
         <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 25 }}>Price & Duration</Typography>
         <TextField id="price" name="price" label="Price" variant="standard"  required/>
         <TextField
-  id="deliveryDate"
-  name="deliveryDate"
-  label="Delivery Date"
-  type="date"
-  variant="standard"
-  InputLabelProps={{
-    shrink: true,
-  }}
-  required
-/>
+            id="deliveryDate"
+            name="deliveryDate"
+            label="Delivery Date"
+            type="date"
+            variant="standard"
+            InputLabelProps={{
+                shrink: true,
+            }}
+            inputProps={{
+                min: today
+            }}
+            required
+        />
 
         <TextField id="amountPaid" name="amountPaid" label="Amount Paid" variant="standard"  required/>
         <TextField id="noofOrders" name="noofOrders" label="No of Orders" variant="standard"  required/>

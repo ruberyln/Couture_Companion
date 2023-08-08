@@ -116,7 +116,14 @@ export default function Display() {
       ]
     });
   };
-  
+  // setting Delivery dates to be from today onward 
+  const [today, setToday] = useState('');
+
+  useEffect(() => {
+      const currentDate = new Date();
+      const formattedDate = currentDate.toISOString().split('T')[0];
+      setToday(formattedDate);
+  }, []);
 
   const formRef = useRef();
 
@@ -273,6 +280,9 @@ console.log(formValues)
         InputLabelProps={{
             shrink: true,
          }}
+         inputProps={{
+          min: today
+      }}
           value={formValues?.deliveryDate || ''}
           onChange={(e) => setFormValues({ ...formValues, deliveryDate: e.target.value })}
         />
