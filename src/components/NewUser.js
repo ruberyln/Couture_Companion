@@ -2,7 +2,8 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Typography } from '@mui/material';
+import { Typography, Stack } from '@mui/material';
+import Divider from '@mui/material/Divider';
 import { Button } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import DrawOutlinedIcon from '@mui/icons-material/DrawOutlined';
@@ -177,7 +178,12 @@ formValues.images=images
             shrink: true,
          }} 
          required/>
-        <TextField id="phoneNumber" name="phoneNumber" label="Phone Number" variant="standard" />
+        <TextField id="phoneNumber" name="phoneNumber" label="Phone Number" variant="standard" type="number"
+    inputProps={{ 
+        pattern: "[0-9]*",
+        inputMode: "numeric"
+    }}
+/>
         <TextField id="email" name="email" label="Email" variant="standard" />
 
         <Typography sx={{ fontFamily: "'EB Garamond', serif" , fontSize: 25 }}>Location</Typography>
@@ -203,8 +209,18 @@ formValues.images=images
             required
         />
 
-        <TextField id="amountPaid" name="amountPaid" label="Amount Paid" variant="standard"  required/>
-        <TextField id="noofOrders" name="noofOrders" label="No of Orders" variant="standard"  required/>
+        <TextField id="amountPaid" name="amountPaid" label="Amount Paid" variant="standard" type="number"
+    inputProps={{ 
+        pattern: "[0-9]*",
+        inputMode: "numeric"
+    }}
+ required/>
+        <TextField id="noofOrders" name="noofOrders" label="No of Orders" variant="standard" type="number"
+    inputProps={{ 
+        pattern: "[0-9]*",
+        inputMode: "numeric"
+    }}
+ required/>
         <TextField id="fabricType" name="fabricType" label="Fabric Type" variant="standard" />
 
         <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 25 }}>Payment Status </Typography>
@@ -240,29 +256,99 @@ formValues.images=images
         <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 25 }} >Order Details and Measurements</Typography>
         <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 20 }}>Upper body Measurements </Typography>
         
-        <TextField id="shoulder" name="shoulder" label="Shoulder" variant="outlined" />
-        <TextField id="bust" name="bust" label="Bust" variant="outlined" />
-        <TextField id="waist" name="waist" label="Waist" variant="outlined" />
-        <TextField id="underBust" name="underBust" label="Underbust" variant="outlined" />
-        <TextField id="shoulderBust" name="shoulderBust" label="Shoulder-bust" variant="outlined" />
-        <TextField id="shoulderWaist" name="shoulderWaist" label="Shoulder-Waist" variant="outlined" />
+        <TextField id="shoulder" name="shoulder" label="Shoulder" variant="outlined"      type="number"
+    inputProps={{ 
+        pattern: "[0-9]*",
+        inputMode: "numeric"
+    }}
+/>
+        <TextField id="bust" name="bust" label="Bust" variant="outlined"     type="number"
+    inputProps={{ 
+        pattern: "[0-9]*",
+        inputMode: "numeric"
+    }}
+ />
+        <TextField id="waist" name="waist" label="Waist" variant="outlined"     type="number"
+    inputProps={{ 
+        pattern: "[0-9]*",
+        inputMode: "numeric"
+    }}
+ />
+        <TextField id="underBust" name="underBust" label="Underbust" variant="outlined"     type="number"
+    inputProps={{ 
+        pattern: "[0-9]*",
+        inputMode: "numeric"
+    }}
+ />
+        <TextField id="shoulderBust" name="shoulderBust" label="Shoulder-bust" variant="outlined"     type="number"
+    inputProps={{ 
+        pattern: "[0-9]*",
+        inputMode: "numeric"
+    }}
+ />
+        <TextField id="shoulderWaist" name="shoulderWaist" label="Shoulder-Waist" variant="outlined"     type="number"
+    inputProps={{ 
+        pattern: "[0-9]*",
+        inputMode: "numeric"
+    }}
+ />
        
         <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 20 }}>Arms </Typography>
-        <TextField id="wrist" name="wrist" label="Wrist" variant="outlined" />
-        <TextField id="biceps" name="biceps" label="Biceps" variant="outlined" />
-        <TextField id="elbow" name="elbow" label="Elbow" variant="outlined" />
+        <TextField id="wrist" name="wrist" label="Wrist" variant="outlined"    type="number"
+    inputProps={{ 
+        pattern: "[0-9]*",
+        inputMode: "numeric"
+    }}
+ />
+        <TextField id="biceps" name="biceps" label="Biceps" variant="outlined"    type="number"
+    inputProps={{ 
+        pattern: "[0-9]*",
+        inputMode: "numeric"
+    }}
+ />
+        <TextField id="elbow" name="elbow" label="Elbow" variant="outlined"     type="number"
+    inputProps={{ 
+        pattern: "[0-9]*",
+        inputMode: "numeric"
+    }}
+ />
 
         <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 20 }}>Lower Body Measuremenrs </Typography>
-        <TextField id="hips" name="hips" label="Hips" variant="outlined" />
-        <TextField id="fullLength" name="fullLength" label="Full Length" variant="outlined" />
-        <TextField id="shortdresslength" name="shortdresslength" label="Short Dress Length" variant="outlined" />
-        <TextField id="skirtLength" name="skirtLength" label="Skirt Length" variant="outlined" />
+        <TextField id="hips" name="hips" label="Hips" variant="outlined"    
+          type="number"
+    inputProps={{ 
+        pattern: "[0-9]*",
+        inputMode: "numeric"
+    }}
+/>
+        <TextField id="fullLength" name="fullLength" label="Full Length" variant="outlined"   
+         type="number"
+    inputProps={{ 
+        pattern: "[0-9]*",
+        inputMode: "numeric"
+    }}
+ />
+        <TextField id="shortdresslength" name="shortdresslength" label="Short Dress Length" variant="outlined"  type="number"
+    inputProps={{ 
+        pattern: "[0-9]*",
+        inputMode: "numeric"
+    }}
+ />
+        <TextField id="skirtLength" name="skirtLength" label="Skirt Length" variant="outlined"     type="number"
+    inputProps={{ 
+        pattern: "[0-9]*",
+        inputMode: "numeric"
+    }}
+ />
 
       
 
         
 
         <Box>
+          <Stack
+  divider={<Divider orientation="vertical" flexItem />}
+  spacing={2}>
         <TextField
           id="orderSummary"
           name="orderSummary"
@@ -272,6 +358,16 @@ formValues.images=images
          
           placeholder="Describe order in details, example: Long sleeve dress with tiny sleeves and stoned neck"
         />
+
+        <TextField
+          id="add"
+          name="add"
+          label="Add"
+          multiline
+          rows={7}
+          placeholder="Add your custom measurements e.g Back -10 upper arm - 15"
+        />
+</Stack>
           <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
             <InputLabel id="demo-simple-select-standard-label">Order-Status</InputLabel>
             <Select

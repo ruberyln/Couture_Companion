@@ -268,6 +268,12 @@ console.log(formValues)
           name="price"
           label="Price"
           variant="standard"
+          type="number"
+          inputProps={{ 
+              pattern: "[0-9]*",
+              inputMode: "numeric"
+          }}
+      
           value={formValues?.price || ''}
           onChange={(e) => setFormValues({ ...formValues, price: e.target.value })}
         />
@@ -291,6 +297,12 @@ console.log(formValues)
           name="amountPaid"
           label="Amount Paid"
           variant="standard"
+          type="number"
+          inputProps={{ 
+              pattern: "[0-9]*",
+              inputMode: "numeric"
+          }}
+      
           value={formValues?.amountPaid || ''}
           onChange={(e) => setFormValues({ ...formValues, amountPaid: e.target.value })}
         />
@@ -299,6 +311,12 @@ console.log(formValues)
           name="noofOrders"
           label="No of Orders"
           variant="standard"
+          type="number"
+          inputProps={{ 
+              pattern: "[0-9]*",
+              inputMode: "numeric"
+          }}
+      
           value={formValues?.noofOrders || ''}
           onChange={(e) => setFormValues({ ...formValues, noofOrders: e.target.value })}
         />
@@ -355,7 +373,13 @@ console.log(formValues)
           id="shoulder"
           name="shoulder"
           label="Shoulder"
-          variant="standard"
+          variant="outlined"
+          type="number"
+          inputProps={{ 
+              pattern: "[0-9]*",
+              inputMode: "numeric"
+          }}
+      
           value={formValues?.shoulder || ''}
           onChange={(e) => setFormValues({ ...formValues, shoulder: e.target.value })}
         />
@@ -366,6 +390,12 @@ console.log(formValues)
   name="bust"
   label="Bust"
   variant="outlined"
+  type="number"
+  inputProps={{ 
+      pattern: "[0-9]*",
+      inputMode: "numeric"
+  }}
+
   value={formValues?.bust || ''}
   onChange={(e) => setFormValues({ ...formValues, bust: e.target.value })}
 />
@@ -374,6 +404,11 @@ console.log(formValues)
           name="waist"
           label="Waist"
           variant="outlined"
+          type="number"
+          inputProps={{ 
+              pattern: "[0-9]*",
+              inputMode: "numeric"
+          }}
           value={formValues?.waist || ''}
           onChange={(e) => setFormValues({ ...formValues, waist: e.target.value })}
         />
@@ -382,6 +417,12 @@ console.log(formValues)
           name="underBust"
           label="Underbust"
           variant="outlined"
+          type="number"
+          inputProps={{ 
+              pattern: "[0-9]*",
+              inputMode: "numeric"
+          }}
+      
           value={formValues?.underBust || ''}
           onChange={(e) => setFormValues({ ...formValues, underBust: e.target.value })}
         />
@@ -390,6 +431,12 @@ console.log(formValues)
           name="shoulderBust"
           label="Shoulder-bust"
           variant="outlined"
+          type="number"
+          inputProps={{ 
+              pattern: "[0-9]*",
+              inputMode: "numeric"
+          }}
+      
           value={formValues?.shoulderBust || ''}
           onChange={(e) => setFormValues({ ...formValues, shoulderBust: e.target.value })}
         />
@@ -398,6 +445,12 @@ console.log(formValues)
           name="shoulderWaist"
           label="Shoulder-Waist"
           variant="outlined"
+          type="number"
+          inputProps={{ 
+              pattern: "[0-9]*",
+              inputMode: "numeric"
+          }}
+      
           value={formValues?.shoulderWaist || ''}
           onChange={(e) => setFormValues({ ...formValues, shoulderWaist: e.target.value })}
         />
@@ -410,6 +463,12 @@ console.log(formValues)
           name="wrist"
           label="Wrist"
           variant="outlined"
+          type="number"
+          inputProps={{ 
+              pattern: "[0-9]*",
+              inputMode: "numeric"
+          }}
+      
           value={formValues?.wrist || ''}
           onChange={(e) => setFormValues({ ...formValues, wrist: e.target.value })}
         />
@@ -418,6 +477,12 @@ console.log(formValues)
           name="biceps"
           label="Biceps"
           variant="outlined"
+          type="number"
+          inputProps={{ 
+              pattern: "[0-9]*",
+              inputMode: "numeric"
+          }}
+      
           value={formValues?.biceps || ''}
           onChange={(e) => setFormValues({ ...formValues, biceps: e.target.value })}
         />
@@ -426,6 +491,12 @@ console.log(formValues)
           name="elbow"
           label="Elbow"
           variant="outlined"
+          type="number"
+          inputProps={{ 
+              pattern: "[0-9]*",
+              inputMode: "numeric"
+          }}
+      
           value={formValues?.elbow || ''}
           onChange={(e) => setFormValues({ ...formValues, elbow: e.target.value })}
         />
@@ -436,6 +507,12 @@ console.log(formValues)
           name="hips"
           label="Hips"
           variant="outlined"
+          type="number"
+          inputProps={{ 
+              pattern: "[0-9]*",
+              inputMode: "numeric"
+          }}
+      
           value={formValues?.hips || ''}
           onChange={(e) => setFormValues({ ...formValues, hips: e.target.value })}
         />
@@ -444,6 +521,12 @@ console.log(formValues)
           name="fullLength"
           label="Full Length"
           variant="outlined"
+          type="number"
+          inputProps={{ 
+              pattern: "[0-9]*",
+              inputMode: "numeric"
+          }}
+      
           value={formValues?.fullLength || ''}
           onChange={(e) => setFormValues({ ...formValues, fullLength: e.target.value })}
         />
@@ -452,6 +535,12 @@ console.log(formValues)
           name="shortdresslength"
           label="Short Dress Length"
           variant="outlined"
+          type="number"
+          inputProps={{ 
+              pattern: "[0-9]*",
+              inputMode: "numeric"
+          }}
+      
           value={formValues?.shortdresslength || ''}
           onChange={(e) => setFormValues({ ...formValues, shortdresslength: e.target.value })}
         />
@@ -460,19 +549,36 @@ console.log(formValues)
           name="skirtLength"
           label="Skirt Length"
           variant="outlined"
+          type="number"
+          inputProps={{ 
+              pattern: "[0-9]*",
+              inputMode: "numeric"
+          }}
+      
           value={formValues?.skirtLength || ''}
           onChange={(e) => setFormValues({ ...formValues, skirtLength: e.target.value })}
         />
         
- <TextField
+        <TextField
           id="orderSummary"
           name="orderSummary"
           label="Order summary"
           multiline
-          rows={4}
+          rows={7}
           placeholder="Describe order in details, example: Long sleeve dress with tiny sleeves and stoned neck"
           value={formValues?.orderSummary || ''}
           onChange={(e) => setFormValues({ ...formValues, orderSummary: e.target.value })}
+        />
+
+ <TextField
+          id="add"
+          name="add"
+          label="Additional Measurements"
+          multiline
+          rows={7}
+          placeholder="Add your custom measurements e.g Back -10 upper arm - 15"
+          value={formValues?.add || ''}
+          onChange={(e) => setFormValues({ ...formValues, add: e.target.value })}
         />
 
         <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 20 }} >Order Status</Typography>
@@ -513,23 +619,23 @@ console.log(formValues)
           </FormControl>
 
 
-         <Typography sx= {{alignItems: "center", justifyContent : "center"}}>Additional Measurements</Typography>
+         {/* <Typography sx= {{alignItems: "center", justifyContent : "center"}}>Additional Measurements</Typography>
         {/* {fieldLabels.map((label, index) => (
           <TextField key={index} id={`add${index}`} name={`add${index}`} label={label} variant="outlined" />
-        ))} */}
+        ))} */} 
 
-        <TextField
+         {/* <TextField
           id="additionalMeasurements"
           // label={label}
           name = "additionalMeasurements"
           variant="outlined"
           value={formValues?.additionalMeasurements || ''}
           onChange={(e) => setFormValues({ ...formValues, additionalMeasurements: e.target.value })}
-        /> 
+        />  */}
 
-        <Button variant="contained" color="primary" onClick={addNewField}>
+        {/* <Button variant="contained" color="primary" onClick={addNewField}>
           Add New Field
-        </Button>
+        </Button>  */}
 
 <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 20 }}>Image(s)</Typography>
         <Button

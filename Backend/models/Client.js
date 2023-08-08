@@ -34,6 +34,7 @@ const ClientSchema = new Schema({
     shoulderWaist:String,
     skirtLength:String,
     addedBy: String,
+    add:String,
     // Add:String,
     images: [String],
     additionalMeasurements:[String]
