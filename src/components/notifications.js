@@ -29,11 +29,25 @@ const Notifications = () => {
   }, []);
   const checkUpcomingDates = (date) => {
     const today = new Date();
+    
+    // Adjust today's year to match the input year
+    // This allows us to compare month and day without year interference
     const targetDate = new Date(date);
+    targetDate.setFullYear(today.getFullYear());
+
+    // If the targetDate has already passed this year, adjust to check the same date next year
+    if (today > targetDate) {
+        targetDate.setFullYear(today.getFullYear() + 1);
+    }
+    
     const diffTime = Math.abs(targetDate - today);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
     return diffDays <= 7;
-  };
+};
+
+// Test
+console.log(checkUpcomingDates("2023-08-13")); // true if today is 2023-08-07
 
 
 
