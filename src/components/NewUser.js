@@ -178,7 +178,7 @@ formValues.images=images
             shrink: true,
          }} 
          required/>
-        <TextField id="phoneNumber" name="phoneNumber" label="Phone Number" variant="standard" type="number"
+        <TextField id="phoneNumber" name="phoneNumber" label="Phone Number" variant="standard" placeholder='000-000-0000' type="number"
     inputProps={{ 
         pattern: "[0-9]*",
         inputMode: "numeric"
@@ -404,7 +404,7 @@ formValues.images=images
           </FormControl>
         </Box>
 
-        <Typography sx= {{alignItems: "center", justifyContent : "center"}}>Additional Measurements</Typography>
+        {/* <Typography sx= {{alignItems: "center", justifyContent : "center"}}>Additional Measurements</Typography>
         {fieldLabels.map((label, index) => (
           <TextField key={index} id={`add${index}`} name={`add${index}`} label={label} variant="outlined" />
         ))}
@@ -420,7 +420,7 @@ formValues.images=images
 
         <Button variant="contained" color="primary" onClick={addNewField}>
           Add New Field
-        </Button>
+        </Button> */}
 
         <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 20 }}>Upload Image</Typography>
         <Button variant="outlined" component="label" startIcon={<CloudUploadIcon />}>

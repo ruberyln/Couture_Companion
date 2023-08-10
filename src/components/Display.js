@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import { confirmAlert } from 'react-confirm-alert'; 
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import TextField from '@mui/material/TextField';
-import { Typography } from '@mui/material';
+import { Typography, Stack, Divider } from '@mui/material';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
@@ -558,7 +558,9 @@ console.log(formValues)
           value={formValues?.skirtLength || ''}
           onChange={(e) => setFormValues({ ...formValues, skirtLength: e.target.value })}
         />
-        
+            <Stack
+  divider={<Divider orientation="vertical" flexItem />}
+  spacing={2}>
         <TextField
           id="orderSummary"
           name="orderSummary"
@@ -580,7 +582,7 @@ console.log(formValues)
           value={formValues?.add || ''}
           onChange={(e) => setFormValues({ ...formValues, add: e.target.value })}
         />
-
+</Stack>
         <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 20 }} >Order Status</Typography>
         <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
             <InputLabel id="demo-simple-select-standard-label">Order-Status</InputLabel>

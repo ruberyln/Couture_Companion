@@ -15,9 +15,9 @@ import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 
 export default function Dash({ totalAmountPaid, totalNoOfOrders, totalClients }) {
   const [isVisible, setIsVisible] = React.useState({
-    order: true,
-    payment: true,
-    client: true,
+    order: false,
+    payment: false,
+    client: false,
   });
 
   const toggleVisibility = (type) => {
