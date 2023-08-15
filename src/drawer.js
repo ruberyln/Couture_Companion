@@ -148,8 +148,6 @@ export default function Orders({}) {
       
         <IconButton>
 
-    
-
 <SearchIcon />
 </IconButton>
 <InputBase
@@ -195,7 +193,7 @@ onChange={(e) => setSearchQuery(e.target.value)}
                   <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>
                     {client.price}
                   </TableCell>
-                  <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif", color: client.paymentStatus === 'Paid' ? "green" : client.paymentStatus === 'Partially-Paid' ? 'orange' :  client.paymentStatus === 'Pending' ? 'red' :'orange'}}>
+                  <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif", color: client.paymentStatus === 'Paid' ? "green" : client.paymentStatus === 'Partially-Paid' ? 'blue' :  client.paymentStatus === 'Pending' ? 'red' :'blue'}}>
     {client.paymentStatus}
 </TableCell>
 

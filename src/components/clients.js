@@ -5,6 +5,8 @@ import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import IconButton from '@mui/material/IconButton';
 import OnlyDrawer from './onlydrawer';
+import InputBase from '@mui/material/InputBase';
+import SearchIcon from '@mui/icons-material/Search';
 import Avatar from '@mui/material/Avatar';
 import { blue, green, indigo , orange, pink, red } from '@mui/material/colors';
 import Table from '@mui/material/Table';
@@ -51,7 +53,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   
     const [savedData, setSavedData] = useState(formData);
     const [clients, setClients] = useState([]);
-  
+    const [searchQuery, setSearchQuery] = useState('');
     const [totalAmountPaid, setTotalAmountPaid] = useState(0);
     const [totalNoOfOrders, setTotalNoOfOrders] = useState(0);
     const [totalClients, setTotalClients] = useState(0);
@@ -80,7 +82,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
         <CssBaseline />
 
         <OnlyDrawer/>
-      
+
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Typography variant="h6" noWrap    sx={{
         '& > :not(style)': { m: 1, width: '25ch' },
@@ -92,6 +94,19 @@ const DrawerHeader = styled('div')(({ theme }) => ({
         </Typography>
           {/* <Dash totalNoOfOrders={totalClients} /> */}
           <DrawerHeader />
+                
+        <IconButton>
+
+    
+
+<SearchIcon />
+</IconButton>
+<InputBase
+placeholder="Search by Name..."
+value={searchQuery}
+onChange={(e) => setSearchQuery(e.target.value)}
+/>
+
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 750 }} aria-label="simple table">
               <TableHead>
@@ -107,7 +122,12 @@ const DrawerHeader = styled('div')(({ theme }) => ({
                 </TableRow>
               </TableHead>
               <TableBody>
-                {clients.map((client) => (
+
+                       {clients
+  .filter((client) =>
+    client.firstName.toLowerCase().includes(searchQuery.toLowerCase())
+  )
+  .map((client) => (
                   <TableRow
                     key={client.id}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

@@ -12,6 +12,8 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
+import InputBase from '@mui/material/InputBase';
+import SearchIcon from '@mui/icons-material/Search';
 import TableRow from '@mui/material/TableRow';
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import Paper from '@mui/material/Paper';
@@ -51,7 +53,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   
     const [savedData, setSavedData] = useState(formData);
     const [clients, setClients] = useState([]);
-  
+    const [searchQuery, setSearchQuery] = useState('');
     const [totalAmountPaid, setTotalAmountPaid] = useState(0);
     const [totalNoOfOrders, setTotalNoOfOrders] = useState(0);
     const [totalClients, setTotalClients] = useState(0);
@@ -80,19 +82,32 @@ const DrawerHeader = styled('div')(({ theme }) => ({
         <CssBaseline />
 
         <OnlyDrawer/>
-        
+  
        
+  
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Typography variant="h6" noWrap    sx={{
         '& > :not(style)': { m: 1, width: '25ch' },
-        marginLeft: '50px',
+        marginLeft: '20px',
         marginTop: '50px',
         fontFamily: "'EB Garamond', serif" 
       }}>
+
        ORDERS
         </Typography>
           {/* <Dash  totalNoOfOrders={totalNoOfOrders} /> */}
           <DrawerHeader />
+          <IconButton>
+
+    
+
+<SearchIcon />
+</IconButton>
+<InputBase
+placeholder="Search by Name..."
+value={searchQuery}
+onChange={(e) => setSearchQuery(e.target.value)}
+/>
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 750 }} aria-label="simple table">
               <TableHead>
@@ -108,7 +123,13 @@ const DrawerHeader = styled('div')(({ theme }) => ({
                 </TableRow>
               </TableHead>
               <TableBody>
-                {clients.map((client) => (
+
+                
+              {clients
+  .filter((client) =>
+    client.firstName.toLowerCase().includes(searchQuery.toLowerCase())
+  )
+  .map((client) => (
                   <TableRow
                     key={client.id}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
