@@ -313,7 +313,7 @@ formValues.images=images
     }}
  />
 
-        <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 20 }}>Lower Body Measuremenrs </Typography>
+        <Typography sx={{ fontFamily: "'EB Garamond', serif", fontSize: 20 }}>Lower Body Measurements </Typography>
         <TextField id="hips" name="hips" label="Hips" variant="outlined"    
           type="number"
     inputProps={{ 

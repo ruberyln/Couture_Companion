@@ -114,7 +114,7 @@ export default function SignIn() {
                 
                 </Grid>
                 <Grid item>
-                  <Link href="http://localhost:3000/signup">
+                  <Link href="http://localhost:3000">
                     {"Dont have an account? Sign Up"}
                   </Link>
                 </Grid>
