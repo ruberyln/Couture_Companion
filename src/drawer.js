@@ -22,7 +22,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
 import PowerSettingsNewOutlinedIcon from '@mui/icons-material/PowerSettingsNewOutlined';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
-import BasicTable from './table';
+import BasicTable from './Table';
 import OnlyDrawer from './components/onlydrawer';
 import Avatar from '@mui/material/Avatar';
 import Badge from '@mui/material/Badge';
@@ -105,7 +105,7 @@ export default function Orders({}) {
     navigate("/NewUser");
   };
 
-  let serialNumber = 1;
+  let serialNumber = 101;
 
   const [savedData, setSavedData] = useState(formData);
   const [clients, setClients] = useState([]);
@@ -160,7 +160,7 @@ onChange={(e) => setSearchQuery(e.target.value)}
           <Table sx={{ minWidth: 750 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell sx={{ fontFamily: "'EB Garamond', serif" }}>S/N</TableCell>
+                <TableCell sx={{ fontFamily: "'EB Garamond', serif" }}>Custoner ID</TableCell>
                 <TableCell sx={{ fontFamily: "'EB Garamond', serif" }}>Name</TableCell>
                 <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Phone Number</TableCell>
                 <TableCell align="right" sx={{ fontFamily: "'EB Garamond', serif" }}>Due Delivery</TableCell>
